@@ -124,6 +124,11 @@ First, you need to create a key vault and add a *secret* for the cognitive servi
 
 ### Create a service principal
 
+
+~~~
+Note : You can skip step 1. Instead of creating new service principal, you can use the pre-created SPN. Details are available in the Lab environment details page.
+~~~
+
 To access the secret in the key vault, your application must use a service principal that has access to the secret. You'll use the Azure command line interface (CLI) to create the service principal and grant access to the secret in Azure Vault.
 
 1. Return to Visual Studio Code, and in the integrated terminal for the **02-cognitive-security** folder, run the following Azure CLI command, replacing *&lt;spName&gt;* with a suitable name for an application identity (for example, *ai-app*). Also replace *&lt;subscriptionId&gt;* and *&lt;resourceGroup&gt;* with the correct values for your subscription ID and the resource group containing your cognitive services and key vault resources:
