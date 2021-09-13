@@ -98,7 +98,7 @@ You can write code that consumes cognitive services REST APIs directly, but ther
     **Python**
 
     ```
-    pip install azure-ai-textanalytics==5.0.0
+    pip install --user azure-ai-textanalytics==5.0.0
     ```
 
 3. View the contents of the **sdk-client** folder, and note that it contains a file for configuration settings:
