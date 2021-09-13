@@ -70,6 +70,10 @@ The cognitive services APIs are REST-based, so you can consume them by submittin
     ```
 
     **Python**
+ 
+    ```
+    python -m pip install --user python-dotenv
+    ```
 
     ```
     python rest-client.py
