@@ -93,7 +93,7 @@ The knowledge base provides a back-end service that client applications can use 
 1. At the top of the QnA Maker page, click **Publish**. Then in the **Learn FAQ** page, click **Publish**.
 2. When publishing is complete, view the sample code provided to use your knowledge base's REST endpoint. There is an example for *Postman* and an example for *Curl*.
 3. View the **Curl** tab and copy the example code.
-4. Press **Windows**, and then type **cmd** into the search bar click on **Command Prompt**.
+4. Press **Windows** key, and then type **cmd** into the search bar click on **Command Prompt**.
 5. Paste the code you copied into the **Command Prompt**, and then edit it to replace **&lt;your question&gt;** with **What is a learning path?**.
 6. Enter the command and view the JSON response that is returned from your knowledge base.
 
