@@ -85,7 +85,7 @@ To use the Speech SDK with the Language Understanding service, you need to insta
     **Python**
 
     ```
-    pip install azure-cognitiveservices-speech==1.14.0
+    pip3 install azure-cognitiveservices-speech
     ```
 
 2. Additionally, if your system does <u>not</u> have a working microphone, you will need to use an audio file to provide spoken input for your application. In this case, use the following commands to install an additional package so your program can play the audio file (you can skip this if you intend to use a microphone):
@@ -443,6 +443,11 @@ else:
     ```
 
     **Python**
+
+    ```
+    python -m pip install --user python-dotenv
+    ```
+
 
     ```
     python speaking-clock-client.py
