@@ -265,21 +265,21 @@ In a real project, you'd iteratively refine intents and entities, retrain, and r
 8. Right-click the **09-luis-app** folder and open an integrated terminal. Then enter the following command (be sure to include the quotation marks!):
 
     ```
-    GetIntent "What's the time?"
+    .\GetIntent "What's the time?"
     ```
 
 9. Review the JSON response returned by your app, which should indicate the top scoring intent predicted for your input (which should be **GetTime**).
 10. Try the following command:
 
     ```
-    GetIntent "What's today's date?"
+    .\GetIntent "What's today's date?"
     ```
 
 11. Examine the response and verify that it predicts the **GetDate** intent.
 12. Try the following command:
 
     ```
-    GetIntent "What time is it in Sydney?"
+    .\GetIntent "What time is it in Sydney?"
     ```
 
 13. Examine the response and verify that it includes a **Location** entity.
@@ -287,15 +287,15 @@ In a real project, you'd iteratively refine intents and entities, retrain, and r
 14. Try the following commands and examine the responses:
 
     ```
-    GetIntent "What time is it in Glasgow?"
+    .\GetIntent "What time is it in Glasgow?"
     ```
 
     ```
-    GetIntent "What's the time in Nairobi?"
+    .\GetIntent "What's the time in Nairobi?"
     ```
 
     ```
-    GetIntent "What's the UK time?"
+    .\GetIntent "What's the UK time?"
     ```
 15. Try a few more variations - the goal is to generate at least some responses that correctly predict the **GetTime** intent, but fail to detect a **Location** entity.
 
