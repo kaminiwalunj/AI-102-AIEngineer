@@ -59,7 +59,7 @@ In this exercise, you'll complete a partially implemented client application tha
     **Python**
     
     ```
-    pip install azure-cognitiveservices-speech==1.14.0
+    pip3 install azure-cognitiveservices-speech
     ```
 
 3. View the contents of the **speaking-clock** folder, and note that it contains a file for configuration settings:
