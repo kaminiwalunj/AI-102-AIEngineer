@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Detect, Analyze, and Recognize Faces'
-    module: 'Module 10 - Detecting, Analyzing, and Recognizing Faces'
----
-
 # Detect, Analyze, and Recognize Faces
 
 The ability to detect, analyze, and recognize human faces is a core AI capability. In this exercise, you'll explore two Azure Cognitive Services that you can use to work with faces in images: the **Computer Vision** service, and the **Face** service.
