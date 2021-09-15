@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Create a Bot with Bot Framework Composer'
-    module: 'Module 7 - Conversational AI and the Azure Bot Service'
----
-
 # Create a Bot with Bot Framework Composer
 
 Bot Framework Composer is a graphical designer that lets you quickly and easily build sophisticated conversational bots without writing code. The composer is an open-source tool that presents a visual canvas for building bots.
