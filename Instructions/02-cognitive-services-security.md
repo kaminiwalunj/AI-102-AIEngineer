@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Manage Cognitive Services Security'
-    module: 'Module 2 - Developing AI Apps with Cognitive Services'
----
-
 # Manage Cognitive Services Security
 
 Security is a critical consideration for any application, and as a developer you should ensure that access to resources such as cognitive services is restricted to only those who require it.
