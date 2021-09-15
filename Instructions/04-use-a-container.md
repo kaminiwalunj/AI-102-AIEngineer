@@ -92,6 +92,7 @@ Many commonly used cognitive services APIs are available in container images. Fo
     ```
     rest-test
     ```
+    **Note: If get error please use.\rest-test**
 
 4. Verify that the command returns a JSON document containing information about the language detected in the two input documents (which should be English and French).
 
