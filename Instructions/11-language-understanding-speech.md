@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Use the Speech and Language Understanding Services'
-    module: 'Module 5 - Creating Language Understanding Solutions'
----
-
 # Use the Speech and Language Understanding Services
 
 You can integrate the Speech service with the Language Understanding service to create applications that can intelligently determine user intents from spoken input.
