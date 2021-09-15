@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Translate Text'
-    module: 'Module 3 - Getting Started with Natural Language Processing'
----
-
 # Translate Text
 
 The **Translator** service is a cognitive service that enables you to translate text between languages.
