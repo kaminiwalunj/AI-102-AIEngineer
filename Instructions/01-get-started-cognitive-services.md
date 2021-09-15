@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Get Started with Cognitive Services'
-    module: 'Module 2 - Developing AI Apps with Cognitive Services'
----
-
 # Get Started with Cognitive Services
 
 In this exercise, you'll get started with Cognitive Services by creating a **Cognitive Services** resource in your Azure subscription and using it from a client application. The goal of the exercise is not to gain expertise in any particular service, but rather to become familiar with a general pattern for provisioning and working with cognitive services as a developer.
