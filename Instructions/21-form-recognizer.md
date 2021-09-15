@@ -87,7 +87,7 @@ Then **save** your changes.
 13. In the terminal for the **21-custom-form** folder, enter the following command to run the script:
 
 ```
-setup
+.\setup
 ```
 
 14. When the script completes, review the displayed output and note your Azure resource's SAS URI.
