@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Read Text in Images'
-    module: 'Module 11 - Reading Text in Images and Documents'
----
-
 # Read Text in Images
 
 Optical character recognition (OCR) is a subset of computer vision that deals with reading text in images and documents. The **Computer Vision** service provides two APIs for reading text, which you'll explore in this exercise.
