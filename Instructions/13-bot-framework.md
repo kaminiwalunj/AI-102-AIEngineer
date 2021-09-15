@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Create a Bot with the Bot Framework SDK'
-    module: 'Module 7 - Conversational AI and the Azure Bot Service'
----
-
 # Create a Bot with the Bot Framework SDK
 
 *Bots* are software agents that can participate in conversational dialogs with human users. The Microsoft Bot Framework provides a comprehensive platform for building bots that can be delivered as cloud services through the Azure Bot Service.
