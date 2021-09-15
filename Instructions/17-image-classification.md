@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Classify Images with Custom Vision'
-    module: 'Module 9 - Developing Custom Vision Solutions'
----
-
 # Classify Images with Custom Vision
 
 The **Custom Vision** service enables you to create computer vision models that are trained on your own images. You can use it to train *image classification* and *object detection* models; which you can then publish and consume from applications.
