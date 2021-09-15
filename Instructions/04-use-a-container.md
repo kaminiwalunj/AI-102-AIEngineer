@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Use a Cognitive Services Container'
-    module: 'Module 2 - Developing AI Apps with Cognitive Services'
----
-
 # Use a Cognitive Services Container
 
 Using cognitive services hosted in Azure enables application developers to focus on the infrastructure for their own code while benefiting from scalable services that are managed by Microsoft. However, in many scenarios, organizations require more control over their service infrastructure and the data that is passed between services.
