@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Translate Speech'
-    module: 'Module 4 - Building Speech-Enabled Applications'
----
-
 # Translate Speech
 
 The **Speech** service includes a **Speech translation** API that you can use to translate spoken language. For example, suppose you want to develop a translator application that people can use when traveling in places where they don't speak the local language. They would be able to say phrases such as "Where is the station?" or "I need to find a pharmacy" in their own language, and have it translate them to the local language.
