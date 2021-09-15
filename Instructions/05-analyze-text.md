@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Analyze Text'
-    module: 'Module 3 - Getting Started with Natural Language Processing'
----
-
 # Analyze Text
 
 The **Text Analytics API** is a cognitive service that supports analysis of text, including language detection, sentiment analysis, key phrase extraction, and entity recognition.
