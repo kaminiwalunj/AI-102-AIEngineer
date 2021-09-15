@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Analyze Images with Computer Vision'
-    module: 'Module 8 - Getting Started with Computer Vision'
----
-
 # Analyze Images with Computer Vision
 
 Computer vision is an artificial intelligence capability that enables software systems to interpret visual input by analyzing images. In Microsoft Azure, the **Computer Vision** cognitive service provides pre-built models for common computer vision tasks, including analysis of images to suggest captions and tags, detection of common objects, landmarks, celebrities, brands, and the presence of adult content. You can also use the Computer Vision service to analyze image color and formats, and to generate "smart-cropped" thumbnail images.
