@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Recognize and Synthesize Speech'
-    module: 'Module 4 - Building Speech-Enabled Applications'
----
-
 # Recognize and Synthesize Speech
 
 The **Speech** service is an Azure cognitive service that provides speech-related functionality, including:
