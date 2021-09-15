@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Detect Objects in Images with Custom Vision'
-    module: 'Module 9 - Developing Custom Vision Solutions'
----
-
 # Detect Objects in Images with Custom Vision
 
 In this exercise, you will use the Custom Vision service to train an *object detection* model that can detect and locate three classes of fruit (apple, banana, and orange) in an image.
