@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Extract Data from Forms'
-    module: 'Module 11 - Reading Text in Images and Documents'
----
-
 # Extract Data from Forms 
 
 Suppose a company needs to automate a data entry process. Currently an employee might manually read a purchase order and enter the data into a database. You want to build a model that will use machine learning  to read the form and produce structured data that can be used to automatically update a database.
