@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Create a Language Understanding Client Application'
-    module: 'Module 5 - Creating Language Understanding Solutions'
----
-
 # Create a Language Understanding Client Application
 
 The Language Understanding service enables you to define an app that encapsulates a language model that applications can use to interpret natural language input from users,  predict the users *intent* (what they want to achieve), and identify any *entities* to which the intent should be applied. You can create client applications that consume Language Understanding apps directly through REST interfaces, or by using language -specific software development kits (SDKs).
