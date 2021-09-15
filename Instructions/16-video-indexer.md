@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Analyze Video with Video Analyzer'
-    module: 'Module 8 - Getting Started with Computer Vision'
----
-
 # Analyze Video with Video Analyzer
 
 A large proportion of the data created and consumed today is in the format of video. **Video Analyzer for Media** is an AI-powered service that you can use to index videos and extract insights from them.
