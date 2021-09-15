@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Create a Knowledge Store with Azure Cognitive Search'
-    module: 'Module 12 - Creating a Knowledge Mining Solution'
----
-
 # Create a Knowledge Store with Azure Cognitive Search
 
 Azure Cognitive Search uses an enrichment pipeline of cognitive skills to extract AI-generated fields from documents and include them in a search index. While the index might be considered the primary output from an indexing process, the enriched data it contains might also be useful in other ways. For example:
