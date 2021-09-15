@@ -89,6 +89,7 @@ As well as defining alerts, you can view metrics for your cognitive services res
     ```
     rest-test
     ```
+    **Note: If get error please use.\rest-test**
 
 The command returns a JSON document containing information about the language detected in the input data (which should be English).
 
