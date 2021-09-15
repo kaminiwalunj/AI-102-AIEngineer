@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Monitor Cognitive Services'
-    module: 'Module 2 - Developing AI Apps with Cognitive Services'
----
-
 # Monitor Cognitive Services
 
 Azure Cognitive Services can be a critical part of an overall application infrastructure. It's important to be able to monitor activity and get alerted to issues that may need attention.
