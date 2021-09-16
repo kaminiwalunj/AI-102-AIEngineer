@@ -110,6 +110,14 @@ In this exercise, you'll complete a partially implemented client application tha
     **Python**
 
     ```
+    python -m pip install --user python-dotenv
+    ```
+    
+    ```
+    pip install azure-ai-textanalytics
+    ```
+    
+    ```
     python text-analysis.py
     ```
 
