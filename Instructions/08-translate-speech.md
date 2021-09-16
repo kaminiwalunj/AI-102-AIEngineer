@@ -270,6 +270,8 @@ Now that you have a **SpeechTranslationConfig** for the speech service in your c
     >
     > The translation to Hindi may not always be displayed correctly in the Console window due to character encoding issues.
 
+   >**Note**: When you're testing with **python** language you will get a error, This is expected **No wave device is installed that can play files in the current format. To install a wave device, go to Control Panel, click Printers and Other Hardware, and then click Add Hardware.** as we're testing in Virtual Machine there are no audio drivers installed
+
 ## Synthesize the translation to speech
 
 So far, your application translates spoken input to text; which might be sufficient if you need to ask someone for help while traveling. However, it would be better to have the translation spoken aloud in a suitable voice.
@@ -328,6 +330,8 @@ So far, your application translates spoken input to text; which might be suffici
 3. When prompted, enter a valid language code (*fr*, *es*, or *hi*), and then speak clearly into the microphone and say a phrase you might use when traveling abroad. The program should transcribe your spoken input and respond with a spoken translation. Repeat this process, trying each language supported by the application. When you're finished, press ENTER to end the program.
 
     > **Note** *In this example, you've used a **SpeechTranslationConfig** to translate speech to text, and then used a **SpeechConfig** to synthesize the translation as speech. You can in fact use the **SpeechTranslationConfig** to synthesize the translation directly, but this only works when translating to a single language, and results in an audio stream that is typically saved as a file rather than sent directly to a speaker.*
+
+   >**Note**: When you're testing with **python** language you will get a error, This is expected **No wave device is installed that can play files in the current format. To install a wave device, go to Control Panel, click Printers and Other Hardware, and then click Add Hardware.** as we're testing in Virtual Machine there are no audio drivers installed
 
 ## More information
 
