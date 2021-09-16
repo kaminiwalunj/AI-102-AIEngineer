@@ -130,7 +130,10 @@ dotnet run
 ```
 
 **Python**
-
+```
+python -m pip install --user python-dotenv
+```
+    
 ```
 python train-classifier.py
 ```
