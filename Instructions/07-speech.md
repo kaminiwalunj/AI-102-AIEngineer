@@ -265,7 +265,7 @@ Now that you have a **SpeechConfig** for the speech service in your cognitive se
 
     If the SpeechRecognizer encounters an error, it produces a result of "Cancelled". The code in the application will then display the error message. The most likely cause is an incorrect key or region in the configuration file.
 
-   >**Note**: When you're testing with python language you will get a error **No wave device is installed that can play files in the current format. To install a wave device, go to Control Panel, click Printers and Other Hardware, and then click Add Hardware.** as we're testing in Virtual Machine there are no audio drivers installed
+   >**Note**: When you're testing with **python** language you will get a error, This is expected **No wave device is installed that can play files in the current format. To install a wave device, go to Control Panel, click Printers and Other Hardware, and then click Add Hardware.** as we're testing in Virtual Machine there are no audio drivers installed
 
 ## Synthesize speech
 
@@ -328,7 +328,8 @@ Your speaking clock application accepts spoken input, but it doesn't actually sp
 
 5. When prompted, speak clearly into the microphone and say "what time is it?". The program should speak, telling you the time.
 
-  >**Note**: When you're testing with python language you will get a error **No wave device is installed that can play files in the current format. To install a wave device, go to Control Panel, click Printers and Other Hardware, and then click Add Hardware.** as we're testing in Virtual Machine there are no audio drivers installed
+   >**Note**: When you're testing with **python** language you will get a error, This is expected **No wave device is installed that can play files in the current format. To install a wave device, go to Control Panel, click Printers and Other Hardware, and then click Add Hardware.** as we're testing in Virtual Machine there are no audio drivers installed
+
 
 ## Use a different voice
 
@@ -370,7 +371,7 @@ Your speaking clock application uses a default voice, which you can change. The 
 
 3. When prompted, speak clearly into the microphone and say "what time is it?". The program should speak in the specified voice, telling you the time.
 
->**Note**: When you're testing with python language you will get a error **No wave device is installed that can play files in the current format. To install a wave device, go to Control Panel, click Printers and Other Hardware, and then click Add Hardware.** as we're testing in Virtual Machine there are no audio drivers installed
+   >**Note**: When you're testing with **python** language you will get a error, This is expected **No wave device is installed that can play files in the current format. To install a wave device, go to Control Panel, click Printers and Other Hardware, and then click Add Hardware.** as we're testing in Virtual Machine there are no audio drivers installed
 
 ## Use Speech Synthesis Markup Language
 
@@ -430,7 +431,7 @@ Speech Synthesis Markup Language (SSML) enables you to customize the way your sp
 
 3. When prompted, speak clearly into the microphone and say "what time is it?". The program should speak in the voice that is specified in the SSML (overriding the voice specified in the SpeechConfig), telling you the time, and then after a pause telling you it's time to end this lab - which it is!
 
->**Note**: When you're testing with python language you will get a error **No wave device is installed that can play files in the current format. To install a wave device, go to Control Panel, click Printers and Other Hardware, and then click Add Hardware.** as we're testing in Virtual Machine there are no audio drivers installed
+   >**Note**: When you're testing with **python** language you will get a error, This is expected **No wave device is installed that can play files in the current format. To install a wave device, go to Control Panel, click Printers and Other Hardware, and then click Add Hardware.** as we're testing in Virtual Machine there are no audio drivers installed
 
 ## More information
 
