@@ -47,6 +47,9 @@ In this exercise, you'll complete a partially implemented client application tha
 
     ```
     pip install azure-cognitiveservices-vision-computervision==0.7.0
+    pip install python-dotenv
+    pip install Pillow
+    python -m pip install -U matplotlib
     ```
     
 3. View the contents of the **computer-vision** folder, and note that it contains a file for configuration settings:
