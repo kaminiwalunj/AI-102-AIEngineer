@@ -49,6 +49,7 @@ dotnet add package Microsoft.Azure.CognitiveServices.Vision.ComputerVision --ver
 pip install azure-cognitiveservices-vision-computervision==0.7.0
 pip install python-dotenv
 pip install Pillow
+python -m pip install -U matplotlib
 ```
     
 3. View the contents of the **image-analysis** folder, and note that it contains a file for configuration settings:
