@@ -66,7 +66,7 @@ dotnet add package Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime --ver
 **Python**
 
 ```
-pip install azure-cognitiveservices-language-luis==0.7.0
+pip install --user azure-cognitiveservices-language-luis==0.7.0
 ```
     
 *The Python SDK package includes classes for both **prediction** and **authoring**.*
