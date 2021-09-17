@@ -192,6 +192,10 @@ dotnet run
 **Python**
 
 ```
+pip install matplotlib
+```
+
+```
 python test-detector.py
 ```
 
