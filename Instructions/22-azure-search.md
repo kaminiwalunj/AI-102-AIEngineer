@@ -302,7 +302,7 @@ All of the other metadata and content fields in the source document are implicit
 2. In the terminal pane for the **modify-search** folder, enter the following command to run the **modify-search.cmd** script, which submits the JSON definitions to the REST interface and initiates the indexing.
 
     ```
-    modify-search
+    .\modify-search
     ```
 
 3. When the script has finished, return to the **Overview** page for your Azure Cognitive Search resource in the Azure portal and view the **Indexers** page. The periodically select **Refresh** to track the progress of the indexing operation. It may take a minute or so to complete.
@@ -350,6 +350,7 @@ Now that you have a useful index, you can use it from a client application. You 
     
     ```
     pip install azure-search-documents==11.0.0
+    python -m pip install --user python-dotenv
     ```
     
 3. View the contents of the **margies-travel** folder, and note that it contains a file for configuration settings:
@@ -411,7 +412,7 @@ The web app already includes code to process and render the search results.
     **Python**
     
     ```
-    flask run
+    python -m flask run
     ```
 
 2. In the message that is displayed when the app starts successfully, follow the link to the running web application (*http://localhost:5000/* or *http://127.0.0.1:5000/*) to open the Margies Travel site in a web browser.
