@@ -11,9 +11,9 @@ To address this challenge, Margie's Travel can use Azure Cognitive Search to imp
 If you have not already cloned **AI-102-AIEngineer** code repository to the environment where you're working on this lab, follow these steps to do so. Otherwise, open the cloned folder in Visual Studio Code.
 
 1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/AI-102-AIEngineer` repository to a local folder (it doesn't matter which folder).
-3. When the repository has been cloned, open the folder in Visual Studio Code.
-4. Wait while additional files are installed to support the C# code projects in the repo.
+1. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/AI-102-AIEngineer` repository to a local folder (it doesn't matter which folder).
+1. When the repository has been cloned, open the folder in Visual Studio Code.
+1. Wait while additional files are installed to support the C# code projects in the repo.
 
     > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
 
@@ -30,15 +30,15 @@ The solution you will create for Margie's Travel requires the following resource
 ### Create an Azure Cognitive Search resource
 
 1. In a web browser, open the Azure portal at `https://portal.azure.com`, and sign in using the Microsoft account associated with your Azure subscription.
-2. Select the **&#65291;Create a resource** button, search for *search*, and create a **Azure Cognitive Search** resource with the following settings:
+1. Select the **&#65291;Create a resource** button, search for *search*, and create a **Azure Cognitive Search** resource with the following settings:
     - **Subscription**: *Your Azure subscription*
     - **Resource group**: *Create a new resource group (if you are using a restricted subscription, you may not have permission to create a new resource group - use the one provided)*
     - **Service name**: *Enter a unique name*
     - **Location**: *Select a location - note that your Azure Cognitive Search and Cognitive Services resources must be in the same location*
     - **Pricing tier**: Basic
 
-3. Wait for deployment to complete, and then go to the deployed resource.
-4. Review the **Overview** page on the blade for your Azure Cognitive Search resource in the Azure portal. Here, you can use a visual interface to create, test, manage, and monitor the various components of a search solution; including data sources, indexes, indexers, and skillsets.
+1. Wait for deployment to complete, and then go to the deployed resource.
+1. Review the **Overview** page on the blade for your Azure Cognitive Search resource in the Azure portal. Here, you can use a visual interface to create, test, manage, and monitor the various components of a search solution; including data sources, indexes, indexers, and skillsets.
 
 ### Create a Cognitive Services resource
 
@@ -50,8 +50,8 @@ If you don't already have one in your subscription, you'll need to provision a *
     - **Region**: *The same location as your Azure Cognitive Search resource*
     - **Name**: *Enter a unique name*
     - **Pricing tier**: Standard S0
-2. Select the required checkboxes and create the resource.
-3. Wait for deployment to complete, and then view the deployment details.
+1. Select the required checkboxes and create the resource.
+1. Wait for deployment to complete, and then view the deployment details.
 
 ### Create a storage account
 
@@ -62,9 +62,9 @@ If you don't already have one in your subscription, you'll need to provision a *
     - **Region**: *Choose any available region*
     - **Performance**: Standard
     - **Replication**: Locally-redundant storage (LRS)
-2. Wait for deployment to complete, and then go to the deployed resource.
-3. On the **Overview** page, note the **Subscription ID** -this identifies the subscription in which the storage account is provisioned.
-4. On the **Access keys** page, note that two keys have been generated for your storage account. Then select **Show keys** to view the keys.
+1. Wait for deployment to complete, and then go to the deployed resource.
+1. On the **Overview** page, note the **Subscription ID** -this identifies the subscription in which the storage account is provisioned.
+1. On the **Access keys** page, note that two keys have been generated for your storage account. Then select **Show keys** to view the keys.
 
     > **Tip**: Keep the **Storage Account** blade open - you will need the subscription ID and one of the keys in the next procedure.
 
@@ -73,9 +73,9 @@ If you don't already have one in your subscription, you'll need to provision a *
 Now that you have the required resources, you can upload some documents to your Azure Storage account.
 
 1. In Visual Studio Code, in the **Explorer** pane, expand the **22-create-a-search-solution** folder and select **UploadDocs.cmd**.
-2. Edit the batch file to replace the **YOUR_SUBSCRIPTION_ID**, **YOUR_AZURE_STORAGE_ACCOUNT_NAME**, and **YOUR_AZURE_STORAGE_KEY** placeholders with the appropriate subscription ID, Azure storage account name, and Azure storage account key values for the storage account you created previously.
-3. Save your changes, and then right-click the **22-create-a-search-solution** folder and open an integrated terminal.
-4. Enter the following command to sign into your Azure subscription by using the Azure CLI.
+1. Edit the batch file to replace the **YOUR_SUBSCRIPTION_ID**, **YOUR_AZURE_STORAGE_ACCOUNT_NAME**, and **YOUR_AZURE_STORAGE_KEY** placeholders with the appropriate subscription ID, Azure storage account name, and Azure storage account key values for the storage account you created previously.
+1. Save your changes, and then right-click the **22-create-a-search-solution** folder and open an integrated terminal.
+1. Enter the following command to sign into your Azure subscription by using the Azure CLI.
 
     ```
     az login
@@ -83,10 +83,10 @@ Now that you have the required resources, you can upload some documents to your 
 
 A web browser tab will open and prompt you to sign into Azure. Do so, and then close the browser tab and return to Visual Studio Code.
 
-5. Enter the following command to run the batch file. This will create a blob container in your storage account and upload the documents in the **data** folder to it.
+1. Enter the following command to run the batch file. This will create a blob container in your storage account and upload the documents in the **data** folder to it.
 
     ```
-    UploadDocs
+    .\UploadDocs
     ```
 
 ## Index the documents
@@ -94,7 +94,7 @@ A web browser tab will open and prompt you to sign into Azure. Do so, and then c
 Now that you have the documents in place, you can create a search solution by indexing them.
 
 1. In the Azure portal, browse to your Azure Cognitive Search resource. Then, on its **Overview** page, select **Import data**.
-2. On the **Connect to your data** page, in the **Data Source** list, select **Azure Blob Storage**. Then complete the data store details with the following values:
+1. On the **Connect to your data** page, in the **Data Source** list, select **Azure Blob Storage**. Then complete the data store details with the following values:
     - **Data Source**: Azure Blob Storage
     - **Data source name**: margies-data
     - **Data to extract**: Content and metadata
@@ -104,9 +104,9 @@ Now that you have the documents in place, you can create a search solution by in
     - **Container name**: margies
     - **Blob folder**: *Leave this blank*
     - **Description**: Brochures and reviews in Margie's Travel web site.
-3. Proceed to the next step (*Add cognitive skills*).
-4. in the **Attach Cognitive Services** section, select your cognitive services resource.
-5. In the **Add enrichments** section:
+1. Proceed to the next step (*Add cognitive skills*).
+1. in the **Attach Cognitive Services** section, select your cognitive services resource.
+1. In the **Add enrichments** section:
     - Change the **Skillset name** to **margies-skillset**.
     - Select the option **Enable OCR and merge all text into merged_content field**.
     - Ensure that the **Source data field** is set to **merged_content**.
@@ -121,10 +121,10 @@ Now that you have the documents in place, you can create a search solution by in
         | Generate tags from images | | imageTags |
         | Generate captions from images | | imageCaption |
 
-6. Double-check your selections (it can be difficult to change them later). Then proceed to the next step (*Customize target index*).
-7. Change the **Index name** to **margies-index**.
-8. Ensure that the **Key** is set to **metadata_storage_path** and leave the **Suggester name** and **Search mode** blank.
-9. Make the following changes to the index fields, leaving all other fields with their default settings (**IMPORTANT**: you may need to scroll to the right to see the entire table):
+1. Double-check your selections (it can be difficult to change them later). Then proceed to the next step (*Customize target index*).
+1. Change the **Index name** to **margies-index**.
+1. Ensure that the **Key** is set to **metadata_storage_path** and leave the **Suggester name** and **Search mode** blank.
+1. Make the following changes to the index fields, leaving all other fields with their default settings (**IMPORTANT**: you may need to scroll to the right to see the entire table):
 
     | Field name | Retrievable | Filterable | Sortable | Facetable | Searchable |
     | ---------- | ----------- | ---------- | -------- | --------- | ---------- |
@@ -135,16 +135,24 @@ Now that you have the documents in place, you can create a search solution by in
     | locations | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | | | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; |
     | keyphrases | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | | | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; |
     | language | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | | | |
+    
+1. Click on **+Add field**, Add the following fields.
 
-11. Double-check your selections, paying particular attention to ensure that the correct **Retrievable**, **Filterable**, **Sortable**, **Facetable**, and **Searchable** options are selected for each field  (it can be difficult to change them later). Then proceed to the next step (*Create an indexer*).
-12. Change the **Indexer name** to **margies-indexer**.
-13. Leave the **Schedule** set to **Once**.
-14. Expand the **Advanced** options, and ensure that the **Base-64 encode keys** option is selected (generally encoding keys make the index more efficient).
-15. Select **Submit** to create the data source, skillset, index, and indexer. The indexer is run automatically and runs the indexing pipeline, which:
+    | Field name | Type        |Retrievable | Filterable | Sortable | Facetable | Searchable |
+    | ---------- | ----------- | ---------- | -------- | --------- | ---------- | ---------- |
+    | sentiment  | Edm.Double  | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | | |
+    | url        | Edm.String  | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | | | | 
+
+
+1. Double-check your selections, paying particular attention to ensure that the correct **Retrievable**, **Filterable**, **Sortable**, **Facetable**, and **Searchable** options are selected for each field  (it can be difficult to change them later). Then proceed to the next step (*Create an indexer*).
+1. Change the **Indexer name** to **margies-indexer**.
+1. Leave the **Schedule** set to **Once**.
+1. Expand the **Advanced** options, and ensure that the **Base-64 encode keys** option is selected (generally encoding keys make the index more efficient).
+1. Select **Submit** to create the data source, skillset, index, and indexer. The indexer is run automatically and runs the indexing pipeline, which:
     1. Extracts the document metadata fields and content from the data source
     2. Runs the skillset of cognitive skills to generate additional enriched fields
     3. Maps the extracted fields to the index.
-16. In the bottom half of the **Overview** page for your Azure Cognitive Search resource, view the **Indexers** tab, which should show the newly created **margies-indexer**. Wait a few minutes, and click **&orarr; Refresh** until the **Status** indicates success.
+1. In the bottom half of the **Overview** page for your Azure Cognitive Search resource, view the **Indexers** tab, which should show the newly created **margies-indexer**. Wait a few minutes, and click **&orarr; Refresh** until the **Status** indicates success.
 
 ## Search the index
 
@@ -294,7 +302,7 @@ All of the other metadata and content fields in the source document are implicit
 2. In the terminal pane for the **modify-search** folder, enter the following command to run the **modify-search.cmd** script, which submits the JSON definitions to the REST interface and initiates the indexing.
 
     ```
-    modify-search
+    .\modify-search
     ```
 
 3. When the script has finished, return to the **Overview** page for your Azure Cognitive Search resource in the Azure portal and view the **Indexers** page. The periodically select **Refresh** to track the progress of the indexing operation. It may take a minute or so to complete.
@@ -342,6 +350,7 @@ Now that you have a useful index, you can use it from a client application. You 
     
     ```
     pip install azure-search-documents==11.0.0
+    python -m pip install --user python-dotenv
     ```
     
 3. View the contents of the **margies-travel** folder, and note that it contains a file for configuration settings:
@@ -403,7 +412,7 @@ The web app already includes code to process and render the search results.
     **Python**
     
     ```
-    flask run
+    python -m flask run
     ```
 
 2. In the message that is displayed when the app starts successfully, follow the link to the running web application (*http://localhost:5000/* or *http://127.0.0.1:5000/*) to open the Margies Travel site in a web browser.

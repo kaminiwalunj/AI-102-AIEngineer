@@ -47,7 +47,7 @@ If you have already cloned **AI-102-AIEngineer** code repository to the environm
 12. In the terminal for the **24-knowledge-store** folder, enter the following command to run the script:
 
     ```
-    setup
+    .\setup
     ```
     > **Note**: The Search CLI module is in preview, and may get stuck in the *- Running ..* process. If this happens for over 2 minutes, press CTRL+C to cancel the long-running operation, and then select **N** when asked if you want to terminate the script. It should then complete successfully.
     >
@@ -124,7 +124,7 @@ Now that you've prepared the JSON objects that define your search solution compo
 5. In the terminal pane for the **create-search** folder, enter the following command run the batch script.
 
     ```
-    create-search
+    .\create-search
     ```
 
 6. When the script completes, in the Azure portal, on the page for your Azure Cognitive Search resource, select the **Indexers** page and wait for the indexing process to complete.
