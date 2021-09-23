@@ -4,16 +4,18 @@ Suppose a company needs to automate a data entry process. Currently an employee 
 
 **Form Recognizer** is a cognitive service that enables users to build automated data processing software. This software can extract text, key/value pairs, and tables from form documents using optical character recognition (OCR). Form Recognizer has pre-built models for recognizing invoices, receipts, and business cards. The service also provides the capability to train custom models. In this exercise, we will focus on building custom models.
 
-## Clone the repository for this course
+## Open the cloned folder in Visual Studio Code.
 
-If you have not already done so, you must clone the code repository for this course:
+1.  Start Visual Studio Code (the program icon is pinned to the bottom taskbar).
 
-1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/AI-102-AIEngineer` repository to a local folder (it doesn't matter which folder).
-3. When the repository has been cloned, open the folder in Visual Studio Code.
-4. Wait while additional files are installed to support the C# code projects in the repo.
+     ![Visual Studio Code Icon](./images/vscode.jpg)
 
-    > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
+2.  Open a file, From the top-left options, Click on **file->Open File** and navigate to **C:\AllFiles\AI-102-AIEngineer-prod**.
+
+    **Note:** You may be prompted to complete a 2-minute survey. Go ahead and select **No, thanks**. You may need to do this more than once.
+
+3.  Wait while additional files are installed to support the C# code projects in the repo.
+
 
 ## Create a Form Recognizer resource
 
