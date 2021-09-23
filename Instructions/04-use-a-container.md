@@ -4,16 +4,18 @@ Using cognitive services hosted in Azure enables application developers to focus
 
 Many of the cognitive services APIs can be packaged and deployed in a *container*, enabling organizations to host cognitive services in their own infrastructure; for example in local Docker servers, Azure Container Instances, or Azure Kubernetes Services clusters. Containerized cognitive services need to communicate with an Azure-based cognitive services account to support billing; but application data is not passed to the back-end service, and organizations have greater control over the deployment configuration of their containers, enabling custom solutions for authentication, scalability, and other considerations.
 
-## Clone the repository for this course
+## Open the cloned folder in Visual Studio Code.
 
-If you have already cloned **AI-102-AIEngineer** code repository to the environment where you're working on this lab, open it in Visual Studio Code; otherwise, follow these steps to clone it now.
+1.  Start Visual Studio Code (the program icon is pinned to the bottom taskbar).
 
-1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/AI-102-AIEngineer` repository to a local folder (it doesn't matter which folder).
-3. When the repository has been cloned, open the folder in Visual Studio Code.
-4. Wait while additional files are installed to support the C# code projects in the repo.
+     ![Visual Studio Code Icon](./images/vscode.jpg)
 
-    > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
+2.  Open a file, From the top-left options, Click on **file->Open File** and navigate to **C:\AllFiles\AI-102-AIEngineer-prod**.
+
+    **Note:** You may be prompted to complete a 2-minute survey. Go ahead and select **No, thanks**. You may need to do this more than once.
+
+3.  Wait while additional files are installed to support the C# code projects in the repo.
+
 
 ## Provision a Cognitive Services resource
 
