@@ -6,14 +6,17 @@ For example, suppose *Margie's Travel* is a travel agency that specializes in or
 
 To address this challenge, Margie's Travel can use Azure Cognitive Search to implement a solution in which the documents are indexed and enriched by using AI-based cognitive skills to make them easier to search.
 
-## Clone the repository for this course
+## Open the cloned folder in Visual Studio Code.
 
-1. Start Visual Studio Code.
-1. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/AI-102-AIEngineer` repository to a local folder (it doesn't matter which folder).
-1. When the repository has been cloned, open the folder in Visual Studio Code.
-1. Wait while additional files are installed to support the C# code projects in the repo.
+1.  Start Visual Studio Code (the program icon is pinned to the bottom taskbar).
 
-    > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
+     ![Visual Studio Code Icon](./images/vscode.jpg)
+
+2.  Open a file, From the top-left options, Click on **file->Open File** and navigate to **C:\AllFiles\AI-102-AIEngineer-prod**.
+
+    **Note:** You may be prompted to complete a 2-minute survey. Go ahead and select **No, thanks**. You may need to do this more than once.
+
+3.  Wait while additional files are installed to support the C# code projects in the repo.
 
 ## Create Azure resources
 
