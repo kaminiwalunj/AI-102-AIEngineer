@@ -53,9 +53,10 @@ To train an object detection model, you need to create a Custom Vision project b
 To train an object detection model, you need to upload images that contain the classes you want the model to identify, and tag them to indicate bounding boxes for each object instance.
 
 1. In Visual Studio Code, view the training images in the **18-object-detection/training-images** folder where you cloned the repository. This folder contains images of fruit.
-2. In the Custom Vision portal, in your object detection project, select **Add images** and upload all of the images in the extracted folder.
-3. After the images have been uploaded, select the first one to open it.
-4. Hold the mouse over any object in the image until an automatically detected region is displayed like the image below. Then select the object, and if necessary resize the region to surround it.
+2. Download and extract the training images from https://aka.ms/fruit-objects. The extracted folder contains a collection of images of fruit
+3. In the Custom Vision portal, in your object detection project, select **Add images** and upload all of the images in the extracted folder.
+4. After the images have been uploaded, select the first one to open it.
+5. Hold the mouse over any object in the image until an automatically detected region is displayed like the image below. Then select the object, and if necessary resize the region to surround it.
 
 ![The default region for an object](./images/object-region.jpg)
 
