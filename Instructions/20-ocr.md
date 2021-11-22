@@ -196,6 +196,9 @@ dotnet run
 **Python**
 
 ```
+pip install azure-cognitiveservices-vision-computervision
+pip install matplotlib
+pip install Pillow
 python read-text.py
 ```
 
