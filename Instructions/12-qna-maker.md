@@ -11,8 +11,8 @@ In this lab, we will be using the Managed QnA Maker, which is a feature within T
 To create and host a knowledge base using the Managed QnA Maker, you need a Text Analytics resource in your Azure subscription.
 
 1. Open the Azure portal at `https://portal.azure.com`, and sign in using the Microsoft account associated with your Azure subscription.
-2. Select the **&#65291;Create a resource** button, search for *Text Analytics*, and create a **Text Analytics** resource. 
-3. Click **Select** on the **Custom question answering (preview)** block. Then click **Continue to create your resource**. You will need to enter the following settings:
+2. Select the **&#65291;Create a resource** button, select *AI + Machine Learning* under Category section then select *Language service* form list of products. 
+3. Under **Select additional features** blade Click **Select** on the **Custom question answering (preview)** block. Then click **Continue to create your resource**. You will need to enter the following settings:
     
     - **Subscription**: *Your Azure subscription*
     - **Resource group**: *Choose or create a resource group (if you are using a restricted subscription, you may not have permission to create a new resource group - use the one provided)*
