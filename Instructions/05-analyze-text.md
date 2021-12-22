@@ -1,6 +1,6 @@
 # Analyze Text
 
-The ***Language** service is a cognitive service that supports analysis of text, including language detection, sentiment analysis, key phrase extraction, and entity recognition.
+The ***Language*** service is a cognitive service that supports analysis of text, including language detection, sentiment analysis, key phrase extraction, and entity recognition.
 
 For example, suppose a travel agency wants to process hotel reviews that have been submitted to the company's web site. By using the Language service, they can determine the language each review is written in, the sentiment (positive, neutral, or negative) of the reviews, key phrases that might indicate the main topics discussed in the review, and named entities, such as places, landmarks, or people mentioned in the reviews.
 
