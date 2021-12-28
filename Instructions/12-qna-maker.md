@@ -33,20 +33,23 @@ To create and host a knowledge base for question answering, you need a **Languag
 To create a knowledge base for question answering in your Language resource, you can use the Language Studio portal to create a question answering project. In this case, you'll create a knowledge base containing questions and answers about [Microsoft Learn](https://docs.microsoft.com/learn).
 
 1. In a new browser tab, go to the Language Studio portal at https://language.azure.com and sign in using the Microsoft account associated with your Azure subscription.
-2. At the top of the portal, select **Create a knowledge base**.
-3. You have already created a QnA Maker resource, so you can skip step 1. In the **Step 2** section, select the following settings:
+2. If prompted to choose a Language resource, select the following settings:
     - **Microsoft Azure Directory ID**: The Azure directory containing your subscription.
     - **Azure subscription name**: Your Azure subscription.
     - **Language resource**: The Language resource you created previously.
     
-4. In the **Step 3** section, enter **Learn FAQ** as the name for your knowledge base.
-
-    You can create a knowledge base from scratch, but it's common to start by importing questions and answers from an existing FAQ page or document.
-
-5. In the **Step 4** section:
-    - In the **URL** box type `https://docs.microsoft.com/en-us/learn/support/faq` and click **&#65291; Add URL**.
-    - In the **Chit-chat** section, select **Friendly**.
-6. In the **Step 5** section, select **Create your KB** and wait for your knowledge base to be created.
+3. If you are <u>not</u> prompted to choose a language resource, it may be because you have multiple Language resources in your subscription; in which case:
+    1. On the bar at the top if the page, click the **Settings (&#9881;)** button.
+    2. On the **Settings** page, view the **Resources** tab.
+    3. Select the language resource you just created, and click **Switch resource**.
+    4. At the top of the page, click **Language Studio** to return to the Language Studio home page.
+4. At the top of the portal, in the **Create new** menu, select **Custom question answering**.
+5. In the ***Create a project** wizard, on the **Choose language setting** page, select the option to set the language for all projects in this resource, and select **English** as the language. Then click **Next**.
+6. On the **Enter basic information** page, enter the following details and then click **Next**:
+    - **Name** LearnFAQ
+    - **Description**: FAQ for Microsoft Learn
+    - **Default answer when no answer is returned**: Sorry, I don't understand the question
+7. On the **Review and finish** page, click **Create project**.
 
 ## Modify the knowledge base
 
