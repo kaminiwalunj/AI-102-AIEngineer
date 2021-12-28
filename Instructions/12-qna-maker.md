@@ -32,13 +32,13 @@ To create and host a knowledge base for question answering, you need a **Languag
 
 To create a knowledge base for question answering in your Language resource, you can use the Language Studio portal to create a question answering project. In this case, you'll create a knowledge base containing questions and answers about [Microsoft Learn](https://docs.microsoft.com/learn).
 
-1. In a new browser tab, go to the QnA Maker portal at `https://qnamaker.ai` and sign in using the Microsoft account associated with your Azure subscription.
+1. In a new browser tab, go to the Language Studio portal at https://language.azure.com and sign in using the Microsoft account associated with your Azure subscription.
 2. At the top of the portal, select **Create a knowledge base**.
 3. You have already created a QnA Maker resource, so you can skip step 1. In the **Step 2** section, select the following settings:
     - **Microsoft Azure Directory ID**: The Azure directory containing your subscription.
     - **Azure subscription name**: Your Azure subscription.
-    - **Azure QnA Service**: The Text Analytics resource you created previously.
-    - **Language**: English (*by default, this option is only available for the first knowledge base you create*).
+    - **Language resource**: The Language resource you created previously.
+    
 4. In the **Step 3** section, enter **Learn FAQ** as the name for your knowledge base.
 
     You can create a knowledge base from scratch, but it's common to start by importing questions and answers from an existing FAQ page or document.
