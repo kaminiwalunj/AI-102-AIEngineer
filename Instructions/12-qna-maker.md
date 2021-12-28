@@ -1,4 +1,4 @@
-# Create a QnA Solution
+# Create a Question Answering Solution
 
 One of the most common conversational scenarios is providing support through a knowledge base of frequently asked questions (FAQs). Many organizations publish FAQs as documents or web pages, which works well for a small set of question and answer pairs, but large documents can be difficult and time-consuming to search.
 
@@ -6,20 +6,20 @@ QnA Maker is a cognitive service that enables you to create a knowledge base of 
 
 In this lab, we will be using the Managed QnA Maker, which is a feature within Text Analytics. 
 
-## Create a Text Analytics resource 
+## Create a Language resource 
 
-To create and host a knowledge base using the Managed QnA Maker, you need a Text Analytics resource in your Azure subscription.
+To create and host a knowledge base for question answering, you need a **Language service** resource in your Azure subscription.
 
 1. Open the Azure portal at `https://portal.azure.com`, and sign in using the Microsoft account associated with your Azure subscription.
-2. Select the **&#65291;Create a resource** button, select ***AI + Machine Learning*** under Category section then select ***Language service*** form list of products. 
-3. Under **Select additional features** blade Click **Select** on the **Custom question answering (preview)** block. Then click **Continue to create your resource**. You will need to enter the following settings:
+2. Select the **+Create a resource** button, search for Language, and create a **Language service** resource.
+3. Click **Select** on the **Custom question answering (preview)** block. Then click **Continue to create your resource**. You will need to enter the following settings:
     
     - **Subscription**: *Your Azure subscription*
     - **Resource group**: *Choose or create a resource group (if you are using a restricted subscription, you may not have permission to create a new resource group - use the one provided)*
     - **Region**: *Choose any available location*
     - **Name**: *Enter a unique name*
     - **Pricing tier**: Standard S
-    - **Azure Search location**\*: *Choose a location in the same global region as your QnA Maker resource*.
+    - **Azure Search location**\*: *Choose a location in the same global region as your language resource*.
     - **Azure Search pricing tier**: Free (F) (*If this tier is not available, select Basic (B)*)
     - **Legal Terms**: _Agree_ 
     - **Responsible AI Notice**: _Agree_
