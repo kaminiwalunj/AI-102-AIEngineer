@@ -205,8 +205,8 @@ The interactions with the weather bot so far has been through text.  Users enter
 
 ```
 [Activity
-    Text = What is your city?
-    SuggestedActions = Cancel
+    Text = Enter your city.
+    
 ]
 ```
 
