@@ -28,9 +28,9 @@ To create and host a knowledge base for question answering, you need a **Languag
 
 4. Wait for deployment to complete, and then view the deployment details.
 
-## Create a knowledge base
+## Create a question answering project
 
-To create a knowledge base in your Text Analytics resource, you can use the QnA Maker portal. In this case, you'll create a knowledge base containing questions and answers about [Microsoft Learn](https://docs.microsoft.com/learn).
+To create a knowledge base for question answering in your Language resource, you can use the Language Studio portal to create a question answering project. In this case, you'll create a knowledge base containing questions and answers about [Microsoft Learn](https://docs.microsoft.com/learn).
 
 1. In a new browser tab, go to the QnA Maker portal at `https://qnamaker.ai` and sign in using the Microsoft account associated with your Azure subscription.
 2. At the top of the portal, select **Create a knowledge base**.
