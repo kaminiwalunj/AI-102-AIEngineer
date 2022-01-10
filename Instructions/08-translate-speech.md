@@ -48,13 +48,13 @@ In this exercise, you'll complete a partially implemented client application tha
     **C#**
 
     ```
-    dotnet add package Microsoft.CognitiveServices.Speech --version 1.14.0
+    dotnet add package Microsoft.CognitiveServices.Speech --version 1.19.0
     ```
     
     **Python**
     
     ```
-    pip install azure-cognitiveservices-speech==1.14.0
+    pip install azure-cognitiveservices-speech==1.19.0
     ```
 
 3. View the contents of the **translator** folder, and note that it contains a file for configuration settings:
@@ -283,9 +283,9 @@ So far, your application translates spoken input to text; which might be suffici
     // Synthesize translation
     var voices = new Dictionary<string, string>
                     {
-                        ["fr"] = "fr-FR-Julie",
-                        ["es"] = "es-ES-Laura",
-                        ["hi"] = "hi-IN-Kalpana"
+                        ["fr"] = "fr-FR-HenriNeural",
+                        ["es"] = "es-ES-ElviraNeural",
+                        ["hi"] = "hi-IN-MadhurNeural"
                     };
     speechConfig.SpeechSynthesisVoiceName = voices[targetLanguage];
     using SpeechSynthesizer speechSynthesizer = new SpeechSynthesizer(speechConfig);
@@ -301,9 +301,9 @@ So far, your application translates spoken input to text; which might be suffici
     ```Python
     # Synthesize translation
     voices = {
-            "fr": "fr-FR-Julie",
-            "es": "es-ES-Laura",
-            "hi": "hi-IN-Kalpana"
+            "fr": "fr-FR-HenriNeural",
+            "es": "es-ES-ElviraNeural",
+            "hi": "hi-IN-MadhurNeural"
     }
     speech_config.speech_synthesis_voice_name = voices.get(targetLanguage)
     speech_synthesizer = speech_sdk.SpeechSynthesizer(speech_config)
