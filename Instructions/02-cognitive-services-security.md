@@ -1,25 +1,20 @@
----
-lab:
-    title: 'Manage Cognitive Services Security'
-    module: 'Module 2 - Developing AI Apps with Cognitive Services'
----
-
 # Manage Cognitive Services Security
 
 Security is a critical consideration for any application, and as a developer you should ensure that access to resources such as cognitive services is restricted to only those who require it.
 
 Access to cognitive services is typically controlled through authentication keys, which are generated when you initially create a cognitive services resource.
 
-## Clone the repository for this course
+## Open the cloned folder in Visual Studio Code.
 
-If you have already cloned **AI-102-AIEngineer** code repository to the environment where you're working on this lab, open it in Visual Studio Code; otherwise, follow these steps to clone it now.
+1.  Start Visual Studio Code (the program icon is pinned to the bottom taskbar).
 
-1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/AI-102-AIEngineer` repository to a local folder (it doesn't matter which folder).
-3. When the repository has been cloned, open the folder in Visual Studio Code.
-4. Wait while additional files are installed to support the C# code projects in the repo.
+     ![Visual Studio Code Icon](./images/vscode.png)
 
-    > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
+2.  Open a file, From the top-left options, Click on **file->Open File** and navigate to **C:\AllFiles\AI-102-AIEngineer-prod**.
+
+    **Note:** You may be prompted to complete a 2-minute survey. Go ahead and select **No, thanks**. You may need to do this more than once.
+
+3.  Wait while additional files are installed to support the C# code projects in the repo.
 
 ## Provision a Cognitive Services resource
 
@@ -84,6 +79,7 @@ The command returns a list of the keys for your cognitive services resource - th
     ```
     rest-test
     ```
+    **Note: If get error please use **.\rest-test**
 
 The command returns a JSON document containing information about the language detected in the input data (which should be English).
 
@@ -153,7 +149,13 @@ The output of this command includes information about your new service principal
 
 Make a note of the **appId**, **password**, and **tenant** values - you will need them later (if you close this terminal, you won't be able to retrieve the password; so it's important to note the values now - you can paste the output into a new text file in Visual Studio Code to ensure you can find the values you need later!)
 
-2. To assign permission for your new service principal to access secrets in your Key Vault, run the following Azure CLI command, replacing *&lt;keyVaultName&gt;* with the name of your Azure Key Vault resource and *&lt;spName&gt;* with the same value you provided when creating the service principal.
+2. Run below command to get the Service principal name in the output section. (you will find Display Name in environment detail page under Service principal details)
+ 
+    ```
+    az ad sp list --display-name <displayname>
+    ```
+
+3. Now assign permission for your new service principal to access secrets in your Key Vault, run the following Azure CLI command, replacing *&lt;keyVaultName&gt;* with the name of your Azure Key Vault resource and *&lt;spName&gt;* with the same value you provided when creating the service principal.
 
     ```
     az keyvault set-policy -n <keyVaultName> --spn "https://<spName>" --secret-permissions get list
@@ -171,15 +173,15 @@ Now you're ready to use the service principal identity in an application, so it 
     **C#**
 
     ```
-    dotnet add package Azure.AI.TextAnalytics --version 5.0.0
-    dotnet add package Azure.Identity --version 1.3.0
+    dotnet add package Azure.AI.TextAnalytics --version 5.1.0
+    dotnet add package Azure.Identity --version 1.5.0
     dotnet add package Azure.Security.KeyVault.Secrets --version 4.2.0-beta.3
     ```
 
     **Python**
 
     ```
-    pip install azure-ai-textanalytics==5.0.0
+    pip install azure-ai-textanalytics==5.1.0
     pip install azure-identity==1.5.0
     pip install azure-keyvault-secrets==4.2.0
     ```
