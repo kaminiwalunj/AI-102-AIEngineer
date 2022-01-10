@@ -27,6 +27,7 @@ In this exercise, you'll create **Custom Vision** resources for training and pre
     - **Create options**: Both
     - **Subscription**: *Your Azure subscription*
     - **Resource group**: *Choose or create a resource group (if you are using a restricted subscription, you may not have permission to create a new resource group - use the one provided)*
+    - **Region**: *Choose any available region*
     - **Name**: *Enter a unique name*
     - **Training location**: *Choose any available region*
     - **Training pricing tier**: F0
@@ -85,7 +86,7 @@ The project you have created has been assigned a unique identifier, which you wi
 
 1. Click the *settings* (&#9881;) icon at the top right of the **Performance** page to view the project settings.
 2. Under **General** (on the left), note the **Project Id** that uniquely identifies this project.
-3. On the right, under **Resources** note that the details for the *training* resource, including its key and endpoint are shown (you can also obtain this information by viewing the resource in the Azure portal).
+3. On the right, under **Resources** note that the key and endpoints are shown. These are the details for the *training* resource (you can also obtain this information by viewing the resource in the Azure portal).
 
 ## Use the *training* API
 
@@ -149,9 +150,9 @@ Now you're ready to publish your trained model so that it can be used from a cli
 
 1. In the Custom Vision portal, on the **Performance** page,  click **&#128504; Publish** to publish the trained model with the following settings:
     - **Model name**: fruit-classifier
-    - **Prediction Resource**: *The **prediction** resource you created previously (<u>not</u> the training resource)*.
+    - **Prediction Resource**: *The **prediction** resource you created previously which ends with "-Prediction" (<u>not</u> the training resource)*.
 2. At the top left of the **Project Settings** page, click the *Projects Gallery* (&#128065;) icon to return to the Custom Vision portal home page, where your project is now listed.
-3. On the Custom Vision portal home page, at the top right, click the *settings* (&#9881;) icon to view the settings for your Custom Vision service. Then, under **Resources**, find your *prediction* resource (<u>not</u> the training resource) to determine its **Key** and **Endpoint** values (you can also obtain this information by viewing the resource in the Azure portal).
+3. On the Custom Vision portal home page, at the top right, click the *settings* (&#9881;) icon to view the settings for your Custom Vision service. Then, under **Resources**, find your *prediction* resource which ends with "-Prediction"  (<u>not</u> the training resource) to determine its **Key** and **Endpoint** values (you can also obtain this information by viewing the resource in the Azure portal).
 
 ## Use the image classifier from a client application
 
