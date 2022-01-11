@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Create a Language Understanding App'
-    module: 'Module 5 - Creating Language Understanding Solutions'
----
-
 # Create a Language Understanding App
 
 The Language Understanding service enables you to define an app that encapsulates a language model that applications can use to interpret natural language input from users,  predict the users *intent* (what they want to achieve), and identify any *entities* to which the intent should be applied.
@@ -16,16 +10,18 @@ This kind of input is an example of an *utterance* (something a user might say o
 
 > **Note**: The task of the language understanding app is to predict the user's intent, and identify any entities to which the intent applies. It is <u>not</u> its job to actually perform the actions required to satisfy the intent. For example, the clock application can use a language app to discern that the user wants to know the time in London; but the client application itself must then implement the logic to determine the correct time and present it to the user.
 
-## Clone the repository for this course
 
-If you have not already cloned **AI-102-AIEngineer** code repository to the environment where you're working on this lab, follow these steps to do so. Otherwise, open the cloned folder in Visual Studio Code.
+## Open the cloned folder in Visual Studio Code.
 
-1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/AI-102-AIEngineer` repository to a local folder (it doesn't matter which folder).
-3. When the repository has been cloned, open the folder in Visual Studio Code.
-4. Wait while additional files are installed to support the C# code projects in the repo.
+1.  Start Visual Studio Code (the program icon is pinned to the bottom taskbar).
 
-    > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
+     ![Visual Studio Code Icon](./images/vscode.png)
+
+2.  Open a file, From the top-left options, Click on **file->Open File** and navigate to **C:\AllFiles\AI-102-AIEngineer-prod**.
+
+    **Note:** You may be prompted to complete a 2-minute survey. Go ahead and select **No, thanks**. You may need to do this more than once.
+
+3.  Wait while additional files are installed to support the C# code projects in the repo.
 
 ## Create Language Understanding resources
 
@@ -265,21 +261,21 @@ In a real project, you'd iteratively refine intents and entities, retrain, and r
 8. Right-click the **09-luis-app** folder and open an integrated terminal. Then enter the following command (be sure to include the quotation marks!):
 
     ```
-    GetIntent "What's the time?"
+    .\GetIntent "What's the time?"
     ```
 
 9. Review the JSON response returned by your app, which should indicate the top scoring intent predicted for your input (which should be **GetTime**).
 10. Try the following command:
 
     ```
-    GetIntent "What's today's date?"
+    .\GetIntent "What's today's date?"
     ```
 
 11. Examine the response and verify that it predicts the **GetDate** intent.
 12. Try the following command:
 
     ```
-    GetIntent "What time is it in Sydney?"
+    .\GetIntent "What time is it in Sydney?"
     ```
 
 13. Examine the response and verify that it includes a **Location** entity.
@@ -287,15 +283,15 @@ In a real project, you'd iteratively refine intents and entities, retrain, and r
 14. Try the following commands and examine the responses:
 
     ```
-    GetIntent "What time is it in Glasgow?"
+    .\GetIntent "What time is it in Glasgow?"
     ```
 
     ```
-    GetIntent "What's the time in Nairobi?"
+    .\GetIntent "What's the time in Nairobi?"
     ```
 
     ```
-    GetIntent "What's the UK time?"
+    .\GetIntent "What's the UK time?"
     ```
 15. Try a few more variations - the goal is to generate at least some responses that correctly predict the **GetTime** intent, but fail to detect a **Location** entity.
 
