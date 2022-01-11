@@ -1,25 +1,20 @@
----
-lab:
-    title: 'Analyze Text'
-    module: 'Module 3 - Getting Started with Natural Language Processing'
----
-
 # Analyze Text
 
-The **Language** service is a cognitive service that supports analysis of text, including language detection, sentiment analysis, key phrase extraction, and entity recognition.
+The ***Language*** service is a cognitive service that supports analysis of text, including language detection, sentiment analysis, key phrase extraction, and entity recognition.
 
 For example, suppose a travel agency wants to process hotel reviews that have been submitted to the company's web site. By using the Language service, they can determine the language each review is written in, the sentiment (positive, neutral, or negative) of the reviews, key phrases that might indicate the main topics discussed in the review, and named entities, such as places, landmarks, or people mentioned in the reviews.
 
-## Clone the repository for this course
+## Open the cloned folder in Visual Studio Code.
 
-If you have not already cloned **AI-102-AIEngineer** code repository to the environment where you're working on this lab, follow these steps to do so. Otherwise, open the cloned folder in Visual Studio Code.
+1.  Start Visual Studio Code (the program icon is pinned to the bottom taskbar).
 
-1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/AI-102-AIEngineer` repository to a local folder (it doesn't matter which folder).
-3. When the repository has been cloned, open the folder in Visual Studio Code.
-4. Wait while additional files are installed to support the C# code projects in the repo.
+     ![Visual Studio Code Icon](./images/vscode.png)
+     
+2.  Open a file, From the top-left options, Click on **file->Open File** and navigate to **C:\AllFiles\AI-102-AIEngineer-prod**.
 
-    > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
+       **Note:** You may be prompted to complete a 2-minute survey. Go ahead and select **No, thanks**. You may need to do this more than once.
+    
+3.  Wait while additional files are installed to support the C# code projects in the repo.
 
 ## Provision a Cognitive Services resource
 
@@ -36,7 +31,7 @@ If you don't already have one in your subscription, you'll need to provision a *
 4. Wait for deployment to complete, and then view the deployment details.
 5. When the resource has been deployed, go to it and view its **Keys and Endpoint** page. You will need the endpoint and one of the keys from this page in the next procedure.
 
-## Prepare to use the Language SDK for text analytics
+## Prepare to use the langauge SDK for text analytics
 
 In this exercise, you'll complete a partially implemented client application that uses the Language service text analytics SDK to analyze hotel reviews.
 
@@ -48,13 +43,13 @@ In this exercise, you'll complete a partially implemented client application tha
     **C#**
     
     ```
-    dotnet add package Azure.AI.TextAnalytics --version 5.0.0
+    dotnet add package Azure.AI.TextAnalytics --version 5.1.0
     ```
     
     **Python**
     
     ```
-    pip install azure-ai-textanalytics==5.0.0
+    pip install azure-ai-textanalytics==5.1.0
     ```
     
 3. View the contents of the **text-analysis** folder, and note that it contains a file for configuration settings:
@@ -115,6 +110,14 @@ In this exercise, you'll complete a partially implemented client application tha
 
     **Python**
 
+    ```
+    python -m pip install --user python-dotenv
+    ```
+    
+    ```
+    pip install azure-ai-textanalytics
+    ```
+    
     ```
     python text-analysis.py
     ```
@@ -345,4 +348,4 @@ In addition to categorized entities, the Text Analytics API can detect entities 
 
 ## More information
 
-For more information about using the **Language** service, see the [language-service documentation](https://docs.microsoft.com/azure/cognitive-services/text-analytics/).
+For more information about using the **Language** service, see the [Text Analytics documentation](https://docs.microsoft.com/azure/cognitive-services/langauge-service/).
