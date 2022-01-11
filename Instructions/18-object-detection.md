@@ -1,23 +1,18 @@
----
-lab:
-    title: 'Detect Objects in Images with Custom Vision'
-    module: 'Module 9 - Developing Custom Vision Solutions'
----
-
 # Detect Objects in Images with Custom Vision
 
 In this exercise, you will use the Custom Vision service to train an *object detection* model that can detect and locate three classes of fruit (apple, banana, and orange) in an image.
 
-## Clone the repository for this course
+## Open the cloned folder in Visual Studio Code.
 
-If you have already cloned **AI-102-AIEngineer** code repository to the environment where you're working on this lab, open it in Visual Studio Code; otherwise, follow these steps to clone it now.
+1.  Start Visual Studio Code (the program icon is pinned to the bottom taskbar).
 
-1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/AI-102-AIEngineer` repository to a local folder (it doesn't matter which folder).
-3. When the repository has been cloned, open the folder in Visual Studio Code.
-4. Wait while additional files are installed to support the C# code projects in the repo.
+     ![Visual Studio Code Icon](./images/vscode.png)
 
-    > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
+2.  Open a file, From the top-left options, Click on **file->Open File** and navigate to **C:\AllFiles\AI-102-AIEngineer-prod**.
+
+    **Note:** You may be prompted to complete a 2-minute survey. Go ahead and select **No, thanks**. You may need to do this more than once.
+
+3.  Wait while additional files are installed to support the C# code projects in the repo.
 
 ## Create Custom Vision resources
 
@@ -30,14 +25,16 @@ If you already have **Custom Vision** resources for training and prediction in y
     - **Resource group**: *Choose or create a resource group (if you are using a restricted subscription, you may not have permission to create a new resource group - use the one provided)*
     - **Region**: *Choose any available region*
     - **Name**: *Enter a unique name*
+    - **Training location**: *Choose any available region*
     - **Training pricing tier**: F0
+    - **Prediction location**: *The same region as the training resource*
     - **Prediction pricing tier**: F0
 
     > **Note**: If you already have an F0 custom vision service in your subscription, select **S0** for this one.
 
-3. Wait for the resources to be created, and then view the deployment details and note that two Custom Vision resources are provisioned; one for training, and another for prediction (evident by the **-Prediction** suffix). You can view these by navigating to the resource group where you created them.
+3. Wait for the resources to be created, and then view the deployment details and note that two Custom Vision resources are provisioned; one for training, and another for prediction. You can view these by navigating to the resource group where you created them.
 
-> **Important**: Each resource has its own *endpoint* and *keys*, which are used to manage access from your code. To train an image classification model, your code must use the *training* resource (with its endpoint and key); and to use the trained model to predict image classes, your code must use the *prediction* resource (with its endpoint and key).
+> **Important**: Each resource has its own *endpoint* and *keys*, which are used to manage access from your code. To train an image classification model, your code must use the *training* resource (with its endpoint and key); and to use the trained model to predict image classes, your code must use the *prediction* (evident by the **-prediction** suffix) resource (with its endpoint and key).
 
 ## Create a Custom Vision project
 
@@ -57,9 +54,10 @@ To train an object detection model, you need to create a Custom Vision project b
 To train an object detection model, you need to upload images that contain the classes you want the model to identify, and tag them to indicate bounding boxes for each object instance.
 
 1. In Visual Studio Code, view the training images in the **18-object-detection/training-images** folder where you cloned the repository. This folder contains images of fruit.
-2. In the Custom Vision portal, in your object detection project, select **Add images** and upload all of the images in the extracted folder.
-3. After the images have been uploaded, select the first one to open it.
-4. Hold the mouse over any object in the image until an automatically detected region is displayed like the image below. Then select the object, and if necessary resize the region to surround it.
+2. Download and extract the training images from https://aka.ms/fruit-objects. The extracted folder contains a collection of images of fruit
+3. In the Custom Vision portal, in your object detection project, select **Add images** and upload all of the images in the extracted folder.
+4. After the images have been uploaded, select the first one to open it.
+5. Hold the mouse over any object in the image until an automatically detected region is displayed like the image below. Then select the object, and if necessary resize the region to surround it.
 
 ![The default region for an object](./images/object-region.jpg)
 
@@ -87,7 +85,7 @@ You can use the graphical tool in the Custom Vision portal to tag your images, b
 
 1. Click the *settings* (&#9881;) icon at the top right of the **Training Images** page in the Custom Vision portal to view the project settings.
 2. Under **General** (on the left), note the **Project Id** that uniquely identifies this project.
-3. On the right, under **Resources** note that the key and endpoint are shown. These are the details for the *training* resource (you can also obtain this information by viewing the resource in the Azure portal).
+3. On the right, under **Resources** note that the details for the *training* resource, including its key and endpoint are shown (you can also obtain this information by viewing the resource in the Azure portal).
 4. In Visual Studio Code, under the **18-object-detection** folder, expand the **C-Sharp** or **Python** folder depending on your language preference.
 5. Right-click the **train-detector** folder and open an integrated terminal. Then install the Custom Vision Training package by running the appropriate command for your language preference:
 
@@ -107,7 +105,7 @@ pip install azure-cognitiveservices-vision-customvision==3.1.0
     - **C#**: appsettings.json
     - **Python**: .env
 
-    Open the configuration file and update the configuration values it contains to reflect the endpoint and key for your Custom Vision *training* resource, and the project ID for the object detection project you created previously. Save your changes.
+    Open the configuration file and update the configuration values it contains to reflect the endpoint and key for your Custom Vision *training* resource, and the project ID for the object classification project you created previously. Save your changes.
 
 7. In the **train-detector** folder, open **tagged-images.json** and examine the JSON it contains. The JSON defines a list of images, each containing one or more tagged regions. Each tagged region includes a tag name, and the top and left coordinates and width and height dimensions of the bounding box containing the tagged object.
 
@@ -156,9 +154,9 @@ Now you're ready to publish your trained model so that it can be used from a cli
 
 1. In the Custom Vision portal, on the **Performance** page,  click **&#128504; Publish** to publish the trained model with the following settings:
     - **Model name**: fruit-detector
-    - **Prediction Resource**: *The **prediction** resource you created previously which ends with "-Prediction" (<u>not</u> the training resource)*.
+    - **Prediction Resource**: *The **prediction** resource you created previously (<u>not</u> the training resource)*.
 2. At the top left of the **Project Settings** page, click the *Projects Gallery* (&#128065;) icon to return to the Custom Vision portal home page, where your project is now listed.
-3. On the Custom Vision portal home page, at the top right, click the *settings* (&#9881;) icon to view the settings for your Custom Vision service. Then, under **Resources**, find your *prediction* resource which ends with "-Prediction" (<u>not</u> the training resource) to determine its **Key** and **Endpoint** values (you can also obtain this information by viewing the resource in the Azure portal).
+3. On the Custom Vision portal home page, at the top right, click the *settings* (&#9881;) icon to view the settings for your Custom Vision service. Then, under **Resources**, find your *prediction* (evident by the **-prediction** suffix) resource (<u>not</u> the training resource) to determine its **Key** and **Endpoint** values (you can also obtain this information by viewing the resource in the Azure portal).
 
 ## Use the image classifier from a client application
 
@@ -181,7 +179,7 @@ pip install azure-cognitiveservices-vision-customvision==3.1.0
 
 > **Note**: The Python SDK package includes both training and prediction packages, and may already be installed.
 
-3. Open the configuration file for your client application (*appsettings.json* for C# or *.env* for Python) and update the configuration values it contains to reflect the endpoint and key for your Custom Vision *prediction* resource, the project ID for the object detection project, and the name of your published model (which should be *fruit-detector*). Save your changes.
+3. Open the configuration file for your client application (*appsettings.json* for C# or *.env* for Python) and update the configuration values it contains to reflect the endpoint and key for your Custom Vision *prediction* (evident by the **-prediction** suffix) resource, the project ID for the object detection project, and the name of your published model (which should be *fruit-detector*). Save your changes.
 4. Open the code file for your client application (*Program.cs* for C#, *test-detector.py* for Python) and review the code it contains, noting the following details:
     - Namespaces from the package you installed are imported
     - The **Main** function retrieves the configuration settings, and uses the key and endpoint to create an authenticated **CustomVisionPredictionClient**.
@@ -195,6 +193,10 @@ dotnet run
 ```
 
 **Python**
+
+```
+pip install matplotlib
+```
 
 ```
 python test-detector.py
