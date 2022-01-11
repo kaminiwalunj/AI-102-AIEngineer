@@ -1,25 +1,20 @@
----
-lab:
-    title: 'Classify Images with Custom Vision'
-    module: 'Module 9 - Developing Custom Vision Solutions'
----
-
 # Classify Images with Custom Vision
 
 The **Custom Vision** service enables you to create computer vision models that are trained on your own images. You can use it to train *image classification* and *object detection* models; which you can then publish and consume from applications.
 
 In this exercise, you will use the Custom Vision service to train an image classification model that can identify three classes of fruit (apple, banana, and orange).
 
-## Clone the repository for this course
+## Open the cloned folder in Visual Studio Code.
 
-If you have not already cloned **AI-102-AIEngineer** code repository to the environment where you're working on this lab, follow these steps to do so. Otherwise, open the cloned folder in Visual Studio Code.
+1.  Start Visual Studio Code (the program icon is pinned to the bottom taskbar).
 
-1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/AI-102-AIEngineer` repository to a local folder (it doesn't matter which folder).
-3. When the repository has been cloned, open the folder in Visual Studio Code.
-4. Wait while additional files are installed to support the C# code projects in the repo.
+     ![Visual Studio Code Icon](./images/vscode.png)
 
-    > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
+2.  Open a file, From the top-left options, Click on **file->Open File** and navigate to **C:\AllFiles\AI-102-AIEngineer-prod**.
+
+    **Note:** You may be prompted to complete a 2-minute survey. Go ahead and select **No, thanks**. You may need to do this more than once.
+
+3.  Wait while additional files are installed to support the C# code projects in the repo.
 
 ## Create Custom Vision resources
 
@@ -34,12 +29,14 @@ In this exercise, you'll create **Custom Vision** resources for training and pre
     - **Resource group**: *Choose or create a resource group (if you are using a restricted subscription, you may not have permission to create a new resource group - use the one provided)*
     - **Region**: *Choose any available region*
     - **Name**: *Enter a unique name*
+    - **Training location**: *Choose any available region*
     - **Training pricing tier**: F0
+    - **Prediction location**: *The same region as the training resource*
     - **Prediction pricing tier**: F0
 
     > **Note**: If you already have an F0 custom vision service in your subscription, select **S0** for this one.
 
-3. Wait for the resources to be created, and then view the deployment details and note that two Custom Vision resources are provisioned; one for training, and another for prediction (evident by the **-Prediction** suffix). You can view these by navigating to the resource group where you created them.
+3. Wait for the resources to be created, and then view the deployment details and note that two Custom Vision resources are provisioned; one for training, and another for prediction. You can view these by navigating to the resource group where you created them.
 
 > **Important**: Each resource has its own *endpoint* and *keys*, which are used to manage access from your code. To train an image classification model, your code must use the *training* resource (with its endpoint and key); and to use the trained model to predict image classes, your code must use the *prediction* resource (with its endpoint and key).
 
@@ -48,15 +45,16 @@ In this exercise, you'll create **Custom Vision** resources for training and pre
 To train an image classification model, you need to create a Custom Vision project based on your training resource. To do this, you'll use the Custom Vision portal.
 
 1. In Visual Studio Code, view the training images in the **17-image-classification/training-images** folder where you cloned the repository. This folder contains subfolders of apple, banana, and orange images.
-2. In a new browser tab, open the Custom Vision portal at `https://customvision.ai`. If prompted, sign in using the Microsoft account associated with your Azure subscription and agree to the terms of service.
-3. In the Custom Vision portal, create a new project with the following settings:
+2. Download and extract the training images from https://aka.ms/fruit-images.
+3. In a new browser tab, open the Custom Vision portal at `https://customvision.ai`. If prompted, sign in using the Microsoft account associated with your Azure subscription and agree to the terms of service.
+4. In the Custom Vision portal, create a new project with the following settings:
     - **Name**: Classify Fruit
     - **Description**: Image classification for fruit
     - **Resource**: *The Custom Vision resource you created previously*
     - **Project Types**: Classification
     - **Classification Types**: Multiclass (single tag per image)
     - **Domains**: Food
-4. In the new project, click **\[+\] Add images**, and select all of the files in the **training-images/apple** folder you viewed previously. Then upload the image files, specifying the tag *apple*, like this:
+5. In the new project, click **\[+\] Add images**, and select all of the files in the **training-images/apple** folder you viewed previously. Then upload the image files, specifying the tag *apple*, like this:
 
 ![Upload apple with apple tag](./images/upload_apples.jpg)
    
@@ -88,7 +86,7 @@ The project you have created has been assigned a unique identifier, which you wi
 
 1. Click the *settings* (&#9881;) icon at the top right of the **Performance** page to view the project settings.
 2. Under **General** (on the left), note the **Project Id** that uniquely identifies this project.
-3. On the right, under **Resources** note that the key and endpoint are shown. These are the details for the *training* resource (you can also obtain this information by viewing the resource in the Azure portal).
+3. On the right, under **Resources** note that the key and endpoints are shown. These are the details for the *training* resource (you can also obtain this information by viewing the resource in the Azure portal).
 
 ## Use the *training* API
 
@@ -135,7 +133,10 @@ dotnet run
 ```
 
 **Python**
-
+```
+python -m pip install --user python-dotenv
+```
+    
 ```
 python train-classifier.py
 ```
@@ -151,7 +152,7 @@ Now you're ready to publish your trained model so that it can be used from a cli
     - **Model name**: fruit-classifier
     - **Prediction Resource**: *The **prediction** resource you created previously which ends with "-Prediction" (<u>not</u> the training resource)*.
 2. At the top left of the **Project Settings** page, click the *Projects Gallery* (&#128065;) icon to return to the Custom Vision portal home page, where your project is now listed.
-3. On the Custom Vision portal home page, at the top right, click the *settings* (&#9881;) icon to view the settings for your Custom Vision service. Then, under **Resources**, find your *prediction* resource which ends with "-Prediction" (<u>not</u> the training resource) to determine its **Key** and **Endpoint** values (you can also obtain this information by viewing the resource in the Azure portal).
+3. On the Custom Vision portal home page, at the top right, click the *settings* (&#9881;) icon to view the settings for your Custom Vision service. Then, under **Resources**, find your *prediction* resource which ends with "-Prediction"  (<u>not</u> the training resource) to determine its **Key** and **Endpoint** values (you can also obtain this information by viewing the resource in the Azure portal).
 
 ## Use the image classifier from a client application
 
