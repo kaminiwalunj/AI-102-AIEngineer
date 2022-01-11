@@ -1,25 +1,20 @@
----
-lab:
-    title: 'Translate Speech'
-    module: 'Module 4 - Building Speech-Enabled Applications'
----
-
 # Translate Speech
 
 The **Speech** service includes a **Speech translation** API that you can use to translate spoken language. For example, suppose you want to develop a translator application that people can use when traveling in places where they don't speak the local language. They would be able to say phrases such as "Where is the station?" or "I need to find a pharmacy" in their own language, and have it translate them to the local language.
 
 **Note**: This exercise requires that you are using a computer with speakers/headphones. For the best experience, a microphone is also required. Some hosted virtual environments may be able to capture audio from your local microphone, but if this doesn't work (or you don't have a microphone at all), you can use a provided audio file for speech input. Follow the instructions carefully, as you'll need to choose different options depending on whether you are using a microphone or the audio file.
 
-## Clone the repository for this course
+## Open the cloned folder in Visual Studio Code.
 
-If you have already cloned **AI-102-AIEngineer** code repository to the environment where you're working on this lab, open it in Visual Studio Code; otherwise, follow these steps to clone it now.
+1.  Start Visual Studio Code (the program icon is pinned to the bottom taskbar).
 
-1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/AI-102-AIEngineer` repository to a local folder (it doesn't matter which folder).
-3. When the repository has been cloned, open the folder in Visual Studio Code.
-4. Wait while additional files are installed to support the C# code projects in the repo.
+      ![Visual Studio Code Icon](./images/vscode.jpg)
 
-    > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
+2.  Open a file, From the top-left options, Click on **file->Open File** and navigate to **C:\AllFiles\AI-102-AIEngineer-prod**.
+
+    **Note:** You may be prompted to complete a 2-minute survey. Go ahead and select **No, thanks**. You may need to do this more than once.
+
+3.  Wait while additional files are installed to support the C# code projects in the repo.
 
 ## Provision a Cognitive Services resource
 
@@ -54,7 +49,7 @@ In this exercise, you'll complete a partially implemented client application tha
     **Python**
     
     ```
-    pip install azure-cognitiveservices-speech==1.19.0
+    pip3 install azure-cognitiveservices-speech
     ```
 
 3. View the contents of the **translator** folder, and note that it contains a file for configuration settings:
@@ -136,6 +131,11 @@ In this exercise, you'll complete a partially implemented client application tha
     ```
     
     **Python**
+    
+    ```
+    python -m pip install --user python-dotenv
+    ```
+
     
     ```
     python translator.py
@@ -271,6 +271,8 @@ Now that you have a **SpeechTranslationConfig** for the speech service in your c
     >
     > The translation to Hindi may not always be displayed correctly in the Console window due to character encoding issues.
 
+   >**Note**: When you're testing with **python** language you will get a error, This is expected **No wave device is installed that can play files in the current format. To install a wave device, go to Control Panel, click Printers and Other Hardware, and then click Add Hardware.** as we're testing in Virtual Machine there are no audio drivers installed
+
 ## Synthesize the translation to speech
 
 So far, your application translates spoken input to text; which might be sufficient if you need to ask someone for help while traveling. However, it would be better to have the translation spoken aloud in a suitable voice.
@@ -329,6 +331,8 @@ So far, your application translates spoken input to text; which might be suffici
 3. When prompted, enter a valid language code (*fr*, *es*, or *hi*), and then speak clearly into the microphone and say a phrase you might use when traveling abroad. The program should transcribe your spoken input and respond with a spoken translation. Repeat this process, trying each language supported by the application. When you're finished, press ENTER to end the program.
 
     > **Note** *In this example, you've used a **SpeechTranslationConfig** to translate speech to text, and then used a **SpeechConfig** to synthesize the translation as speech. You can in fact use the **SpeechTranslationConfig** to synthesize the translation directly, but this only works when translating to a single language, and results in an audio stream that is typically saved as a file rather than sent directly to a speaker.*
+
+   >**Note**: When you're testing with **python** language you will get a error, This is expected **No wave device is installed that can play files in the current format. To install a wave device, go to Control Panel, click Printers and Other Hardware, and then click Add Hardware.** as we're testing in Virtual Machine there are no audio drivers installed
 
 ## More information
 
