@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Recognize and Synthesize Speech'
-    module: 'Module 4 - Building Speech-Enabled Applications'
----
-
 # Recognize and Synthesize Speech
 
 The **Speech** service is an Azure cognitive service that provides speech-related functionality, including:
@@ -15,16 +9,17 @@ In this exercise, you'll use both of these APIs to implement a speaking clock ap
 
 **Note**: This exercise requires that you are using a computer with speakers/headphones. For the best experience, a microphone is also required. Some hosted virtual environments may be able to capture audio from your local microphone, but if this doesn't work (or you don't have a microphone at all), you can use a provided audio file for speech input. Follow the instructions carefully, as you'll need to choose different options depending on whether you are using a microphone or the audio file.
 
-## Clone the repository for this course
+## Open the cloned folder in Visual Studio Code.
 
-If you have not already cloned **AI-102-AIEngineer** code repository to the environment where you're working on this lab, follow these steps to do so. Otherwise, open the cloned folder in Visual Studio Code.
+1.  Start Visual Studio Code (the program icon is pinned to the bottom taskbar).
 
-1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/AI-102-AIEngineer` repository to a local folder (it doesn't matter which folder).
-3. When the repository has been cloned, open the folder in Visual Studio Code.
-4. Wait while additional files are installed to support the C# code projects in the repo.
+      ![Visual Studio Code Icon](./images/vscode.png)
 
-    **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
+2.  Open a file, From the top-left options, Click on **file->Open File** and navigate to **C:\AllFiles\AI-102-AIEngineer-prod**.
+
+    **Note:** You may be prompted to complete a 2-minute survey. Go ahead and select **No, thanks**. You may need to do this more than once.
+
+3.  Wait while additional files are installed to support the C# code projects in the repo.
 
 ## Provision a Cognitive Services resource
 
@@ -59,7 +54,7 @@ In this exercise, you'll complete a partially implemented client application tha
     **Python**
     
     ```
-    pip install azure-cognitiveservices-speech==1.19.0
+    pip3 install azure-cognitiveservices-speech
     ```
 
 3. View the contents of the **speaking-clock** folder, and note that it contains a file for configuration settings:
@@ -98,7 +93,7 @@ In this exercise, you'll complete a partially implemented client application tha
     speechConfig = SpeechConfig.FromSubscription(cogSvcKey, cogSvcRegion);
     Console.WriteLine("Ready to use speech service in " + speechConfig.Region);
     
-    // Configure voice
+    // Configure voice	
     speechConfig.SpeechSynthesisVoiceName = "en-US-AriaNeural";
     ```
     
@@ -119,6 +114,10 @@ In this exercise, you'll complete a partially implemented client application tha
     ```
     
     **Python**
+    
+    ```
+    python -m pip install --user python-dotenv
+    ```
     
     ```
     python speaking-clock.py
@@ -270,6 +269,8 @@ Now that you have a **SpeechConfig** for the speech service in your cognitive se
 
     If the SpeechRecognizer encounters an error, it produces a result of "Cancelled". The code in the application will then display the error message. The most likely cause is an incorrect key or region in the configuration file.
 
+   >**Note**: When you're testing with **python** language you will get a error, This is expected **No wave device is installed that can play files in the current format. To install a wave device, go to Control Panel, click Printers and Other Hardware, and then click Add Hardware.** as we're testing in Virtual Machine there are no audio drivers installed
+
 ## Synthesize speech
 
 Your speaking clock application accepts spoken input, but it doesn't actually speak! Let's fix that by adding code to synthesize speech.
@@ -333,6 +334,9 @@ Your speaking clock application accepts spoken input, but it doesn't actually sp
 
 5. When prompted, speak clearly into the microphone and say "what time is it?". The program should speak, telling you the time.
 
+   >**Note**: When you're testing with **python** language you will get a error, This is expected **No wave device is installed that can play files in the current format. To install a wave device, go to Control Panel, click Printers and Other Hardware, and then click Add Hardware.** as we're testing in Virtual Machine there are no audio drivers installed
+
+
 ## Use a different voice
 
 Your speaking clock application uses a default voice, which you can change. The Speech service supports a range of *standard* voices as well as more human-like *neural* voices. You can also create *custom* voices.
@@ -372,6 +376,8 @@ Your speaking clock application uses a default voice, which you can change. The 
     ```
 
 3. When prompted, speak clearly into the microphone and say "what time is it?". The program should speak in the specified voice, telling you the time.
+
+   >**Note**: When you're testing with **python** language you will get a error, This is expected **No wave device is installed that can play files in the current format. To install a wave device, go to Control Panel, click Printers and Other Hardware, and then click Add Hardware.** as we're testing in Virtual Machine there are no audio drivers installed
 
 ## Use Speech Synthesis Markup Language
 
@@ -430,6 +436,8 @@ Speech Synthesis Markup Language (SSML) enables you to customize the way your sp
     ```
 
 3. When prompted, speak clearly into the microphone and say "what time is it?". The program should speak in the voice that is specified in the SSML (overriding the voice specified in the SpeechConfig), telling you the time, and then after a pause telling you it's time to end this lab - which it is!
+
+   >**Note**: When you're testing with **python** language you will get a error, This is expected **No wave device is installed that can play files in the current format. To install a wave device, go to Control Panel, click Printers and Other Hardware, and then click Add Hardware.** as we're testing in Virtual Machine there are no audio drivers installed
 
 ## More information
 
