@@ -1,25 +1,20 @@
----
-lab:
-    title: 'Use the Speech and Language Understanding Services'
-    module: 'Module 5 - Creating Language Understanding Solutions'
----
-
 # Use the Speech and Language Understanding Services
 
 You can integrate the Speech service with the Language Understanding service to create applications that can intelligently determine user intents from spoken input.
 
 > **Note**: This exercise works best if you have a microphone. Some hosted virtual environments may be able to capture audio from your local microphone, but if this doesn't work (or you don't have a microphone at all), you can use a provided audio file for speech input. Follow the instructions carefully, as you'll need to choose different options depending on whether you are using a microphone or the audio file.
 
-## Clone the repository for this course
+## Open the cloned folder in Visual Studio Code.
 
-If you have already cloned **AI-102-AIEngineer** code repository to the environment where you're working on this lab, open it in Visual Studio Code; otherwise, follow these steps to clone it now.
+1.  Start Visual Studio Code (the program icon is pinned to the bottom taskbar).
 
-1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/AI-102-AIEngineer` repository to a local folder (it doesn't matter which folder).
-3. When the repository has been cloned, open the folder in Visual Studio Code.
-4. Wait while additional files are installed to support the C# code projects in the repo.
+     ![Visual Studio Code Icon](./images/vscode.png)
 
-    > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
+2.  Open a file, From the top-left options, Click on **file->Open File** and navigate to **C:\AllFiles\AI-102-AIEngineer-prod**.
+
+    **Note:** You may be prompted to complete a 2-minute survey. Go ahead and select **No, thanks**. You may need to do this more than once.
+
+3.  Wait while additional files are installed to support the C# code projects in the repo.
 
 ## Create Language Understanding resources
 
@@ -85,7 +80,7 @@ To use the Speech SDK with the Language Understanding service, you need to insta
     **Python**
 
     ```
-    pip install azure-cognitiveservices-speech==1.14.0
+    pip3 install azure-cognitiveservices-speech
     ```
 
 2. Additionally, if your system does <u>not</u> have a working microphone, you will need to use an audio file to provide spoken input for your application. In this case, use the following commands to install an additional package so your program can play the audio file (you can skip this if you intend to use a microphone):
@@ -443,6 +438,10 @@ else:
     ```
 
     **Python**
+
+    ```
+    python -m pip install --user python-dotenv
+    ```
 
     ```
     python speaking-clock-client.py
