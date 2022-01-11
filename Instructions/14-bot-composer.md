@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Create a Bot with Bot Framework Composer'
-    module: 'Module 7 - Conversational AI and the Azure Bot Service'
----
-
 # Create a Bot with Bot Framework Composer
 
 Bot Framework Composer is a graphical designer that lets you quickly and easily build sophisticated conversational bots without writing code. The composer is an open-source tool that presents a visual canvas for building bots.
@@ -210,7 +204,7 @@ The interactions with the weather bot so far has been through text.  Users enter
 3. In the properties pane, select **Show code**, and replace the existing code with the following code.
 
 ```
-[Activity    
+[Activity
     Text = Enter your city.
     SuggestedActions = Cancel
 ]
