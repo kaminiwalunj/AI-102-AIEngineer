@@ -1,8 +1,4 @@
----
-lab:
-    title: 'Create a Question Answering Solution'
-    module: 'Module 6 - Building a QnA Solution'
----
+
 
 # Create a Question Answering Solution
 
@@ -12,17 +8,17 @@ The **Language** service includes a *question answering* capability that enables
 
 > **Note**: The question answering capability in the Language service is a newer version of the QnA Maker service - which is still available as a separate service.
 
-## Clone the repository for this course
+## Open the cloned folder in Visual Studio Code.
 
-If you have not already cloned **AI-102-AIEngineer** code repository to the environment where you're working on this lab, follow these steps to do so. Otherwise, open the cloned folder in Visual Studio Code.
+1.  Start Visual Studio Code (the program icon is pinned to the bottom taskbar).
 
-1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/AI-102-AIEngineer` repository to a local folder (it doesn't matter which folder).
-3. When the repository has been cloned, open the folder in Visual Studio Code.
-4. Wait while additional files are installed to support the C# code projects in the repo.
+     ![Visual Studio Code Icon](./images/vscode.png)
 
-    > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
+2.  Open a file, From the top-left options, Click on **file->Open File** and navigate to **C:\AllFiles\AI-102-AIEngineer-prod**.
 
+    **Note:** You may be prompted to complete a 2-minute survey. Go ahead and select **No, thanks**. You may need to do this more than once.
+
+3.  Wait while additional files are installed to support the C# code projects in the repo.
 ## Create a Language resource
 
 To create and host a knowledge base for question answering, you need a **Language service** resource in your Azure subscription.
