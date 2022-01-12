@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Create a Knowledge Store with Azure Cognitive Search'
-    module: 'Module 12 - Creating a Knowledge Mining Solution'
----
-
 # Create a Knowledge Store with Azure Cognitive Search
 
 Azure Cognitive Search uses an enrichment pipeline of cognitive skills to extract AI-generated fields from documents and include them in a search index. While the index might be considered the primary output from an indexing process, the enriched data it contains might also be useful in other ways. For example:
@@ -14,16 +8,17 @@ Azure Cognitive Search uses an enrichment pipeline of cognitive skills to extrac
 
 In this exercise, you'll implement a knowledge store for *Margie's Travel*, a fictitious travel agency that uses information in brochures and hotel reviews to help customers plan trips.
 
-## Clone the repository for this course
+## Open the cloned folder in Visual Studio Code.
 
-If you have already cloned **AI-102-AIEngineer** code repository to the environment where you're working on this lab, open it in Visual Studio Code; otherwise, follow these steps to clone it now.
+1.  Start Visual Studio Code (the program icon is pinned to the bottom taskbar).
 
-1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/AI-102-AIEngineer` repository to a local folder (it doesn't matter which folder).
-3. When the repository has been cloned, open the folder in Visual Studio Code.
-4. Wait while additional files are installed to support the C# code projects in the repo.
+     ![Visual Studio Code Icon](./images/vscode.png)
 
-    > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
+2.  Open a file, From the top-left options, Click on **file->Open File** and navigate to **C:\AllFiles\AI-102-AIEngineer-prod**.
+
+    **Note:** You may be prompted to complete a 2-minute survey. Go ahead and select **No, thanks**. You may need to do this more than once.
+
+3.  Wait while additional files are installed to support the C# code projects in the repo.
 
 ## Create Azure resources
 
@@ -53,7 +48,7 @@ If you have already cloned **AI-102-AIEngineer** code repository to the environm
 12. In the terminal for the **24-knowledge-store** folder, enter the following command to run the script:
 
     ```
-    setup
+    .\setup
     ```
     > **Note**: The Search CLI module is in preview, and may get stuck in the *- Running ..* process. If this happens for over 2 minutes, press CTRL+C to cancel the long-running operation, and then select **N** when asked if you want to terminate the script. It should then complete successfully.
     >
@@ -130,7 +125,7 @@ Now that you've prepared the JSON objects that define your search solution compo
 5. In the terminal pane for the **create-search** folder, enter the following command run the batch script.
 
     ```
-    create-search
+    .\create-search
     ```
 
 6. When the script completes, in the Azure portal, on the page for your Azure Cognitive Search resource, select the **Indexers** page and wait for the indexing process to complete.
