@@ -1,25 +1,20 @@
----
-lab:
-    title: 'Create a Custom Skill for Azure Cognitive Search'
-    module: 'Module 12 - Creating a Knowledge Mining Solution'
----
-
 # Create a Custom Skill for Azure Cognitive Search
 
 Azure Cognitive Search uses an enrichment pipeline of cognitive skills to extract AI-generated fields from documents and include them in a search index. There's a comprehensive set of built-in skills that you can use, but if you have a specific requirement that isn't met by these skills, you can create a custom skill.
 
 In this exercise, you'll create a custom skill that tabulates the frequency of individual words in a document to generate a list of the top five most used words, and add it to a search solution for Margie's Travel - a fictitious travel agency.
 
-## Clone the repository for this course
+## Open the cloned folder in Visual Studio Code.
 
-If you have already cloned **AI-102-AIEngineer** code repository to the environment where you're working on this lab, open it in Visual Studio Code; otherwise, follow these steps to clone it now.
+1.  Start Visual Studio Code (the program icon is pinned to the bottom taskbar).
 
-1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/AI-102-AIEngineer` repository to a local folder (it doesn't matter which folder).
-3. When the repository has been cloned, open the folder in Visual Studio Code.
-4. Wait while additional files are installed to support the C# code projects in the repo.
+     ![Visual Studio Code Icon](./images/vscode.png)
 
-    > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
+2.  Open a file, From the top-left options, Click on **file->Open File** and navigate to **C:\AllFiles\AI-102-AIEngineer-prod**.
+
+    **Note:** You may be prompted to complete a 2-minute survey. Go ahead and select **No, thanks**. You may need to do this more than once.
+
+3.  Wait while additional files are installed to support the C# code projects in the repo.
 
 ## Create Azure resources
 
@@ -49,7 +44,7 @@ If you have already cloned **AI-102-AIEngineer** code repository to the environm
 12. In the terminal for the **23-custom-search-skill** folder, enter the following command to run the script:
 
     ```
-    setup
+    .\setup
     ```
 
     > **Note**: The Search CLI module is in preview, and may get stuck in the *- Running ..* process. If this happens for over 2 minutes, press CTRL+C to cancel the long-running operation, and then select **N** when asked if you want to terminate the script. It should then complete successfully.
@@ -108,7 +103,7 @@ In this exercise, you'll use the Azure Cognitive Search REST interface to create
 15. In the terminal pane for the **create-search** folder, enter the following command run the batch script.
 
     ```
-    create-search
+    .\create-search
     ```
 
 16. When the script completes, in the Azure portal, on the page for your Azure Cognitive Search resource, select the **Indexers** page and wait for the indexing process to complete.
@@ -123,10 +118,10 @@ Now that you have an index, you can search it.
 2. In Search explorer, in the **Query string** box, enter the following query string, and then select **Search**.
 
     ```
-    search=London&$select=url,sentiment,keyphrases&$filter=metadata_author eq 'Reviewer' and sentiment eq 'positive'
+    search=London&$select=url,sentiment,keyphrases&$filter=metadata_author eq 'Reviewer' and sentiment gt 'positive'
     ```
 
-    This query retrieves the **url**, **sentiment**, and **keyphrases** for all documents that mention *London* authored by *Reviewer* that have a positive **sentiment** label (in other words, positive reviews that mention London)
+    This query retrieves the **url**, **sentiment**, and **keyphrases** for all documents that mention *London* authored by *Reviewer* that have a positive *sentiment* label (in other words, positive reviews that mention London)
 
 ## Create an Azure Function for a custom skill
 
@@ -262,7 +257,7 @@ namespace margies.search
 
             public static string RemoveHtmlTags(string html)
         {
-            string htmlRemoved = Regex.Replace(html, @"<script[^>]*>[\s\S]*?</script>|<[^>]+>| ", " ").Trim();
+            string htmlRemoved = Regex.Replace(html, @"<script[^>]*>[\s\S]*?</script>|<[^>]+>| ", " ").Trim();
             string normalised = Regex.Replace(htmlRemoved, @"\s{2,}", " ");
             return normalised;
         }
@@ -552,7 +547,7 @@ Now you need to include your function as a custom skill in the search solution s
 14. In the terminal pane for the **update-search** folder, enter the following command run the batch script.
 
     ```
-    update-search
+    .\update-search
     ```
 
 15. When the script completes, in the Azure portal, on the page for your Azure Cognitive Search resource, select the **Indexers** page and wait for the indexing process to complete.
