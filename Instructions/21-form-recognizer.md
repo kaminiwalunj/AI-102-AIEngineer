@@ -1,25 +1,21 @@
----
-lab:
-    title: 'Extract Data from Forms'
-    module: 'Module 11 - Reading Text in Images and Documents'
----
-
 # Extract Data from Forms 
 
 Suppose a company needs to automate a data entry process. Currently an employee might manually read a purchase order and enter the data into a database. You want to build a model that will use machine learning  to read the form and produce structured data that can be used to automatically update a database.
 
 **Form Recognizer** is a cognitive service that enables users to build automated data processing software. This software can extract text, key/value pairs, and tables from form documents using optical character recognition (OCR). Form Recognizer has pre-built models for recognizing invoices, receipts, and business cards. The service also provides the capability to train custom models. In this exercise, we will focus on building custom models.
 
-## Clone the repository for this course
+## Open the cloned folder in Visual Studio Code.
 
-If you have not already done so, you must clone the code repository for this course:
+1.  Start Visual Studio Code (the program icon is pinned to the bottom taskbar).
 
-1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/AI-102-AIEngineer` repository to a local folder (it doesn't matter which folder).
-3. When the repository has been cloned, open the folder in Visual Studio Code.
-4. Wait while additional files are installed to support the C# code projects in the repo.
+     ![Visual Studio Code Icon](./images/vscode.jpg)
 
-    > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
+2.  Open a file, From the top-left options, Click on **file->Open File** and navigate to **C:\AllFiles\AI-102-AIEngineer-prod**.
+
+    **Note:** You may be prompted to complete a 2-minute survey. Go ahead and select **No, thanks**. You may need to do this more than once.
+
+3.  Wait while additional files are installed to support the C# code projects in the repo.
+
 
 ## Create a Form Recognizer resource
 
@@ -93,14 +89,14 @@ Then **save** your changes.
 13. In the terminal for the **21-custom-form** folder, enter the following command to run the script:
 
 ```
-setup
+.\setup
 ```
 
 14. When the script completes, review the displayed output and note your Azure resource's SAS URI.
 
 > **Important**: Before moving on, paste the SAS URI somewhere you will be able to retrieve it again later (for example, in a new text file in Visual Studio Code).
 
-15. In the Azure portal, refresh the resource group and verify that it contains the Azure Storage account just created. Open the storage account and in the pane on the left, select **Storage Browser (preview)**. Then in Storage Browser, expand **BLOB CONTAINERS** and select the **sampleforms** container to verify that the files have been uploaded from your local **21-custom-form/sample-forms** folder.
+15. In the Azure portal, refresh the resource group and verify that it contains the Azure Storage account just created. Open the storage account and in the pane on the left, select **Storage Explorer**. Then in Storage Explorer, expand **BLOB CONTAINERS** and select the **sampleforms** container to verify that the files have been uploaded from your local **21-custom-form/sample-forms** folder.
 
 ## Train a model *without* labels
 
@@ -160,6 +156,7 @@ python train-model.py
 ```
 
 7. Wait for the program to end. Then review the model output and locate the Model ID in the terminal. You will need this value in the next procedure, so do not close the terminal!
+8. Keep a Note of **Model ID**.
 
 ## Test the model created without labels
 
