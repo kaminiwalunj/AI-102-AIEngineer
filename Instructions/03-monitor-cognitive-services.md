@@ -6,7 +6,7 @@ Azure Cognitive Services can be a critical part of an overall application infras
 
 1.  Start Visual Studio Code (the program icon is pinned to the bottom taskbar).
 
-     ![Visual Studio Code Icon](./images/vscode.jpg)
+     ![Visual Studio Code Icon](./images/vscode.png)
 
 2.  Open a file, From the top-left options, Click on **file->Open File** and navigate to **C:\AllFiles\AI-102-AIEngineer-prod**.
 
