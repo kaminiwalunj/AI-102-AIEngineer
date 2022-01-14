@@ -78,7 +78,7 @@ Your knowledge base has been populated with question and answer pairs from the M
 
 1. In the **LearnFAQ** project in Language Studio, select the **Edit knowledge base** page to see the existing question and answer pairs (if some tips are displayed, read them and click **Got it** to dismiss them, or click **Skip all**)
 2. In the knowledge base, select **&#65291; Add question pair**.
-3. In the **Question** box, type `What is Microsoft certification?` and press **Enter****.
+3. In the **Question** box, type `What is Microsoft certification?` and press ***Enter****.
 4. Select **&#65291; Add alternative phrasing** and type `How can I demonstrate my Microsoft technology skills?` and press **Enter**.
 5. In the **Answer** box, type `The Microsoft Certified Professional program enables you to validate and prove your skills with Microsoft technologies.` Then press **Enter** and click **Submit** to add the question (including alternative phrasing) and answer to the knowledge base.
 
@@ -86,7 +86,7 @@ Your knowledge base has been populated with question and answer pairs from the M
 
 6. Under the answer you entered for the certification question, select **&#65291; Add follow-up prompts**.
 7. In the **Follow-up Prompt** dialog box, enter the following settings, and then click **Add prompt**:
-    - **Text displayed in the prompt to the user**: `Learn more about certification.
+    - **Text displayed in the prompt to the user**: Learn more about certification.
     - Select **Create link to new pair**, and enter this text: `You can learn more about certification on the [Microsoft certification page](https://docs.microsoft.com/learn/certifications/).`
     - **Show in contextual flow only**: Selected. *This option ensures that the answer is only ever returned in the context of a follow-up question from the original certification question.*
 
@@ -145,7 +145,7 @@ Most commonly, the client applications used to retrieve answers from a knowledge
   - **Resource group**: *The resource group containing your Language resource*
   - **Location**: *The same location as your Text Analytics service*.
   - **Pricing tier**: F0
-  - **App name**: *Same as the **Bot handle** with a unique ID and *.azurewebsites.net* appended automatically
+  - **App name**: Same as the **Bot handle** with a unique ID and *.azurewebsites.net* appended automatically
   - **SDK language**: *Choose either C# or Node.js*
   - **QnA Auth Key**: *This should automatically be set to the authentication key for your QnA knowledge base*
   - **App service plan/location**: *This may be set automatically to a suitable plan and location if one exists. If not, create a new plan*
