@@ -49,6 +49,7 @@ dotnet add package Microsoft.Azure.CognitiveServices.Vision.ComputerVision --ver
 
 ```
 pip install azure-cognitiveservices-vision-computervision==0.7.0
+pip install python-dotenv
 ```
 
 3. View the contents of the **read-text** folder, and note that it contains a file for configuration settings:
