@@ -98,7 +98,7 @@ Then **save** your changes.
 
 15. In the Azure portal, refresh the resource group and verify that it contains the Azure Storage account just created. Open the storage account and in the pane on the left, select **Storage Explorer**. Then in Storage Explorer, expand **BLOB CONTAINERS** and select the **sampleforms** container to verify that the files have been uploaded from your local **21-custom-form/sample-forms** folder.
 
-## Train a model *without* labels
+## Train a model using Form Recognizer SDK
 
 You will use the Form Recognizer SDK to train and test a custom model.  
 
@@ -121,16 +121,16 @@ dotnet add package Azure.AI.FormRecognizer --version 3.0.0
 pip install azure-ai-formrecognizer==3.0.0
 ```
 
-3. View the contents of the **train-model** folder, and note that it contains a file for configuration settings:
+4. View the contents of the **train-model** folder, and note that it contains a file for configuration settings:
     - **C#**: appsettings.json
     - **Python**: .env
 
-4. Edit the configuration file, modifying the settings to reflect:
+5. Edit the configuration file, modifying the settings to reflect:
     - The **endpoint** for your Form Recognizer resource.
     - A **key** for your Form Recognizer resource.
     - The **SAS URI** for your blob container.
 
-5. Note that the **train-model** folder contains a code file for the client application:
+6. Note that the **train-model** folder contains a code file for the client application:
 
     - **C#**: Program.cs
     - **Python**: train-model.py
@@ -141,7 +141,7 @@ pip install azure-ai-formrecognizer==3.0.0
     - The code uses the the training client to train a model using the images in your blob storage container, which is acessed using the SAS URI you generated.
     - Training is performed with a parameter to indicate that training labels should <u>not</u> be used. Form Recognizer uses an *unsupervised* technique to extract the fields from the form images.
 
-6. Return the integrated terminal for the **train-model** folder, and enter the following command to run the program:
+7. Return the integrated terminal for the **train-model** folder, and enter the following command to run the program:
 
 **C#**
 
@@ -155,8 +155,8 @@ dotnet run
 python train-model.py
 ```
 
-7. Wait for the program to end. Then review the model output and locate the Model ID in the terminal. You will need this value in the next procedure, so do not close the terminal!
-8. Keep a Note of **Model ID**.
+8. Wait for the program to end. Then review the model output and locate the Model ID in the terminal. You will need this value in the next procedure, so do not close the terminal!
+9. Keep a Note of **Model ID**.
 
 ## Test the model created without labels
 
