@@ -79,7 +79,7 @@ Your knowledge base has been populated with question and answer pairs from the M
 1. In the **LearnFAQ** project in Language Studio, select the **Edit knowledge base** page to see the existing question and answer pairs (if some tips are displayed, read them and click **Got it** to dismiss them, or click **Skip all**)
 2. In the knowledge base, select **&#65291; Add question pair**.
 3. In the **Question** box, type `What is Microsoft certification?` and press ***Enter****.
-4. Select **&#65291; Add alternative phrasing** and type `How can I demonstrate my Microsoft technology skills?` and press **Enter**.
+4. Select **&#65291; Add alternative phrase** and type `How can I demonstrate my Microsoft technology skills?` and press **Enter**.
 5. In the **Answer** box, type `The Microsoft Certified Professional program enables you to validate and prove your skills with Microsoft technologies.` Then press **Enter** and click **Submit** to add the question (including alternative phrasing) and answer to the knowledge base.
 
     In some cases, it makes sense to enable the user to follow up on answer to create a *multi-turn* conversation that enables the user to iteratively refine the question to get to the answer they need.
@@ -157,4 +157,4 @@ Most commonly, the client applications used to retrieve answers from a knowledge
 
 ## More information
 
-To learn more about question answering in the Language service, see the [Langage service documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/question-answering/overview).
+To learn more about question answering in the Language service, see the [Language service documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/question-answering/overview).
