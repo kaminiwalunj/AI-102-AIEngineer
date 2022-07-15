@@ -34,7 +34,7 @@ In this exercise, you'll create a custom skill that tabulates the frequency of i
 
 8. When prompted, sign into your Azure subscription. Then return to Visual Studio Code and wait for the sign-in process to complete.
 11. In the **setup.cmd** script, modify the **subscription_id**, **resource_group**, and **location** variable declarations with the appropriate values for your subscription ID, resource group name, and location name. Then save your changes.
-12. In the terminal for the **23-custom-search-skill** folder, enter the following command to run the script:
+9. In the terminal for the **23-custom-search-skill** folder, enter the following command to run the script:
 
     ```
     .\setup
@@ -44,7 +44,7 @@ In this exercise, you'll create a custom skill that tabulates the frequency of i
     >
     > If the script fails, ensure you saved it with the correct variable names and try again.
 
-13. When the script completes, review the output it displays and note the following information about your Azure resources (you will need these values later):
+10. When the script completes, review the output it displays and note the following information about your Azure resources (you will need these values later):
     - Storage account name
     - Storage connection string
     - Cognitive Services account
@@ -53,7 +53,7 @@ In this exercise, you'll create a custom skill that tabulates the frequency of i
     - Search service admin key
     - Search service query key
 
-14. In the Azure portal, refresh the resource group and verify that it contains the Azure Storage account, Azure Cognitive Services resource, and Azure Cognitive Search resource.
+11. In the Azure portal, refresh the resource group and verify that it contains the Azure Storage account, Azure Cognitive Services resource, and Azure Cognitive Search resource.
 
 ## Create a search solution
 
