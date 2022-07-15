@@ -58,13 +58,13 @@ To train an image classification model, you need to create a Custom Vision proje
 
 ![Upload apple with apple tag](./images/upload_apples.jpg)
    
-5. Repeat the previous step to upload the images in the **banana** folder with the tag *banana*, and the images in the **orange** folder with the tag *orange*.
-6. Explore the images you have uploaded in the Custom Vision project - there should be 15 images of each class, like this:
+6. Repeat the previous step to upload the images in the **banana** folder with the tag *banana*, and the images in the **orange** folder with the tag *orange*.
+7. Explore the images you have uploaded in the Custom Vision project - there should be 15 images of each class, like this:
 
 ![Tagged images of fruit - 15 apples, 15 bananas, and 15 oranges](./images/fruit.jpg)
     
-7. In the Custom Vision project, above the images, click **Train** to train a classification model using the tagged images. Select the **Quick Training** option, and then wait for the training iteration to complete (this may take a minute or so).
-8. When the model iteration has been trained, review the *Precision*, *Recall*, and *AP* performance metrics - these measure the prediction accuracy of the classification model, and should all be high.
+8. In the Custom Vision project, above the images, click **Train** to train a classification model using the tagged images. Select the **Quick Training** option, and then wait for the training iteration to complete (this may take a minute or so).
+9. When the model iteration has been trained, review the *Precision*, *Recall*, and *AP* performance metrics - these measure the prediction accuracy of the classification model, and should all be high.
 
 > **Note**: The performance metrics are based on a probability threshold of 50% for each prediction (in other words, if the model calculates a 50% or higher probability that an image is of a particular class, then that class is predicted). You can adjust this at the top-left of the page.
 
@@ -86,7 +86,7 @@ The project you have created has been assigned a unique identifier, which you wi
 
 1. Click the *settings* (&#9881;) icon at the top right of the **Performance** page to view the project settings.
 2. Under **General** (on the left), note the **Project Id** that uniquely identifies this project.
-3. On the right, under **Resources** note that the key and endpoints are shown. These are the details for the *training* resource (you can also obtain this information by viewing the resource in the Azure portal).
+3. On the right, under **Resources** note that the key and endpoint are shown. These are the details for the *training* resource (you can also obtain this information by viewing the resource in the Azure portal).
 
 ## Use the *training* API
 
