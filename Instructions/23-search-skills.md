@@ -10,7 +10,7 @@ In this exercise, you'll create a custom skill that tabulates the frequency of i
 
      ![Visual Studio Code Icon](./images/vscode.png)
 
-2.  Open a file, From the top-left options, Click on **file->Open File** and navigate to **C:\AllFiles\AI-102-AIEngineer-prod**.
+2.  Open a file, From the top-left options, Click on **file->Open Folder** and navigate to **C:\AllFiles\AI-102-AIEngineer-prod**.
 
     **Note:** You may be prompted to complete a 2-minute survey. Go ahead and select **No, thanks**. You may need to do this more than once.
 
@@ -33,13 +33,6 @@ In this exercise, you'll create a custom skill that tabulates the frequency of i
     ```
 
 8. When prompted, sign into your Azure subscription. Then return to Visual Studio Code and wait for the sign-in process to complete.
-9. Run the following command to list Azure locations.
-
-    ```
-    az account list-locations -o table
-    ```
-
-10. In the output, find the **Name** value that corresponds with the location of your resource group (for example, for *East US* the corresponding name is *eastus*).
 11. In the **setup.cmd** script, modify the **subscription_id**, **resource_group**, and **location** variable declarations with the appropriate values for your subscription ID, resource group name, and location name. Then save your changes.
 12. In the terminal for the **23-custom-search-skill** folder, enter the following command to run the script:
 
