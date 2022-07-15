@@ -33,9 +33,9 @@ The solution you will create for Margie's Travel requires the following resource
 1. In a web browser, open the Azure portal at `https://portal.azure.com`, and sign in using the Microsoft account associated with your Azure subscription.
 1. Select the **&#65291;Create a resource** button, search for *search*, and create a **Azure Cognitive Search** resource with the following settings:
     - **Subscription**: *Your Azure subscription*
-    - **Resource group**: *Create a new resource group (if you are using a restricted subscription, you may not have permission to create a new resource group - use the one provided)*
+    - **Resource group**: *Select a resource group Ai-102-DeploymentID)*
     - **Service name**: *Enter a unique name*
-    - **Location**: *Select a location - note that your Azure Cognitive Search and Cognitive Services resources must be in the same location*
+    - **Location**: *East US*
     - **Pricing tier**: Basic
 
 1. Wait for deployment to complete, and then go to the deployed resource.
@@ -47,8 +47,8 @@ If you don't already have one in your subscription, you'll need to provision a *
 
 1. Return to the home page of the Azure portal, and then select the **&#65291;Create a resource** button, search for *cognitive services*, and create a **Cognitive Services** resource with the following settings:
     - **Subscription**: *Your Azure subscription*
-    - **Resource group**: *The same resource group as your Azure Cognitive Search resource*
-    - **Region**: *The same location as your Azure Cognitive Search resource*
+    - **Resource group**: *Select a resource group Ai-102-DeploymentID*
+    - **Region**: *East US*
     - **Name**: *Enter a unique name*
     - **Pricing tier**: Standard S0
 1. Select the required checkboxes and create the resource.
@@ -60,7 +60,7 @@ If you don't already have one in your subscription, you'll need to provision a *
     - **Subscription**: *Your Azure subscription*
     - **Resource group**: **The same resource group as your Azure Cognitive Search and Cognitive Services resources*
     - **Storage account name**: *Enter a unique name*
-    - **Region**: *Choose any available region*
+    - **Region**: *East US*
     - **Performance**: Standard
     - **Replication**: Locally-redundant storage (LRS)
 1. Wait for deployment to complete, and then go to the deployed resource.
