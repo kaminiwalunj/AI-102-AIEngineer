@@ -1,6 +1,6 @@
-# Read Text in Images
+# Detect and Analyze Faces
 
-Optical character recognition (OCR) is a subset of computer vision that deals with reading text in images and documents. The **Computer Vision** service provides two APIs for reading text, which you'll explore in this exercise.
+The ability to detect and analyze human faces is a core AI capability. In this exercise, you'll explore two Azure Cognitive Services that you can use to work with faces in images: the **Computer Vision** service, and the **Face** service.
 
 ## Open the cloned folder in Visual Studio Code.
 
@@ -14,10 +14,7 @@ Optical character recognition (OCR) is a subset of computer vision that deals wi
 
 3.  Wait while additional files are installed to support the C# code projects in the repo.
 
-
 ## Provision a Cognitive Services resource
-
-If you don't already have one in your subscription, you'll need to provision a **Cognitive Services** resource.
 
 1. Open the Azure portal at `https://portal.azure.com`, and sign in using the Microsoft account associated with your Azure subscription.
 2. Select the **&#65291;Create a resource** button, search for *cognitive services*, and create a **Cognitive Services** resource with the following settings:
@@ -28,294 +25,429 @@ If you don't already have one in your subscription, you'll need to provision a *
     - **Pricing tier**: Standard S0
 3. Select the required checkboxes and create the resource.
 4. Wait for deployment to complete, and then view the deployment details.
-5. When the resource has been deployed, go to it and view its **Keys and Endpoint** page. You will need the endpoint and one of the keys from this page in the next procedure.
+5. Go to the resource and view its **Keys and Endpoint** page. This page contains the information that you will need to connect to your resource and use it from applications you develop. Specifically:
+    - An HTTP *endpoint* to which client applications can send requests.
+    - Two *keys* that can be used for authentication (client applications can use either key to authenticate).
+    - The *location* where the resource is hosted. This is required for requests to some (but not all) APIs.
 
 ## Prepare to use the Computer Vision SDK
 
-In this exercise, you'll complete a partially implemented client application that uses the Computer Vision SDK to read text.
+In this exercise, you'll complete a partially implemented client application that uses the Computer Vision SDK to analyze faces in an image.
 
 > **Note**: You can choose to use the SDK for either **C#** or **Python**. In the steps below, perform the actions appropriate for your preferred language.
 
-1. In Visual Studio Code, in the **Explorer** pane, browse to the **20-ocr** folder and expand the **C-Sharp** or **Python** folder depending on your language preference.
-2. Right-click the **read-text** folder and open an integrated terminal. Then install the Computer Vision SDK package by running the appropriate command for your language preference:
+1. In Visual Studio Code, in the **Explorer** pane, browse to the **19-face** folder and expand the **C-Sharp** or **Python** folder depending on your language preference.
+2. Right-click the **computer-vision** folder and open an integrated terminal. Then install the Computer Vision SDK package by running the appropriate command for your language preference:
 
-**C#**
+    **C#**
 
-```
-dotnet add package Microsoft.Azure.CognitiveServices.Vision.ComputerVision --version 6.0.0
-```
+    ```
+    dotnet add package Microsoft.Azure.CognitiveServices.Vision.ComputerVision --version 6.0.0
+    ```
 
-**Python**
+    **Python**
 
-```
-pip install azure-cognitiveservices-vision-computervision==0.7.0
-```
-
-3. View the contents of the **read-text** folder, and note that it contains a file for configuration settings:
+    ```
+    pip install azure-cognitiveservices-vision-computervision==0.7.0
+    ```
+    
+3. View the contents of the **computer-vision** folder, and note that it contains a file for configuration settings:
     - **C#**: appsettings.json
     - **Python**: .env
 
-    Open the configuration file and update the configuration values it contains to reflect the **endpoint** and an authentication **key** for your cognitive services resource. Save your changes.
-4. Note that the **read-text** folder contains a code file for the client application:
+4. Open the configuration file and update the configuration values it contains to reflect the **endpoint** and an authentication **key** for your cognitive services resource. Save your changes.
+
+5. Note that the **computer-vision** folder contains a code file for the client application:
 
     - **C#**: Program.cs
-    - **Python**: read-text.py
+    - **Python**: detect-faces.py
 
-    Open the code file and at the top, under the existing namespace references, find the comment **Import namespaces**. Then, under this comment, add the following language-specific code to import the namespaces you will need to use the Computer Vision SDK:
+6. Open the code file and at the top, under the existing namespace references, find the comment **Import namespaces**. Then, under this comment, add the following language-specific code to import the namespaces you will need to use the Computer Vision SDK:
+
+    **C#**
+
+    ```C#
+    // import namespaces
+    using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
+    using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
+    ```
+
+    **Python**
+
+    ```Python
+    # import namespaces
+    from azure.cognitiveservices.vision.computervision import ComputerVisionClient
+    from azure.cognitiveservices.vision.computervision.models import VisualFeatureTypes
+    from msrest.authentication import CognitiveServicesCredentials
+    ```
+
+## View the image you will analyze
+
+In this exercise, you will use the Computer Vision service to analyze an image of people.
+
+1. In Visual Studio Code, expand the **computer-vision** folder and the **images** folder it contains.
+2. Select the **people.jpg** image to view it.
+
+## Detect faces in an image
+
+Now you're ready to use the SDK to call the Computer Vision service and detect faces in an image.
+
+1. In the code file for your client application (**Program.cs** or **detect-faces.py**), in the **Main** function, note that the code to load the configuration settings has been provided. Then find the comment **Authenticate Computer Vision client**. Then, under this comment, add the following language-specific code to create and authenticate a Computer Vision client object:
+
+    **C#**
+
+    ```C#
+    // Authenticate Computer Vision client
+    ApiKeyServiceClientCredentials credentials = new ApiKeyServiceClientCredentials(cogSvcKey);
+    cvClient = new ComputerVisionClient(credentials)
+    {
+        Endpoint = cogSvcEndpoint
+    };
+    ```
+
+    **Python**
+
+    ```Python
+    # Authenticate Computer Vision client
+    credential = CognitiveServicesCredentials(cog_key) 
+    cv_client = ComputerVisionClient(cog_endpoint, credential)
+    ```
+
+2. In the **Main** function, under the code you just added, note that the code specifies the path to an image file and then passes the image path to a function named **AnalyzeFaces**. This function is not yet fully implemented.
+
+3. In the **AnalyzeFaces** function, under the comment **Specify features to be retrieved (faces)**, add the following code:
+
+    **C#**
+
+    ```C#
+    // Specify features to be retrieved (faces)
+    List<VisualFeatureTypes?> features = new List<VisualFeatureTypes?>()
+    {
+        VisualFeatureTypes.Faces
+    };
+    ```
+
+    **Python**
+
+    ```Python
+    # Specify features to be retrieved (faces)
+    features = [VisualFeatureTypes.faces]
+    ```
+
+4. In the **AnalyzeFaces** function, under the comment **Get image analysis**, add the following code:
 
 **C#**
 
-```C#
-// import namespaces
-using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
-using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
-```
-
-**Python**
-
-```Python
-# import namespaces
-from azure.cognitiveservices.vision.computervision import ComputerVisionClient
-from azure.cognitiveservices.vision.computervision.models import OperationStatusCodes
-from msrest.authentication import CognitiveServicesCredentials
-```
-
-5. In the code file for your client application, in the **Main** function, note that the code to load the configuration settings has been provided. Then find the comment **Authenticate Computer Vision client**. Then, under this comment, add the following language-specific code to create and authenticate a Computer Vision client object:
-
-**C#**
-
-```C#
-// Authenticate Computer Vision client
-ApiKeyServiceClientCredentials credentials = new ApiKeyServiceClientCredentials(cogSvcKey);
-cvClient = new ComputerVisionClient(credentials)
-{
-    Endpoint = cogSvcEndpoint
-};
-```
-
-**Python**
-
-```Python
-# Authenticate Computer Vision client
-credential = CognitiveServicesCredentials(cog_key) 
-cv_client = ComputerVisionClient(cog_endpoint, credential)
-```
-    
-## Use the OCR API
-
-The **OCR** API is an optical character recognition API that is optimized for reading small to medium amounts of printed text in *.jpg*, *.png*, *.gif*, and *.bmp* format images. It supports a wide range of languages and in addition to reading text in the image it can determine the orientation of each text region and return information about the rotation angle of the text in relation to the image
-
-1. In the code file for your application, in the **Main** function, examine the code that runs if the user selects menu option **1**. This code calls the **GetTextOcr** function, passing the path to an image file.
-2. In the **read-text/images** folder, open **Lincoln.jpg** to view the image that your code will process.
-3. Back in the code file, find the **GetTextOcr** function, and under the existing code that prints a message to the console, add the following code:
-
-**C#**
-
-```C#
-// Use OCR API to read text in image
+```C
+// Get image analysis
 using (var imageData = File.OpenRead(imageFile))
 {    
-    var ocrResults = await cvClient.RecognizePrintedTextInStreamAsync(detectOrientation:false, image:imageData);
+    var analysis = await cvClient.AnalyzeImageInStreamAsync(imageData, features);
 
-    // Prepare image for drawing
-    Image image = Image.FromFile(imageFile);
-    Graphics graphics = Graphics.FromImage(image);
-    Pen pen = new Pen(Color.Magenta, 3);
-
-    foreach(var region in ocrResults.Regions)
+    // Get faces
+    if (analysis.Faces.Count > 0)
     {
-        foreach(var line in region.Lines)
+        Console.WriteLine($"{analysis.Faces.Count} faces detected.");
+
+        // Prepare image for drawing
+        Image image = Image.FromFile(imageFile);
+        Graphics graphics = Graphics.FromImage(image);
+        Pen pen = new Pen(Color.LightGreen, 3);
+        Font font = new Font("Arial", 3);
+        SolidBrush brush = new SolidBrush(Color.LightGreen);
+
+        // Draw and annotate each face
+        foreach (var face in analysis.Faces)
         {
-            // Show the position of the line of text
-            int[] dims = line.BoundingBox.Split(",").Select(int.Parse).ToArray();
-            Rectangle rect = new Rectangle(dims[0], dims[1], dims[2], dims[3]);
+            var r = face.FaceRectangle;
+            Rectangle rect = new Rectangle(r.Left, r.Top, r.Width, r.Height);
             graphics.DrawRectangle(pen, rect);
-
-            // Read the words in the line of text
-            string lineText = "";
-            foreach(var word in line.Words)
-            {
-                lineText += word.Text + " ";
-            }
-            Console.WriteLine(lineText.Trim());
+            string annotation = $"Person at approximately {r.Left}, {r.Top}";
+            graphics.DrawString(annotation,font,brush,r.Left, r.Top);
         }
-    }
 
-    // Save the image with the text locations highlighted
-    String output_file = "ocr_results.jpg";
-    image.Save(output_file);
-    Console.WriteLine("Results saved in " + output_file);
+        // Save annotated image
+        String output_file = "detected_faces.jpg";
+        image.Save(output_file);
+        Console.WriteLine(" Results saved in " + output_file);   
+    }
+}        
+```
+
+**Python**
+
+```Python
+# Get image analysis
+with open(image_file, mode="rb") as image_data:
+    analysis = cv_client.analyze_image_in_stream(image_data , features)
+
+    # Get faces
+    if analysis.faces:
+        print(len(analysis.faces), 'faces detected.')
+
+        # Prepare image for drawing
+        fig = plt.figure(figsize=(8, 6))
+        plt.axis('off')
+        image = Image.open(image_file)
+        draw = ImageDraw.Draw(image)
+        color = 'lightgreen'
+
+        # Draw and annotate each face
+        for face in analysis.faces:
+            r = face.face_rectangle
+            bounding_box = ((r.left, r.top), (r.left + r.width, r.top + r.height))
+            draw = ImageDraw.Draw(image)
+            draw.rectangle(bounding_box, outline=color, width=5)
+            annotation = 'Person at approximately {}, {}'.format(r.left, r.top)
+            plt.annotate(annotation,(r.left, r.top), backgroundcolor=color)
+
+        # Save annotated image
+        plt.imshow(image)
+        outputfile = 'detected_faces.jpg'
+        fig.savefig(outputfile)
+
+        print('Results saved in', outputfile)
+```
+
+5. Save your changes and return to the integrated terminal for the **computer-vision** folder, and enter the following command to run the program:
+
+    **C#**
+
+    ```
+    dotnet run
+    ```
+
+    **Python**
+
+    ```
+    python detect-faces.py
+    ```
+
+6. Observe the output, which should indicate the number of faces detected.
+7. View the **detected_faces.jpg** file that is generated in the same folder as your code file to see the annotated faces. In this case, your code has used the attributes of the face to label the location of the top left of the box, and the bounding box coordinates to draw a rectangle around each face.
+
+## Prepare to use the Face SDK
+
+While the **Computer Vision** service offers basic face detection (along with many other image analysis capabilities), the **Face** service provides more comprehensive functionality for facial analysis and recognition.
+
+1. In Visual Studio Code, in the **Explorer** pane, browse to the **19-face** folder and expand the **C-Sharp** or **Python** folder depending on your language preference.
+2. Right-click the **face-api** folder and open an integrated terminal. Then install the Face SDK package by running the appropriate command for your language preference:
+
+    **C#**
+
+    ```
+    dotnet add package Microsoft.Azure.CognitiveServices.Vision.Face --version 2.6.0-preview.1
+    ```
+
+    **Python**
+
+    ```
+    pip install azure-cognitiveservices-vision-face==0.4.1
+    ```
+    
+3. View the contents of the **face-api** folder, and note that it contains a file for configuration settings:
+    - **C#**: appsettings.json
+    - **Python**: .env
+
+4. Open the configuration file and update the configuration values it contains to reflect the **endpoint** and an authentication **key** for your cognitive services resource. Save your changes.
+
+5. Note that the **face-api** folder contains a code file for the client application:
+
+    - **C#**: Program.cs
+    - **Python**: analyze-faces.py
+
+6. Open the code file and at the top, under the existing namespace references, find the comment **Import namespaces**. Then, under this comment, add the following language-specific code to import the namespaces you will need to use the Computer Vision SDK:
+
+    **C#**
+
+    ```C#
+    // Import namespaces
+    using Microsoft.Azure.CognitiveServices.Vision.Face;
+    using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
+    ```
+
+    **Python**
+
+    ```Python
+    # Import namespaces
+    from azure.cognitiveservices.vision.face import FaceClient
+    from azure.cognitiveservices.vision.face.models import FaceAttributeType
+    from msrest.authentication import CognitiveServicesCredentials
+    ```
+
+7. In the **Main** function, note that the code to load the configuration settings has been provided. Then find the comment **Authenticate Face client**. Then, under this comment, add the following language-specific code to create and authenticate a **FaceClient** object:
+
+    **C#**
+
+    ```C#
+    // Authenticate Face client
+    ApiKeyServiceClientCredentials credentials = new ApiKeyServiceClientCredentials(cogSvcKey);
+    faceClient = new FaceClient(credentials)
+    {
+        Endpoint = cogSvcEndpoint
+    };
+    ```
+
+    **Python**
+
+    ```Python
+    # Authenticate Face client
+    credentials = CognitiveServicesCredentials(cog_key)
+    face_client = FaceClient(cog_endpoint, credentials)
+    ```
+
+8. In the **Main** function, under the code you just added, note that the code displays a menu that enables you to call functions in your code to explore the capabilities of the Face service. You will implement these functions in the remainder of this exercise.
+
+## Detect and analyze faces
+
+One of the most fundamental capabilities of the Face service is to detect faces in an image, and determine their attributes, such as head pose, blur, the presence of spectacles, and so on.
+
+1. In the code file for your application, in the **Main** function, examine the code that runs if the user selects menu option **1**. This code calls the **DetectFaces** function, passing the path to an image file.
+2. Find the **DetectFaces** function in the code file, and under the comment **Specify facial features to be retrieved**, add the following code:
+
+    **C#**
+
+    ```C#
+    // Specify facial features to be retrieved
+    List<FaceAttributeType?> features = new List<FaceAttributeType?>
+    {
+        FaceAttributeType.Occlusion,
+        FaceAttributeType.Blur,
+        FaceAttributeType.Glasses
+    };
+    ```
+
+    **Python**
+
+    ```Python
+    # Specify facial features to be retrieved
+    features = [FaceAttributeType.occlusion,
+                FaceAttributeType.blur,
+                FaceAttributeType.glasses]
+    ```
+
+3. In the **DetectFaces** function, under the code you just added, find the comment **Get faces** and add the following code:
+
+**C#**
+
+```C
+// Get faces
+using (var imageData = File.OpenRead(imageFile))
+{    
+    var detected_faces = await faceClient.Face.DetectWithStreamAsync(imageData, returnFaceAttributes: features);
+
+    if (detected_faces.Count > 0)
+    {
+        Console.WriteLine($"{detected_faces.Count} faces detected.");
+
+        // Prepare image for drawing
+        Image image = Image.FromFile(imageFile);
+        Graphics graphics = Graphics.FromImage(image);
+        Pen pen = new Pen(Color.LightGreen, 3);
+        Font font = new Font("Arial", 4);
+        SolidBrush brush = new SolidBrush(Color.Black);
+
+        // Draw and annotate each face
+        foreach (var face in detected_faces)
+        {
+            // Get face properties
+            Console.WriteLine($"\nFace ID: {face.FaceId}");
+            Console.WriteLine($" - Mouth Occluded: {face.FaceAttributes.Occlusion.MouthOccluded}");
+            Console.WriteLine($" - Eye Occluded: {face.FaceAttributes.Occlusion.EyeOccluded}");
+            Console.WriteLine($" - Blur: {face.FaceAttributes.Blur.BlurLevel}");
+            Console.WriteLine($" - Glasses: {face.FaceAttributes.Glasses}");
+
+            // Draw and annotate face
+            var r = face.FaceRectangle;
+            Rectangle rect = new Rectangle(r.Left, r.Top, r.Width, r.Height);
+            graphics.DrawRectangle(pen, rect);
+            string annotation = $"Face ID: {face.FaceId}";
+            graphics.DrawString(annotation,font,brush,r.Left, r.Top);
+        }
+
+        // Save annotated image
+        String output_file = "detected_faces.jpg";
+        image.Save(output_file);
+        Console.WriteLine(" Results saved in " + output_file);   
+    }
 }
 ```
 
 **Python**
 
 ```Python
-# Use OCR API to read text in image
+# Get faces
 with open(image_file, mode="rb") as image_data:
-    ocr_results = cv_client.recognize_printed_text_in_stream(image_data)
+    detected_faces = face_client.face.detect_with_stream(image=image_data,
+                                                            return_face_attributes=features)
 
-# Prepare image for drawing
-fig = plt.figure(figsize=(7, 7))
-img = Image.open(image_file)
-draw = ImageDraw.Draw(img)
+    if len(detected_faces) > 0:
+        print(len(detected_faces), 'faces detected.')
 
-# Process the text line by line
-for region in ocr_results.regions:
-    for line in region.lines:
+        # Prepare image for drawing
+        fig = plt.figure(figsize=(8, 6))
+        plt.axis('off')
+        image = Image.open(image_file)
+        draw = ImageDraw.Draw(image)
+        color = 'lightgreen'
 
-        # Show the position of the line of text
-        l,t,w,h = list(map(int, line.bounding_box.split(',')))
-        draw.rectangle(((l,t), (l+w, t+h)), outline='magenta', width=5)
+        # Draw and annotate each face
+        for face in detected_faces:
 
-        # Read the words in the line of text
-        line_text = ''
-        for word in line.words:
-            line_text += word.text + ' '
-        print(line_text.rstrip())
+            # Get face properties
+            print('\nFace ID: {}'.format(face.face_id))
+            detected_attributes = face.face_attributes.as_dict()
+            if 'blur' in detected_attributes:
+                print(' - Blur:')
+                for blur_name in detected_attributes['blur']:
+                    print('   - {}: {}'.format(blur_name, detected_attributes['blur'][blur_name]))
+                    
+            if 'occlusion' in detected_attributes:
+                print(' - Occlusion:')
+                for occlusion_name in detected_attributes['occlusion']:
+                    print('   - {}: {}'.format(occlusion_name, detected_attributes['occlusion'][occlusion_name]))
 
-# Save the image with the text locations highlighted
-plt.axis('off')
-plt.imshow(img)
-outputfile = 'ocr_results.jpg'
-fig.savefig(outputfile)
-print('Results saved in', outputfile)
+            if 'glasses' in detected_attributes:
+                print(' - Glasses:{}'.format(detected_attributes['glasses']))
+
+            # Draw and annotate face
+            r = face.face_rectangle
+            bounding_box = ((r.left, r.top), (r.left + r.width, r.top + r.height))
+            draw = ImageDraw.Draw(image)
+            draw.rectangle(bounding_box, outline=color, width=5)
+            annotation = 'Face ID: {}'.format(face.face_id)
+            plt.annotate(annotation,(r.left, r.top), backgroundcolor=color)
+
+        # Save annotated image
+        plt.imshow(image)
+        outputfile = 'detected_faces.jpg'
+        fig.savefig(outputfile)
+
+        print('\nResults saved in', outputfile)
 ```
 
-4. Examine the code you added to the **GetTextOcr** function. It detects regions of printed text from an image file, and for each region it extracts the lines of text and highlights there position on the image. It then extracts the words in each line and prints them.
-5. Save your changes and return to the integrated terminal for the **read-text** folder, and enter the following command to run the program:
+4. Examine the code you added to the **DetectFaces** function. It analyzes an image file and detects any faces it contains, including attributes for age, emotions, and the presence of spectacles. The details of each face are displayed, including a unique face identifier that is assigned to each face; and the location of the faces is indicated on the image using a bounding box.
+5. Save your changes and return to the integrated terminal for the **face-api** folder, and enter the following command to run the program:
 
-**C#**
+    **C#**
 
-```
-dotnet run
-```
+    ```
+    dotnet run
+    ```
 
-*The C# output may display warnings about asynchronous functions now using the **await** operator. You can ignore these.*
+    *The C# output may display warnings about asynchronous functions now using the **await** operator. You can ignore these.*
 
-**Python**
+    **Python**
 
-```
-pip install azure-cognitiveservices-vision-computervision
-pip install matplotlib
-pip install Pillow
-python read-text.py
-```
+    ```
+    python analyze-faces.py
+    ```
 
-6. When prompted, enter **1** and observe the output, which is the text extracted from the image.
-7. View the **ocr_results.jpg** file that is generated in the same folder as your code file to see the annotated lines of text in the image.
-
-## Use the Read API
-
-The **Read** API uses a newer text recognition model than the OCR API, and performs better for larger images that contain a lot of text. It also supports text extraction from *.pdf* files, and can recognize both printed text (in multiple languages) and handwritten text (in English).
-
-The **Read** API uses an asynchronous operation model, in which a request to start text recognition is submitted; and the operation ID returned from the request can subsequently be used to check progress and retrieve results.
-
-1. In the code file for your application, in the **Main** function, examine the code that runs if the user selects menu option **2**. This code calls the **GetTextRead** function, passing the path to a PDF document file.
-2. In the **read-text/images** folder, right-click **Rome.pdf** and select **Reveal in File Explorer**. Then in File Explorer, open the PDF file to view it.
-3. Back in the code file in Visual Studio Code, find the **GetTextRead** function, and under the existing code that prints a message to the console, add the following code:
-
-**C#**
-
-```C#
-// Use Read API to read text in image
-using (var imageData = File.OpenRead(imageFile))
-{    
-    var readOp = await cvClient.ReadInStreamAsync(imageData);
-
-    // Get the async operation ID so we can check for the results
-    string operationLocation = readOp.OperationLocation;
-    string operationId = operationLocation.Substring(operationLocation.Length - 36);
-
-    // Wait for the asynchronous operation to complete
-    ReadOperationResult results;
-    do
-    {
-        Thread.Sleep(1000);
-        results = await cvClient.GetReadResultAsync(Guid.Parse(operationId));
-    }
-    while ((results.Status == OperationStatusCodes.Running ||
-            results.Status == OperationStatusCodes.NotStarted));
-
-    // If the operation was successfuly, process the text line by line
-    if (results.Status == OperationStatusCodes.Succeeded)
-    {
-        var textUrlFileResults = results.AnalyzeResult.ReadResults;
-        foreach (ReadResult page in textUrlFileResults)
-        {
-            foreach (Line line in page.Lines)
-            {
-                Console.WriteLine(line.Text);
-            }
-        }
-    }
-}  
-```
-
-**Python**
-
-```Python
-# Use Read API to read text in image
-with open(image_file, mode="rb") as image_data:
-    read_op = cv_client.read_in_stream(image_data, raw=True)
-
-    # Get the async operation ID so we can check for the results
-    operation_location = read_op.headers["Operation-Location"]
-    operation_id = operation_location.split("/")[-1]
-
-    # Wait for the asynchronous operation to complete
-    while True:
-        read_results = cv_client.get_read_result(operation_id)
-        if read_results.status not in [OperationStatusCodes.running, OperationStatusCodes.not_started]:
-            break
-        time.sleep(1)
-
-    # If the operation was successfuly, process the text line by line
-    if read_results.status == OperationStatusCodes.succeeded:
-        for page in read_results.analyze_result.read_results:
-            for line in page.lines:
-                print(line.text)
-```
-    
-4. Examine the code you added to the **GetTextRead** function. It submits a request for a read operation, and then repeatedly checks status until the operation has completed. If it was successful, the code processes the results by iterating through each page, and then through each line.
-5. Save your changes and return to the integrated terminal for the **read-text** folder, and enter the following command to run the program:
-
-**C#**
-
-```
-dotnet run
-```
-
-**Python**
-
-```
-python read-text.py
-```
-
-6. When prompted, enter **2** and observe the output, which is the text extracted from the document.
-
-## Read handwritten text
-
-In addition to printed text, the **Read** API can extract handwritten text in English..
-
-1. In the code file for your application, in the **Main** function, examine the code that runs if the user selects menu option **3**. This code calls the **GetTextRead** function, passing the path to an image file.
-2. In the **read-text/images** folder, open **Note.jpg** to view the image that your code will process.
-3. In the integrated terminal for the **read-text** folder, and enter the following command to run the program:
-
-**C#**
-
-```
-dotnet run
-```
-
-**Python**
-
-```
-python read-text.py
-```
-
-4. When prompted, enter **3** and observe the output, which is the text extracted from the document.
+6. When prompted, enter **1** and observe the output, which should include the ID and attributes of each face detected.
+7. View the **detected_faces.jpg** file that is generated in the same folder as your code file to see the annotated faces.
 
 ## More information
 
-For more information about using the **Computer Vision** service to read text, see the [Computer Vision documentation](https://docs.microsoft.com/azure/cognitive-services/computer-vision/concept-recognizing-text).
+For more information about using the **Computer Vision** service for face detection, see the [Computer Vision documentation](https://docs.microsoft.com/azure/cognitive-services/computer-vision/concept-detecting-faces).
+
+To learn more about the **Face** service, see the [Face documentation](https://docs.microsoft.com/azure/cognitive-services/face/).
