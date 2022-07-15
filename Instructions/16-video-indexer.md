@@ -68,34 +68,6 @@ You can use Video Analyzer to search the video for insights.
 
 ![Video Analyzer search results for Bee](./images/video-indexer-search.png)
 
-## Edit insights
-
-You can use Video Analyzer to edit the insights that have been found, adding custom information to make even more sense of the video.
-
-1. Rewind the video to the start and view the **people** listed at the top of the **Insights** pane. Observe that some people have been recognized, including **Eric Horwitz**, a computer scientist and Technical Fellow at Microsoft.
-
-![Video Analyzer insights for a known person](./images/video-indexer-known-person.png)
-
-2. Select the photo of Eric Horwitz, and view the information underneath - expanding the **Show biography** section to see information about this person.
-3. Observe that the locations in the video where this person appears are indicated. You can use these to view those sections of the video.
-4. In the video player, find the person speaking at approximately 0:34:
-
-![Video Analyzer insights for an unknown person](./images/video-indexer-unknown-person.png)
-
-5. Observe that this person is not recognized, and has been assigned a generic name such as **Unknown #1**. However, the video does include a caption with this person's name, so we can enrich the insights by editing the details for this person.
-6. At the top right of the portal, select the **Edit** icon (&#x1F589;). Then change the name of the unknown person to **Natasha Crampton**.
-
-![Editing a person in Video Analyzer](./images/video-indexer-edit-name.png)
-
-7. After you have made the name change, search the **Insights** pane for *Natasha*. The results should include one person, and indicate the sections of the video in which they appear.
-8. At the top left of the portal, expand the menu (&#8801;) and select the **Model customizations** page. Then on the **People** tab, observe that the **Default** people model has one person in it. Video Analyzer has added the person you named to a people model, so that they will be recognized in any future videos you index in your account.
-
-![The default people model in Video Analyzer](./images/video-indexer-custom-model.png)
-
-You can add images of people to the default people model, or add new models of your own. This enables you to define collections of people with images of their face so that Video Analyzer can recognize them in your videos.
-
-Observe also that you can also create custom models for language (for example to specify industry-specific terminology you want Video Analyzer to recognize) and brands (for example, company or product names).
-
 ## Use Video Analyzer widgets
 
 The Video Analyzer portal is a useful interface to manage video indexing projects. However, there may be occasions when you want to make the video and its insights available to people who don't have access to your Video Analyzer account. Video Analyzer provides widgets that you can embed in a web page for this purpose.
