@@ -218,6 +218,7 @@ with open(image_file, mode="rb") as image_data:
     **Python**
 
     ```
+    pip3 install python-dotenv
     pip install Pillow
     pip install matplotlib --user
     python detect-faces.py
