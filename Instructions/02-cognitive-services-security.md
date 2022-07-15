@@ -163,7 +163,7 @@ Make a note of the **appId**, **password**, and **tenant** values - you will nee
 
 ### Use the service principal in an application
 
-Now you're ready to use the service principal identity in an application, so it can access the secret congitive services key in your key vault and use it to connect to your cognitive services resource.
+Now you're ready to use the service principal identity in an application, so it can access the secret cognitive services key in your key vault and use it to connect to your cognitive services resource.
 
 > **Note**: In this exercise, we'll store the service principal credentials in the application configuration and use them to authenticate a **ClientSecretCredential** identity in your application code. This is fine for development and testing, but in a real production application, an administrator would assign a *managed identity* to the application so that it uses the service principal identity to access resources, without caching or storing the password.
 
@@ -222,7 +222,7 @@ Now you're ready to use the service principal identity in an application, so it 
     python keyvault-client.py
     ```
 
-6. When prompted, enter some text and review the language that is detected by the service. For example, try entering "Hello", "Bonjour", and "Hola".
+6. When prompted, enter some text and review the language that is detected by the service. For example, try entering "Hello", "Bonjour", and "Gracias".
 7. When you have finished testing the application, enter "quit" to stop the program.
 
 ## More information
