@@ -101,7 +101,7 @@ Now that you have the documents in place, you can create a search solution by in
     - **Data to extract**: Content and metadata
     - **Parsing mode**: Default
     - **Connection string**: *Select **Choose an existing connection**. Then select your storage account, and finally select the **margies** container that was created by the UploadDocs.cmd script.*
-    - **Authenticate using managed identity**: Unselected
+    - **Managed identity authentication**: None
     - **Container name**: margies
     - **Blob folder**: *Leave this blank*
     - **Description**: Brochures and reviews in Margie's Travel web site.
@@ -124,7 +124,7 @@ Now that you have the documents in place, you can create a search solution by in
 
 1. Double-check your selections (it can be difficult to change them later). Then proceed to the next step (*Customize target index*).
 1. Change the **Index name** to **margies-index**.
-1. Ensure that the **Key** is set to **metadata_storage_path** and leave the **Suggester name** and **Search mode** blank.
+1. Ensure that the **Key** is set to **metadata_storage_path** and leave the **Suggester name** blank and **Search mode** at its default.
 1. Make the following changes to the index fields, leaving all other fields with their default settings (**IMPORTANT**: you may need to scroll to the right to see the entire table):
 
     | Field name | Retrievable | Filterable | Sortable | Facetable | Searchable |
