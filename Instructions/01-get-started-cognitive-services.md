@@ -16,7 +16,7 @@ In this exercise, you'll get started with Cognitive Services by creating a **Cog
 
 ## Provision a Cognitive Services resource
 
-Azure Cognitive Services are cloud-based services that encapsulate artificial intelligence capabilities you can incorporate into your applications. You can provision individual cognitive services resources for specific APIs (for example, **Langauge** or **Computer Vision**), or you can provision a general **Cognitive Services** resource that provides access to multiple cognitive services APIs through a single endpoint and key. In this case, you'll use a single **Cognitive Services** resource.
+Azure Cognitive Services are cloud-based services that encapsulate artificial intelligence capabilities you can incorporate into your applications. You can provision individual cognitive services resources for specific APIs (for example, **Language** or **Computer Vision**), or you can provision a general **Cognitive Services** resource that provides access to multiple cognitive services APIs through a single endpoint and key. In this case, you'll use a single **Cognitive Services** resource.
 
 1. Open the Azure portal at `https://portal.azure.com`, and sign in using the Microsoft account associated with your Azure subscription.
 2. Select the **&#65291;Create a resource** button, search for *cognitive services*, and create a **Cognitive Services** resource with the following settings:
@@ -34,7 +34,7 @@ Azure Cognitive Services are cloud-based services that encapsulate artificial in
 
 ## Use a REST Interface
 
-The cognitive services APIs are REST-based, so you can consume them by submitting JSON requests over HTTP. In this example, you'll explore a console application that uses the **Langauge** REST API to perform language detection; but the basic principle is the same for all of the APIs supported by the Cognitive Services resource.
+The cognitive services APIs are REST-based, so you can consume them by submitting JSON requests over HTTP. In this example, you'll explore a console application that uses the **Language** REST API to perform language detection; but the basic principle is the same for all of the APIs supported by the Cognitive Services resource.
 
 > **Note**: In this exercise, you can choose to use the REST API from either **C#** or **Python**. In the steps below, perform the actions appropriate for your preferred language.
 
@@ -44,7 +44,7 @@ The cognitive services APIs are REST-based, so you can consume them by submittin
     - **Python**: .env
 
     Open the configuration file and update the configuration values it contains to reflect the **endpoint** and an authentication **key** for your cognitive services resource. Save your changes.
-4. Note that the **rest-client** folder contains a code file for the client application:
+3. Note that the **rest-client** folder contains a code file for the client application:
 
     - **C#**: Program.cs
     - **Python**: rest-client.py
@@ -56,7 +56,7 @@ The cognitive services APIs are REST-based, so you can consume them by submittin
     - The request sent to the API consists of a JSON object containing the input data - in this case, a collection of **document** objects, each of which has an **id** and **text**.
     - The key for your service is included in the request header to authenticate your client application.
     - The response from the service is a JSON object, which the client application can parse.
-5. Right-click the **rest-client** folder and open an integrated terminal. Then enter the following language-specific command to run the program:
+4. Right-click the **rest-client** folder and open an integrated terminal. Then enter the following language-specific command to run the program:
 
     **C#**
 
@@ -74,8 +74,8 @@ The cognitive services APIs are REST-based, so you can consume them by submittin
     python rest-client.py
     ```
 
-6. When prompted, enter some text and review the language that is detected by the service, which is returned in the JSON response. For example, try entering "Hello", "Bonjour", and "Hola".
-7. When you have finished testing the application, enter "quit" to stop the program.
+5. When prompted, enter some text and review the language that is detected by the service, which is returned in the JSON response. For example, try entering "Hello", "Bonjour", and "Gracias".
+6. When you have finished testing the application, enter "quit" to stop the program.
 
 ## Use an SDK
 
