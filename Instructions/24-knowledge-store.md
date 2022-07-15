@@ -14,7 +14,7 @@ In this exercise, you'll implement a knowledge store for *Margie's Travel*, a fi
 
      ![Visual Studio Code Icon](./images/vscode.png)
 
-2.  Open a file, From the top-left options, Click on **file->Open File** and navigate to **C:\AllFiles\AI-102-AIEngineer-prod**.
+2.  Open a file, From the top-left options, Click on **file->Open Folder** and navigate to **C:\AllFiles\AI-102-AIEngineer-prod**.
 
     **Note:** You may be prompted to complete a 2-minute survey. Go ahead and select **No, thanks**. You may need to do this more than once.
 
@@ -37,15 +37,9 @@ In this exercise, you'll implement a knowledge store for *Margie's Travel*, a fi
     ```
 
 8. When prompted, sign into your Azure subscription. Then return to Visual Studio Code and wait for the sign-in process to complete.
-9. Run the following command to list Azure locations.
 
-    ```
-    az account list-locations -o table
-    ```
-
-10. In the output, find the **Name** value that corresponds with the location of your resource group (for example, for *East US* the corresponding name is *eastus*).
-11. In the **setup.cmd** script, modify the **subscription_id**, **resource_group**, and **location** variable declarations with the appropriate values for your subscription ID, resource group name, and location name. Then save your changes.
-12. In the terminal for the **24-knowledge-store** folder, enter the following command to run the script:
+9. In the **setup.cmd** script, modify the **subscription_id**, **resource_group**, and **location** variable declarations with the appropriate values for your subscription ID, resource group name, and location name. Then save your changes.
+10. In the terminal for the **24-knowledge-store** folder, enter the following command to run the script:
 
     ```
     .\setup
@@ -54,7 +48,7 @@ In this exercise, you'll implement a knowledge store for *Margie's Travel*, a fi
     >
     > If the script fails, ensure you saved it with the correct variable names and try again.
 
-13. When the script completes, review the output it displays and note the following information about your Azure resources (you will need these values later):
+11. When the script completes, review the output it displays and note the following information about your Azure resources (you will need these values later):
     - Storage account name
     - Storage connection string
     - Cognitive Services account
@@ -63,7 +57,7 @@ In this exercise, you'll implement a knowledge store for *Margie's Travel*, a fi
     - Search service admin key
     - Search service query key
 
-14. In the Azure portal, refresh the resource group and verify that it contains the Azure Storage account, Azure Cognitive Services resource, and Azure Cognitive Search resource.
+12. In the Azure portal, refresh the resource group and verify that it contains the Azure Storage account, Azure Cognitive Services resource, and Azure Cognitive Search resource.
 
 ## Create a search solution
 
