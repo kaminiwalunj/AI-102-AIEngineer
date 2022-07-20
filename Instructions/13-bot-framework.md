@@ -50,10 +50,10 @@ dotnet new echobot -n TimeBot
 
 5. In the terminal pane, enter the following commands to change the current directory to the **TimeBot** folder list the code files that have been generated for your bot:
 
-    ```
-    cd TimeBot
-    dir
-    ```
+```
+cd TimeBot
+dir
+```
 
 ## Test the bot in the Bot Framework Emulator
 
