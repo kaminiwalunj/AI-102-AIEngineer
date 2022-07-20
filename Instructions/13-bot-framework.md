@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Create a Bot with the Bot Framework SDK'
-    module: 'Module 7 - Conversational AI and the Azure Bot Service'
----
-
 # Create a Bot with the Bot Framework SDK
 
 *Bots* are software agents that can participate in conversational dialogs with human users. The Microsoft Bot Framework provides a comprehensive platform for building bots that can be delivered as cloud services through the Azure Bot Service.
@@ -38,10 +32,8 @@ If you have not already cloned **AI-102-AIEngineer** code repository to the envi
 
 You can use the Bot Framework SDK to create a bot based on a template, and then customize the code to meet your specific requirements.
 
-> **Note**: In this exercise, you can choose to use either **C#** or **Python**. In the steps below, perform the actions appropriate for your preferred language.
-
-1. In Visual Studio Code, in the **Explorer** pane, browse to the **13-bot-framework** folder and expand the **C-Sharp** or **Python** folder depending on your language preference.
-2. Right-click the folder for your chosen language and open an integrated terminal.
+1. In Visual Studio Code, in the **Explorer** pane, browse to the **13-bot-framework** folder and expand the **C-Sharp** folder.
+2. Right-click the folder for your **C#** language and open an integrated terminal.
 3. In the terminal, run the following commands to install the bot templates and packages you need:
 
 **C#**
@@ -52,15 +44,6 @@ dotnet new -i Microsoft.Bot.Framework.CSharp.CoreBot
 dotnet new -i Microsoft.Bot.Framework.CSharp.EmptyBot
 ```
 
-**Python**
-
-```
-pip install botbuilder-core
-pip install asyncio
-pip install aiohttp
-pip install cookiecutter==1.7.0
-```
-
 4. After the templates and packages have been installed, run the following command to create a bot based on the *EchoBot* template:
 
 **C#**
@@ -69,16 +52,6 @@ pip install cookiecutter==1.7.0
 dotnet new echobot -n TimeBot
 ```
 
-**Python**
-
-```
-cookiecutter https://github.com/microsoft/botbuilder-python/releases/download/Templates/echo.zip
-```
-
-If you're using Python, when prompted by cookiecutter, enter the following details:
-- **bot_name**: TimeBot
-- **bot_description**: A bot for our times
-    
 5. In the terminal pane, enter the following commands to change the current directory to the **TimeBot** folder list the code files that have been generated for your bot:
 
     ```
@@ -98,12 +71,6 @@ You've created a bot based on the *EchoBot* template. Now you can run it locally
 dotnet run
 ```
 
-**Python**
-
-```
-python app.py
-```
-    
 When the bot starts, note the endpoint at which it is running is shown. This should be similar to **http://localhost:3978**.
 
 2. Start the Bot Framework Emulator, and open your bot by specifying the endpoint with the **/api/messages** path appended, like this:
@@ -120,7 +87,6 @@ You've created a bot that echoes the user's input back to them. It's not particu
 
 1. In Visual Studio Code, open the following code file for your bot:
     - **C#**: TimeBot/Bots/EchoBot.cs
-    - **Python**: TimeBot/bot.py
 
     Note that the code in this file consists of *activity handler* functions; one for the *Member Added* conversation update activity (when someone joins the chat session) and another for the *Message* activity (when a message is received). The conversation is based on the concept of *turns*, in which each turn represents an interaction in which the bot receives, processes, and responds to an activity. The *turn context* is used to track information about the activity being processed in the current turn.
 
@@ -130,12 +96,6 @@ You've created a bot that echoes the user's input back to them. It's not particu
 
 ```C#
 using System;
-```
-
-**Python**
-
-```Python
-from datetime import datetime
 ```
 
 3. Modify the activity handler function for the *Message* activity to match the following code:
@@ -156,30 +116,12 @@ protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivi
 }
 ```
 
-**Python**
-
-```Python
-async def on_message_activity(self, turn_context: TurnContext):
-    input_message = turn_context.activity.text
-    response_message = 'Ask me what the time is.'
-    if (input_message.lower().startswith('what') and 'time' in input_message.lower()):
-        now = datetime.now()
-        response_message = 'The time is {}:{:02d}.'.format(now.hour,now.minute)
-    await turn_context.send_activity(response_message)
-```
-    
 4. Save your changes, and then in the terminal pane, ensure that the current directory is the **TimeBot** folder containing your bot code files, and then enter the following command to start your bot running locally.
 
 **C#**
 
 ```
 dotnet run
-```
-
-**Python**
-
-```
-python app.py
 ```
 
 As before, when the bot starts, note the endpoint at which it is running is shown.
@@ -262,20 +204,6 @@ Now that you have the required Azure resources in place, you can prepare your co
 
 ```
 az bot prepare-deploy --lang Csharp --code-dir "." --proj-file-path "TimeBot.csproj"
-```
-
-**Python**
-
-```
-rmdir /S /Q  __pycache__
-notepad requirements.txt
-```
-
-- The second command will open the requirements.txt file for your Python environment in Notepad - modify it to match the following, save the changes, and close Notepad.
-
-```
-botbuilder-core==4.11.0
-aiohttp
 ```
 
 ### Create a zip archive for deployment
