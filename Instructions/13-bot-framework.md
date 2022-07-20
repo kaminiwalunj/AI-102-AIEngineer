@@ -36,8 +36,6 @@ You can use the Bot Framework SDK to create a bot based on a template, and then 
 2. Right-click the folder for your **C#** language and open an integrated terminal.
 3. In the terminal, run the following commands to install the bot templates and packages you need:
 
-**C#**
-
 ```
 dotnet new -i Microsoft.Bot.Framework.CSharp.EchoBot
 dotnet new -i Microsoft.Bot.Framework.CSharp.CoreBot
@@ -45,8 +43,6 @@ dotnet new -i Microsoft.Bot.Framework.CSharp.EmptyBot
 ```
 
 4. After the templates and packages have been installed, run the following command to create a bot based on the *EchoBot* template:
-
-**C#**
 
 ```
 dotnet new echobot -n TimeBot
@@ -64,8 +60,6 @@ dotnet new echobot -n TimeBot
 You've created a bot based on the *EchoBot* template. Now you can run it locally and test it by using the Bot Framework Emulator (which should be installed on your system).
 
 1. In the terminal pane, ensure that the current directory is the **TimeBot** folder containing your bot code files, and then enter the following command to start your bot running locally.
-
-**C#**
 
 ```
 dotnet run
@@ -92,15 +86,11 @@ You've created a bot that echoes the user's input back to them. It's not particu
 
 2. At the top of the code file, add the following namespace import statement:
 
-**C#**
-
 ```C#
 using System;
 ```
 
 3. Modify the activity handler function for the *Message* activity to match the following code:
-
-**C#**
 
 ```C#
 protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
@@ -117,8 +107,6 @@ protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivi
 ```
 
 4. Save your changes, and then in the terminal pane, ensure that the current directory is the **TimeBot** folder containing your bot code files, and then enter the following command to start your bot running locally.
-
-**C#**
 
 ```
 dotnet run
@@ -199,8 +187,6 @@ az deployment group create --resource-group "YOUR_RESOURCE_GROUP" --template-fil
 Now that you have the required Azure resources in place, you can prepare your code for deployment to them.
 
 1. In Visual Studio Code, in the terminal pane for your **TimeBot** folder, enter the following command to prepare your code's dependencies for deployment.
-
-**C#**
 
 ```
 az bot prepare-deploy --lang Csharp --code-dir "." --proj-file-path "TimeBot.csproj"
