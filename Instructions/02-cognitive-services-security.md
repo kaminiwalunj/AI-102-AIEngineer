@@ -149,16 +149,16 @@ The output of this command includes information about your new service principal
 
 Make a note of the **appId**, **password**, and **tenant** values - you will need them later (if you close this terminal, you won't be able to retrieve the password; so it's important to note the values now - you can paste the output into a new text file in Visual Studio Code to ensure you can find the values you need later!)
 
-2. Run below command to get the Service principal name in the output section. (you will find Display Name in environment detail page under Service principal details)
+2. To get the **object ID** of your service principal, run the following Azure CLI command, replacing *&lt;appId&gt;* with the value of your service principal's app ID.
  
     ```
-    az ad sp list --display-name <displayname>
+   az ad sp show --id <appId> --query objectId --out tsv
     ```
 
-3. Now assign permission for your new service principal to access secrets in your Key Vault, run the following Azure CLI command, replacing *&lt;keyVaultName&gt;* with the name of your Azure Key Vault resource and *&lt;spName&gt;* with the same value you provided when creating the service principal.
+3.  To assign permission for your new service principal to access secrets in your Key Vault, run the following Azure CLI command, replacing *&lt;keyVaultName&gt;* with the name of your Azure Key Vault resource and *&lt;objectId&gt;* with the value of your service principal's object ID.
 
     ```
-    az keyvault set-policy -n <keyVaultName> --spn "https://<spName>" --secret-permissions get list
+    az keyvault set-policy -n <keyVaultName> --object-id <objectId> --secret-permissions get list
     ```
 
 ### Use the service principal in an application
