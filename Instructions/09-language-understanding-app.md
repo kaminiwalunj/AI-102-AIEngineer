@@ -58,7 +58,8 @@ Now that you have created an authoring resource, you can use it to create a Lang
 
     > **Note**: If your account is associated with multiple subscriptions in different directories, you may need to switch to the directory containing the subscription where you provisioned your Language Understanding resources.
 
-3. On the **Conversation Apps** page, ensure your subscription and Language Understanding authoring resource are selected. Then create a new app for conversation with the following settings:
+3. On the **Conversation Apps** page, ensure your subscription and Language Understanding authoring resource are selected. Then click on **+ New app** for conversation with the following settings:
+  
     - **Name**: Clock
     - **Culture**: English (*if this option is not available, leave it blank*)
     - **Description**: Natural language clock
