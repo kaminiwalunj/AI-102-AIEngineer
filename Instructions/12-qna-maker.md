@@ -112,7 +112,7 @@ The knowledge base provides a back-end service that client applications can use 
 3. When deployment is complete, click **Get prediction URL** to view the REST endpoint for your knowledge base, and copy it to the clipboard (but don't close the dialog box yet).
 4. In Visual Studio Code, in the **12-qna** folder, open **ask-question.cmd**. This script uses *Curl* to call the REST interface of a question answering endpoint.
 5. In the script, replace *YOUR_PREDICTION_ENDPOINT* with the prediction endpoint you copied (ensuring it is enclosed in the quotation marks).
-6. Return to the browser and in the **Get prediction URL** dialog box, note that the sample request includes a value for the **Ocp-Apim-Subscription-Key** parameter, which looks similar to *ab12c345de678fg9hijk01lmno2pqrs34*. This is the authorization key for your resource. Copy it to the clipboard, and then click **Got it** to close the dialog box.
+6. Return to the browser and in the **Get prediction URL** dialog box, note that the sample request includes a value for the **Ocp-Apim-Subscription-Key** parameter, which looks similar to *ab12c345de678fg9hijk01lmno2pqrs34*. This is the authorization key for your resource. Copy it to the clipboard, and then click **Close** to close the dialog box.
 7. Return to Visual Studio Code, and in the **ask-question.cmd** script, replace *YOUR_KEY* with the key you copied (ensuring it is enclosed in the quotation marks).
 8. Note that the Curl command in the script submits a **question** parameter with the value **What is a Learning Path?**.
 9. Verify that the entire script looks similar to the following code, then save the file.
@@ -129,7 +129,7 @@ The knowledge base provides a back-end service that client applications can use 
     ```
 
 10. In Visual Studio Code in the Explorer pane, right-click the **ask-question.cmd** script and select **Open in Integrated Terminal**.
-11. In the terminal pane, enter the command `ask-question.cmd` to run the script and view the JSON response that is returned by the service, which should contain an appropriate answer to the question *What is a learning path?*.
+11. In the terminal pane, enter the command `.\ask-question.cmd` to run the script and view the JSON response that is returned by the service, which should contain an appropriate answer to the question *What is a learning path?*.
 
 ## Create a bot for the knowledge base
 
@@ -140,17 +140,16 @@ Most commonly, the client applications used to retrieve answers from a knowledge
 
     *If some values are missing, refresh your browser.*  
 
-  - **Bot handle**: *A unique name for your bot*
-  - **Subscription**: *Your Azure subscription*
-  - **Resource group**: *The resource group containing your Language resource*
-  - **Location**: *The same location as your Text Analytics service*.
-  - **Pricing tier**: F0
-  - **App name**: Same as the **Bot handle** with a unique ID and *.azurewebsites.net* appended automatically
-  - **SDK language**: *Choose either C# or Node.js*
-  - **QnA Auth Key**: *This should automatically be set to the authentication key for your QnA knowledge base*
-  - **App service plan/location**: *This may be set automatically to a suitable plan and location if one exists. If not, create a new plan*
-  - **Application Insights**: Off
-  - **Microsoft App ID and password**: Auto create App ID and password.
+     - **Bot handle**: *A unique name for your bot*
+     - **Subscription**: *Your Azure subscription*
+     - **Resource group**: *The resource group containing your Language resource*
+     - **Location**: *The same location as your Text Analytics service*.
+     - **Pricing tier**: F0
+     - **App name**: Same as the **Bot handle** with a unique ID and *.azurewebsites.net* appended automatically
+     - **SDK language**: *Choose either C# or Node.js*
+     - **App service plan/location**: *This may be set automatically to a suitable plan and location if one exists. If not, create a new plan*
+     - **Application Insights**: Off
+     - **Microsoft App ID and password**: Auto create App ID and password.
 3. Wait for your bot to be created . Then click **Go to resource** (or alternatively, on the home page, click **Resource groups**, open the resource group where you created the web app bot, and click it.)
 4. In the blade for your bot, view the **Test in Web Chat** page, and wait until the bot displays the message **Hello and welcome!** (it may take a few seconds to initialize).
 5. Use the test chat interface to ensure your bot answers questions from your knowledge base as expected. For example, try submitting `What is Microsoft certification?`.
