@@ -16,16 +16,18 @@ The ability to detect and analyze human faces is a core AI capability. In this e
 
 ## Provision a Cognitive Services resource
 
+If you don't already have one in your subscription, you'll need to provision a **Cognitive Services** resource.
+
 1. Open the Azure portal at `https://portal.azure.com`, and sign in using the Microsoft account associated with your Azure subscription.
 2. Select the **&#65291;Create a resource** button, search for *cognitive services*, and create a **Cognitive Services** resource with the following settings:
     - **Subscription**: *Your Azure subscription*
-    - **Resource group**: *Select a resource group Ai-102-DeploymentID*
+    - **Resource group**: *Choose or create a resource group Ai-102-DeploymentID*
     - **Region**: *Choose any available region*
     - **Name**: *Enter a unique name*
     - **Pricing tier**: Standard S0
 3. Select the required checkboxes and create the resource.
 4. Wait for deployment to complete, and then view the deployment details.
-5. When the resource has been deployed, go to it and view its Keys and Endpoint page. You will need the endpoint and one of the keys from this page in the next procedure.
+5. When the resource has been deployed, go to it and view its **Keys and Endpoint** page. You will need the endpoint and one of the keys from this page in the next procedure.
 
 ## Prepare to use the Computer Vision SDK
 
@@ -45,7 +47,6 @@ In this exercise, you'll complete a partially implemented client application tha
     **Python**
 
     ```
-    pip install numpy --user
     pip install azure-cognitiveservices-vision-computervision==0.7.0
     ```
     
@@ -218,9 +219,6 @@ with open(image_file, mode="rb") as image_data:
     **Python**
 
     ```
-    pip3 install python-dotenv
-    pip install Pillow
-    pip install matplotlib --user
     python detect-faces.py
     ```
 
@@ -335,7 +333,7 @@ One of the most fundamental capabilities of the Face service is to detect faces 
 // Get faces
 using (var imageData = File.OpenRead(imageFile))
 {    
-    var detected_faces = await faceClient.Face.DetectWithStreamAsync(imageData, returnFaceAttributes: features);
+    var detected_faces = await faceClient.Face.DetectWithStreamAsync(imageData, returnFaceAttributes: features, returnFaceId: false);
 
     if (detected_faces.Count > 0)
     {
@@ -347,12 +345,15 @@ using (var imageData = File.OpenRead(imageFile))
         Pen pen = new Pen(Color.LightGreen, 3);
         Font font = new Font("Arial", 4);
         SolidBrush brush = new SolidBrush(Color.Black);
+        int faceCount=0;
 
         // Draw and annotate each face
         foreach (var face in detected_faces)
         {
+            faceCount++;
+            Console.WriteLine($"\nFace number {faceCount}");
+            
             // Get face properties
-            Console.WriteLine($"\nFace ID: {face.FaceId}");
             Console.WriteLine($" - Mouth Occluded: {face.FaceAttributes.Occlusion.MouthOccluded}");
             Console.WriteLine($" - Eye Occluded: {face.FaceAttributes.Occlusion.EyeOccluded}");
             Console.WriteLine($" - Blur: {face.FaceAttributes.Blur.BlurLevel}");
@@ -380,7 +381,7 @@ using (var imageData = File.OpenRead(imageFile))
 # Get faces
 with open(image_file, mode="rb") as image_data:
     detected_faces = face_client.face.detect_with_stream(image=image_data,
-                                                            return_face_attributes=features)
+                                                            return_face_attributes=features,                     return_face_id=False)
 
     if len(detected_faces) > 0:
         print(len(detected_faces), 'faces detected.')
@@ -391,12 +392,15 @@ with open(image_file, mode="rb") as image_data:
         image = Image.open(image_file)
         draw = ImageDraw.Draw(image)
         color = 'lightgreen'
+        face_count = 0
 
         # Draw and annotate each face
         for face in detected_faces:
 
             # Get face properties
-            print('\nFace ID: {}'.format(face.face_id))
+            face_count += 1
+            print('\nFace number {}'.format(face_count))
+
             detected_attributes = face.face_attributes.as_dict()
             if 'blur' in detected_attributes:
                 print(' - Blur:')
@@ -448,6 +452,8 @@ with open(image_file, mode="rb") as image_data:
 7. View the **detected_faces.jpg** file that is generated in the same folder as your code file to see the annotated faces.
 
 ## More information
+
+There are several additional features available within the **Face** service, but following the [Responsible AI Standard](https://aka.ms/aah91ff) those are restricted behind a Limited Access policy. These features include identifying, verifying, and creating facial recognition models. To learn more and apply for access, see the [Limited Access for Cognitive Services](https://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-limited-access).
 
 For more information about using the **Computer Vision** service for face detection, see the [Computer Vision documentation](https://docs.microsoft.com/azure/cognitive-services/computer-vision/concept-detecting-faces).
 
