@@ -58,7 +58,7 @@ Now that you have created an authoring resource, you can use it to create a Lang
 
     > **Note**: If your account is associated with multiple subscriptions in different directories, you may need to switch to the directory containing the subscription where you provisioned your Language Understanding resources.
 
-3. On the **Conversation Apps** page, ensure your subscription and Language Understanding authoring resource are selected. Then create a new app for conversation with the following settings:
+3. On the **Conversation Apps** page, ensure your subscription and Language Understanding authoring resource are selected. Then **create a new app** for conversation with the following settings:
     - **Name**: Clock
     - **Culture**: English (*if this option is not available, leave it blank*)
     - **Description**: Natural language clock
@@ -231,7 +231,7 @@ Now that you've modified ths language model, you need to retrain and retest the 
 You can use the test pane to test individual utterances interactively, but for more complex language models it is generally more efficient to perform *batch testing*.
 
 1. In Visual Studio Code, open the **batch-test.json** file in the **09-luis-app** folder. This file consists of a JSON document that contains multiple test cases for the clock language model you created.
-2. In the Language Understanding portal, in the Test panel, select **Batch testing panel**. Then select **&#65291; Import** and import the **batch-test.json** file, assigning the name **clock-test**.
+2. In the Language Understanding portal, Select the **Test panel** and then, select **Batch testing panel**. Then select **&#65291; Import** and import the **batch-test.json** file, assigning the name **clock-test**.
 3. In the Batch testing panel, run the **clock-test** test.
 4. When the test has completed, select **See results**.
 5. On the results page, view the confusion matrix that represents the prediction results. It shows true positive, false positive, true negative, and false negative predictions for the intent or entity that is selected in the list on the right.
