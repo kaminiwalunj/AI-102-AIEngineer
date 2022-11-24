@@ -104,7 +104,7 @@ cv_client = ComputerVisionClient(cog_endpoint, credential)
     
 ## Use the Read API to read text from an image
 
-1. In the code file for your application, in the **Main** function, examine the code that runs if the user selects menu option **2**. This code calls the **GetTextRead** function, passing the path to an image file.
+1. In the code file for your application, in the **Main** function, examine the code that runs if the user selects menu option **1**. This code calls the **GetTextRead** function, passing the path to an image file.
 2. In the **read-text/images** folder, open **Lincoln.jpg** to view the image that your code will process.
 3. Back in the code file, find the **GetTextRead** function, and under the existing code that prints a message to the console, add the following code:
 
