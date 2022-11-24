@@ -102,9 +102,7 @@ credential = CognitiveServicesCredentials(cog_key)
 cv_client = ComputerVisionClient(cog_endpoint, credential)
 ```
     
-## Use the OCR API
-
-The **OCR** API is an optical character recognition API that is optimized for reading small to medium amounts of printed text in *.jpg*, *.png*, *.gif*, and *.bmp* format images. It supports a wide range of languages and in addition to reading text in the image it can determine the orientation of each text region and return information about the rotation angle of the text in relation to the image
+## Use the Read API to read text from an image
 
 1. In the code file for your application, in the **Main** function, examine the code that runs if the user selects menu option **1**. This code calls the **GetTextOcr** function, passing the path to an image file.
 2. In the **read-text/images** folder, open **Lincoln.jpg** to view the image that your code will process.
@@ -207,13 +205,12 @@ python read-text.py
 7. View the **ocr_results.jpg** file that is generated in the same folder as your code file to see the annotated lines of text in the image.
 
 ## Use the Read API
-
-The **Read** API uses a newer text recognition model than the OCR API, and performs better for larger images that contain a lot of text. It also supports text extraction from *.pdf* files, and can recognize both printed text (in multiple languages) and handwritten text (in English).
+The **Read** API uses a newer text recognition model and generally performs better for larger images that contain a lot of text, but will work for any amount of text. It also supports text extraction from *.pdf* files, and can recognize both printed text and handwritten text in multiple languages.
 
 The **Read** API uses an asynchronous operation model, in which a request to start text recognition is submitted; and the operation ID returned from the request can subsequently be used to check progress and retrieve results.
 
-1. In the code file for your application, in the **Main** function, examine the code that runs if the user selects menu option **2**. This code calls the **GetTextRead** function, passing the path to a PDF document file.
-2. In the **read-text/images** folder, right-click **Rome.pdf** and select **Reveal in File Explorer**. Then in File Explorer, open the PDF file to view it.
+1. In the code file for your application, in the **Main** function, examine the code that runs if the user selects menu option **1**. This code calls the **GetTextRead** function, passing the path to an image  file.
+2. In the **read-text/images** folder, click on **Lincoln.jpg** to view the file that your code will process.
 3. Back in the code file in Visual Studio Code, find the **GetTextRead** function, and under the existing code that prints a message to the console, add the following code:
 
 **C#**
@@ -238,7 +235,7 @@ using (var imageData = File.OpenRead(imageFile))
     while ((results.Status == OperationStatusCodes.Running ||
             results.Status == OperationStatusCodes.NotStarted));
 
-    // If the operation was successfuly, process the text line by line
+    // If the operation was successfully, process the text line by line
     if (results.Status == OperationStatusCodes.Succeeded)
     {
         var textUrlFileResults = results.AnalyzeResult.ReadResults;
@@ -271,7 +268,7 @@ with open(image_file, mode="rb") as image_data:
             break
         time.sleep(1)
 
-    # If the operation was successfuly, process the text line by line
+    # If the operation was successfully, process the text line by line
     if read_results.status == OperationStatusCodes.succeeded:
         for page in read_results.analyze_result.read_results:
             for line in page.lines:
