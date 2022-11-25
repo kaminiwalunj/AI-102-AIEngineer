@@ -31,6 +31,7 @@ The solution you will create for Margie's Travel requires the following resource
 ### Create an Azure Cognitive Search resource
 
 1. In a web browser, open the Azure portal at `https://portal.azure.com`, and sign in using the Microsoft account associated with your Azure subscription.
+
 1. Select the **&#65291;Create a resource** button, search for *search*, and create a **Azure Cognitive Search** resource with the following settings:
     - **Subscription**: *Your Azure subscription*
     - **Resource group**: *Select a resource group Ai-102-DeploymentID)*
@@ -38,7 +39,10 @@ The solution you will create for Margie's Travel requires the following resource
     - **Location**: *East US*
     - **Pricing tier**: Basic
 
+1. Select **Review + Create** to navigate to the **Review + Create** tab, and then select **Create**.
+
 1. Wait for deployment to complete, and then go to the deployed resource.
+
 1. Review the **Overview** page on the blade for your Azure Cognitive Search resource in the Azure portal. Here, you can use a visual interface to create, test, manage, and monitor the various components of a search solution; including data sources, indexes, indexers, and skillsets.
 
 ### Create a Cognitive Services resource
@@ -51,7 +55,11 @@ If you don't already have one in your subscription, you'll need to provision a *
     - **Region**: *East US*
     - **Name**: *Enter a unique name*
     - **Pricing tier**: Standard S0
+
 1. Select the required checkboxes and create the resource.
+
+1. Select **Review + Create** to navigate to the **Review + Create** tab, and then select **Create**.
+
 1. Wait for deployment to complete, and then view the deployment details.
 
 ### Create a storage account
@@ -63,8 +71,13 @@ If you don't already have one in your subscription, you'll need to provision a *
     - **Region**: *East US*
     - **Performance**: Standard
     - **Replication**: Locally-redundant storage (LRS)
-1. Wait for deployment to complete, and then go to the deployed resource.
+
+1. Select **Review** to navigate to the **Review** tab, and then select **Create**.
+
+1. Wait for deployment to complete, and then click **go to resource**.
+
 1. On the **Overview** page, note the **Subscription ID** -this identifies the subscription in which the storage account is provisioned.
+
 1. On the **Access keys** page, note that two keys have been generated for your storage account. Then select **Show keys** to view the keys.
 
     > **Tip**: Keep the **Storage Account** blade open - you will need the subscription ID and one of the keys in the next procedure.
@@ -74,8 +87,11 @@ If you don't already have one in your subscription, you'll need to provision a *
 Now that you have the required resources, you can upload some documents to your Azure Storage account.
 
 1. In Visual Studio Code, in the **Explorer** pane, expand the **22-create-a-search-solution** folder and select **UploadDocs.cmd**.
+
 1. Edit the batch file to replace the **YOUR_SUBSCRIPTION_ID**, **YOUR_AZURE_STORAGE_ACCOUNT_NAME**, and **YOUR_AZURE_STORAGE_KEY** placeholders with the appropriate subscription ID, Azure storage account name, and Azure storage account key values for the storage account you created previously.
+
 1. Save your changes, and then right-click the **22-create-a-search-solution** folder and open an integrated terminal.
+
 1. Enter the following command to sign into your Azure subscription by using the Azure CLI.
 
     ```
@@ -95,6 +111,7 @@ A web browser tab will open and prompt you to sign into Azure. Do so, and then c
 Now that you have the documents in place, you can create a search solution by indexing them.
 
 1. In the Azure portal, browse to your Azure Cognitive Search resource. Then, on its **Overview** page, select **Import data**.
+
 1. On the **Connect to your data** page, in the **Data Source** list, select **Azure Blob Storage**. Then complete the data store details with the following values:
     - **Data Source**: Azure Blob Storage
     - **Data source name**: margies-data
@@ -105,8 +122,11 @@ Now that you have the documents in place, you can create a search solution by in
     - **Container name**: margies
     - **Blob folder**: *Leave this blank*
     - **Description**: Brochures and reviews in Margie's Travel web site.
+
 1. Proceed to the next step (*Add cognitive skills*).
+
 1. in the **Attach Cognitive Services** section, select your cognitive services resource.
+
 1. In the **Add enrichments** section:
     - Change the **Skillset name** to **margies-skillset**.
     - Select the option **Enable OCR and merge all text into merged_content field**.
@@ -123,8 +143,11 @@ Now that you have the documents in place, you can create a search solution by in
         | Generate captions from images | | imageCaption |
 
 1. Double-check your selections (it can be difficult to change them later). Then proceed to the next step (*Customize target index*).
+
 1. Change the **Index name** to **margies-index**.
+
 1. Ensure that the **Key** is set to **metadata_storage_path** and leave the **Suggester name** blank and **Search mode** at its default.
+
 1. Make the following changes to the index fields, leaving all other fields with their default settings (**IMPORTANT**: you may need to scroll to the right to see the entire table):
 
     | Field name | Retrievable | Filterable | Sortable | Facetable | Searchable |
@@ -146,13 +169,18 @@ Now that you have the documents in place, you can create a search solution by in
 
 
 1. Double-check your selections, paying particular attention to ensure that the correct **Retrievable**, **Filterable**, **Sortable**, **Facetable**, and **Searchable** options are selected for each field  (it can be difficult to change them later). Then proceed to the next step (*Create an indexer*).
+
 1. Change the **Indexer name** to **margies-indexer**.
+
 1. Leave the **Schedule** set to **Once**.
+
 1. Expand the **Advanced** options, and ensure that the **Base-64 encode keys** option is selected (generally encoding keys make the index more efficient).
+
 1. Select **Submit** to create the data source, skillset, index, and indexer. The indexer is run automatically and runs the indexing pipeline, which:
     1. Extracts the document metadata fields and content from the data source
     2. Runs the skillset of cognitive skills to generate additional enriched fields
     3. Maps the extracted fields to the index.
+
 1. In the bottom half of the **Overview** page for your Azure Cognitive Search resource, view the **Indexers** tab, which should show the newly created **margies-indexer**. Wait a few minutes, and click **&orarr; Refresh** until the **Status** indicates success.
 
 ## Search the index
@@ -160,6 +188,7 @@ Now that you have the documents in place, you can create a search solution by in
 Now that you have an index, you can search it.
 
 1. At the top of the **Overview** page for your Azure Cognitive Search resource, select **Search explorer**.
+
 2. In Search explorer, in the **Query string** box, enter `*` (a single asterisk), and then select **Search**.
 
     This query retrieves all documents in the index in JSON format. Examine the results and note the fields for each document, which contain document content, metadata, and enriched data extracted by the cognitive skills you selected.
@@ -201,18 +230,27 @@ While you can use the portal to create and modify search solutions, it's often d
 ### Get the endpoint and key for your Azure Cognitive Search resource
 
 1. In the Azure portal, return to the **Overview** page for your Azure Cognitive Search resource; and in the top section of the page, find the **Url** for your resource (which looks like **https://resource_name.search.windows.net**) and copy it to the clipboard.
+
 2. In Visual Studio Code, in the Explorer pane, expand the **22-create-a-search-solution** folder and its **modify-search** subfolder, and select **modify-search.cmd** to open it. You will use this script file to run *cURL* commands that submit JSON to the Azure Cognitive Service REST interface.
+
 3. In **modify-search.cmd**, replace the **YOUR_SEARCH_URL** placeholder with the URL you copied to the clipboard.
+
 4. In the Azure portal, view the **Keys** page for your Azure Cognitive Search resource, and copy the **Primary admin key** to the clipboard.
+
 5. In Visual Studio Code, replace the **YOUR_ADMIN_KEY** placeholder with the key you copied to the clipboard.
+
 6. Save the changes to **modify-search.cmd** (but don't run it yet!)
 
 ### Review and modify the skillset
 
 1. In Visual studio Code, in the **modify-search** folder, open **skillset.json**. This shows a JSON definition for **margies-skillset**.
+
 2. At the top of the skillset definition, note the **cognitiveServices** object, which is used to connect your Cognitive Services resource to the skillset.
+
 3. In the Azure portal, open your Cognitive Services resource (<u>not</u> your Azure Cognitive Search resource!) and view its **Keys** page. Then copy **Key 1** to the clipboard.
+
 4. In Visual Studio Code, in **skillset.json**, replace the **YOUR_COGNITIVE_SERVICES_KEY** placeholder with the Cognitive Services key you copied to the clipboard.
+
 5. Scroll through the JSON file, noting that it includes definitions for the skills you created using the Azure Cognitive Search user interface in the Azure portal. At the bottom of the list of skills, an additional skill has been added with the following definition:
 
     ```
@@ -248,7 +286,9 @@ The new skill is named **get-sentiment**, and for each **document** level in a d
 ### Review and modify the index
 
 1. In Visual studio Code, in the **modify-search** folder, open **index.json**. This shows a JSON definition for **margies-index**.
+
 2. Scroll through the index and view the field definitions. Some fields are based on metadata and content in the source document, and others are the results of skills in the skillset.
+
 3. At the end of the list of fields that you defined in the Azure portal, note that two additional fields have been added:
 
     ```
@@ -276,7 +316,8 @@ The new skill is named **get-sentiment**, and for each **document** level in a d
 ### Review and modify the indexer
 
 1. In Visual studio Code, in the **modify-search** folder, open **indexer.json**. This shows a JSON definition for **margies-indexer**, which maps fields extracted from document content and metadata (in the **fieldMappings** section), and values extracted by skills in the skillset (in the **outputFieldMappings** section), to fields in the index.
-3. In the **fieldMappings** list, note the mapping for the **metadata_storage_path** value to the base-64 encoded key field. This was created when you assigned the **metadata_storage_path** as the key and selected the option to encode the key in the Azure portal. Additionally, a new mapping explicitly maps the same value to the **url** field, but without the Base-64 encoding:
+
+2. In the **fieldMappings** list, note the mapping for the **metadata_storage_path** value to the base-64 encoded key field. This was created when you assigned the **metadata_storage_path** as the key and selected the option to encode the key in the Azure portal. Additionally, a new mapping explicitly maps the same value to the **url** field, but without the Base-64 encoding:
 
     ```
     {
@@ -288,7 +329,7 @@ The new skill is named **get-sentiment**, and for each **document** level in a d
 
 All of the other metadata and content fields in the source document are implicitly mapped to fields of the same name in the index.
 
-4. Review the **ouputFieldMappings** section, which maps outputs from the skills in the skillset to index fields. Most of these reflect the choices you made in the user interface, but the following mapping has been added to map the **sentimentLabel** value extracted by your sentiment skill to the **sentiment** field you added to the index:
+3. Review the **ouputFieldMappings** section, which maps outputs from the skills in the skillset to index fields. Most of these reflect the choices you made in the user interface, but the following mapping has been added to map the **sentimentLabel** value extracted by your sentiment skill to the **sentiment** field you added to the index:
 
     ```
     {
@@ -300,6 +341,7 @@ All of the other metadata and content fields in the source document are implicit
 ### Use the REST API to update the search solution
 
 1. Right-click the **modify-search** folder and open an integrated terminal.
+
 2. In the terminal pane for the **modify-search** folder, enter the following command to run the **modify-search.cmd** script, which submits the JSON definitions to the REST interface and initiates the indexing.
 
     ```
@@ -313,6 +355,7 @@ All of the other metadata and content fields in the source document are implicit
 ### Query the modified index
 
 1. At the top of the blade for your Azure Cognitive Search resource, select **Search explorer**.
+
 2. In Search explorer, in the **Query string** box, enter the following query string, and then select **Search**.
 
     ```
@@ -332,6 +375,7 @@ Now that you have a useful index, you can use it from a client application. You 
 ### Get the endpoint and keys for your search resource
 
 1. In the Azure portal, on the **Overview** page for your Azure Cognitive Search resource, note the **Url** value, which should be similar to **https://*your_resource_name*.search.windows.net**. This is the endpoint for your search resource.
+
 2. On the **Keys** page, note that there are two **admin** keys, and a single **query** key. An *admin* key is used to create and manage search resources; a *query* key is used by client applications that only need to perform search queries.
 
     *You will need the endpoint and query key for your client application.*
@@ -339,6 +383,7 @@ Now that you have a useful index, you can use it from a client application. You 
 ### Prepare to use the Azure Cognitive Search SDK
 
 1. In Visual Studio Code, in the **Explorer** pane, browse to the **22-create-a-search-solution** folder and expand the **C-Sharp** or **Python** folder depending on your language preference.
+
 2. Right-click the **margies-travel** folder and open an integrated terminal. Then install the Azure Cognitive Search SDK package by running the appropriate command for your language preference:
 
     **C#**
@@ -352,7 +397,8 @@ Now that you have a useful index, you can use it from a client application. You 
     ```
     pip install numpy --user
     pip install azure-search-documents==11.0.0
-
+    pip install -U Flask
+    pip install python-dotenv
     ```
     
 3. View the contents of the **margies-travel** folder, and note that it contains a file for configuration settings:
@@ -368,8 +414,11 @@ The **margies-travel** folder contains code files for a web application (a Micro
 1. Open the following code file in the web application, depending on your choice of programming language:
     - **C#**:Pages/Index.cshtml.cs
     - **Python**: app.py
+
 2. Near the top of the code file, find the comment **Import search namespaces**, and note the namespaces that have been imported to work with the Azure Cognitive Search SDK:
+
 3. In the **search_query** function, find the comment **Create a search client**, and note that the code creates a **SearchClient** object using the endpoint and query key for your Azure Cognitive Search resource:
+
 4. In the **search_query** function, find the comment **Submit search query**, and review the code to submit a search for the specified text with the following options:
     - A *search mode* that requires **all** of the individual words in the search text are found.
     - The total number of documents found by the search is included in the results.
@@ -386,6 +435,7 @@ The web app already includes code to process and render the search results.
 1. Open the following code file in the web application, depending on your choice of programming language:
     - **C#**:Pages/Index.cshtml
     - **Python**: templates/search.html
+
 2. Examine the code, which renders the page on which the search results are displayed. Observe that:
     - The page begins with a search form that the user can use to submit a new search (in the Python version of the application, this form is defined in the **base.html** template), which is referenced at the beginning of the page.
     - A second form is then rendered, enabling the user to refine the search results. The code for this form:
@@ -419,18 +469,26 @@ The web app already includes code to process and render the search results.
      **Note:** If above command retured with error, just update pip version with `python -m pip install --upgrade pip` in administrative powershell window.
 
 2. In the message that is displayed when the app starts successfully, follow the link to the running web application (*http://localhost:5000/* or *http://127.0.0.1:5000/*) to open the Margies Travel site in a web browser.
+
 3. In the Margie's Travel website, enter **London hotel** into the search box and click **Search**.
+
 4. Review the search results. They include the file name (with a hyperlink to the file URL), an extract of the file content with the search terms (*London* and *hotel*) emphasized, and other attributes of the file from the index fields.
+
 5. Observe that the results page includes some user interface elements that enable you to refine the results. These include:
     - A *filter* based on a facet value for the **metadata_author** field. This demonstrates how you can use *facetable* fields to return a list of *facets* - fields with a small set of discrete values that can displayed as potential filter values in the user interface.
     - The ability to *order* the results based on a specified field and sort direction (ascending or descending). The default order is based on *relevancy*, which is calculated as a **search.score()** value based on a *scoring profile* that evaluates the frequency and importance of search terms in the index fields.
+
 6. Select the **Reviewer** filter and the **Positive to negative** sort option, and then select **Refine Results**.
+
 7. Observe that the results are filtered to include only reviews, and sorted into descending order of sentiment.
+
 8. In the **Search** box, enter a new search for **quiet hotel in New York** and review the results.
+
 9. Try the following search terms:
     - **Tower of London** (observe that this term is identified as a *key phrase* in some documents).
     - **skyscraper** (observe that this word doesn't appear in the actual content of any documents, but is found in the *image captions* and *image tags* that were generated for images in some documents).
     - **Mojave desert** (observe that this term is identified as a *location* in some documents).
+
 10. Close the browser tab containing the Margie's Travel web site and return to Visual Studio Code. Then in the Python terminal for the **margies-travel** folder (where the dotnet or flask application is running), enter Ctrl+C to stop the app.
 
 ## More information
