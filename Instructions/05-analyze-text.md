@@ -29,9 +29,9 @@ If you don't already have one in your subscription, you'll need to provision a *
     - **Name**: *Enter a unique name*
     - **Pricing tier**: Standard S0
 
-3. Select **Review + Create** to navigate to the **Review + Create** tab, and then select **Create**.
+3. Select the required checkboxes and create the resource.
 
-4. Select the required checkboxes and create the resource.
+4. Select **Review + Create** to navigate to the **Review + Create** tab, and then select **Create**. 
 
 5. Wait for deployment to complete, and then view the deployment details.
 
