@@ -21,15 +21,21 @@ For example, suppose a travel agency wants to process hotel reviews that have be
 If you don't already have one in your subscription, you'll need to provision a **Cognitive Services** resource.
 
 1. Open the Azure portal at `https://portal.azure.com`, and sign in using the Microsoft account associated with your Azure subscription.
+
 2. Select the **&#65291;Create a resource** button, search for *cognitive services*, and create a **Cognitive Services** resource with the following settings:
     - **Subscription**: *Your Azure subscription*
     - **Resource group**: *Choose or create a resource group (if you are using a restricted subscription, you may not have permission to create a new resource group - use the one provided)*
     - **Region**: *Choose any available region*
     - **Name**: *Enter a unique name*
     - **Pricing tier**: Standard S0
-3. Select the required checkboxes and create the resource.
-4. Wait for deployment to complete, and then view the deployment details.
-5. When the resource has been deployed, go to it and view its **Keys and Endpoint** page. You will need the endpoint and one of the keys from this page in the next procedure.
+
+3. Select **Review + Create** to navigate to the **Review + Create** tab, and then select **Create**.
+
+4. Select the required checkboxes and create the resource.
+
+5. Wait for deployment to complete, and then view the deployment details.
+
+6. When the resource has been deployed, go to it and view its **Keys and Endpoint** page. You will need the endpoint and one of the keys from this page in the next procedure.
 
 ## Prepare to use the Language SDK for text analytics
 
