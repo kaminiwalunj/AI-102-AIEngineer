@@ -62,12 +62,16 @@ You've created a bot based on the *EchoBot* template. Now you can run it locally
 1. In the terminal pane, ensure that the current directory is the **TimeBot** folder containing your bot code files, and then enter the following command to start your bot running locally.
 
 ```
+choco install dotnet-6.0-sdk
+```
+
+```
 dotnet run
 ```
 
 When the bot starts, note the endpoint at which it is running is shown. This should be similar to **http://localhost:3978**.
 
-2. Start the Bot Framework Emulator, and open your bot by specifying the endpoint with the **/api/messages** path appended, like this:
+2. Start the **Bot Framework Emulator**, and select **open bot** by specifying the endpoint with the **/api/messages** path appended, like this:
 
     `http://localhost:3978/api/messages`
 
@@ -170,7 +174,7 @@ When you use the Bot Framework SDK to create a bot from a template, the Azure Re
     - **YOUR_RESOURCE_GROUP**: The name of your existing resource group.
     - **YOUR_APP_ID**: The **appId** value you noted in the previous procedure.
     - **REGION**: An Azure region code (such as *eastus*).
-    - **All other placeholders**: Unique values that will be used to name the new resources. The resource IDs you specify must be globally unique strings netween 4 and 42 characters long. Make a note of the value you use for the **BotId** and **newWebAppName** parameters - you will need them later.
+    - **All other placeholders**: Unique values that will be used to name the new resources. The resource IDs you specify must be globally unique strings between 4 and 42 characters long. Make a note of the value you use for the **BotId** and **newWebAppName** parameters - you will need them later.
 
 ```
 az deployment group create --resource-group "YOUR_RESOURCE_GROUP" --template-file "deploymenttemplates/template-with-preexisting-rg.json" --parameters appId="YOUR_APP_ID" appSecret="Super$ecretPassw0rd" botId="A_UNIQUE_BOT_ID" newWebAppName="A_UNIQUE_WEB_APP_NAME" newAppServicePlanName="A_UNIQUE_PLAN_NAME" appServicePlanLocation="REGION" --name "A_UNIQUE_SERVICE_NAME"
