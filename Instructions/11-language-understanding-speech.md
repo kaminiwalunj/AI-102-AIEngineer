@@ -32,9 +32,9 @@ If you already have Language Understanding authoring and prediction resources in
     - **Prediction location**: *Choose the <u>same location</u> as your authoring location*
     - **Prediction pricing tier**: F0 (*If F0 is not available, choose S0*)
 
-4. Select **Review + Create** to navigate to the **Review + Create** tab, and then select **Create**.
+3. Select **Review + Create** to navigate to the **Review + Create** tab, and then select **Create**.
 
-3. Wait for the resources to be created, and note that two Language Understanding resources are provisioned; one for authoring, and another for prediction. You can view both of these by navigating to the resource group where you created them.
+4. Wait for the resources to be created, and note that two Language Understanding resources are provisioned; one for authoring, and another for prediction. You can view both of these by navigating to the resource group where you created them.
 
 ## Prepare a Language Understanding app
 
@@ -457,6 +457,8 @@ else:
     ```
     python speaking-clock-client.py
     ```
+    
+    > **Note**: we can expect an ***Error 326 for command: open "time-in-london.wav" alias playsound 0.46 115105341174323. No wave device is installed that can play files in the current format. To install a wave device, go to Control Panel, click Printers and Other Hardware, and then click Add Hardware.***
 
 2. If using a microphone, speak utterances aloud to test the application. For example, try the following (re-running the program each time):
 
@@ -472,7 +474,7 @@ else:
 
     *What date is Sunday?*
 
-> **Note**: The logic in the application is deliberately simple, and has a number of limitations, but should serve the purpose of testing the ability for the Language Understanding model to predict intents from spoken input using the Speech SDK. You may have trouble recognizing the **GetDay** intent with a specific date entity due to the difficulty in verbalizing a date in *MM/DD/YYYY* format!
+     > **Note**: The logic in the application is deliberately simple, and has a number of limitations, but should serve the purpose of testing the ability for the Language Understanding model to predict intents from spoken input using the Speech SDK. You may have trouble recognizing the **GetDay** intent with a specific date entity due to the difficulty in verbalizing a date in *MM/DD/YYYY* format!
 
 ## More information
 
