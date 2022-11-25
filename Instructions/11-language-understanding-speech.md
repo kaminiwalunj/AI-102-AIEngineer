@@ -21,6 +21,7 @@ You can integrate the Speech service with the Language Understanding service to 
 If you already have Language Understanding authoring and prediction resources in your Azure subscription, you can use them in this exercise. Otherwise, follow these instructions to create them.
 
 1. Open the Azure portal at `https://portal.azure.com`, and sign in using the Microsoft account associated with your Azure subscription.
+
 2. Select the **&#65291;Create a resource** button, search for *language understanding*, and create a **Language Understanding** resource with the following settings:
     - **Create option**: Both
     - **Subscription**: *Your Azure subscription*
@@ -31,6 +32,8 @@ If you already have Language Understanding authoring and prediction resources in
     - **Prediction location**: *Choose the <u>same location</u> as your authoring location*
     - **Prediction pricing tier**: F0 (*If F0 is not available, choose S0*)
 
+4. Select **Review + Create** to navigate to the **Review + Create** tab, and then select **Create**.
+
 3. Wait for the resources to be created, and note that two Language Understanding resources are provisioned; one for authoring, and another for prediction. You can view both of these by navigating to the resource group where you created them.
 
 ## Prepare a Language Understanding app
@@ -38,18 +41,26 @@ If you already have Language Understanding authoring and prediction resources in
 If you already have a **Clock** app from a previous exercise, open it in the Language Understanding portal at `https://www.luis.ai`. Otherwise, follow these instructions to create it.
 
 1. In a new browser tab, open the Language Understanding portal at `https://www.luis.ai`.
+
 2. Sign in using the Microsoft account associated with your Azure subscription. If this is the first time you have signed into the Language Understanding portal, you may need to grant the app some permissions to access your account details. Then complete the *Welcome* steps by selecting your Azure subscription and the authoring resource you just created.
+
 3. Open the **Conversation Apps** page, next to **&#65291;New app**, view the drop-down list and select **Import As LU**.
 Browse to the **11-luis-speech** subfolder in the project folder containing the lab files for this exercise, and select **Clock.lu**. Then specify a unique name for the clock app.
+
 4. If a panel with tips for creating an effective Language Understanding app is displayed, close it.
 
 ## Train and publish the app with *Speech Priming*
 
 1. At the top of the Language Understanding portal, select **Train** to train the app if it has not already been trained.
+
 2. At the top right of the Language Understanding portal, select **Publish**. Then select the **Production slot** and change the settings to enable **Speech Priming** (this will result in better performance for speech recognition).
+
 3. After publishing is complete, at the top of the Language Understanding portal, select **Manage**.
+
 4. On the **Settings** page, note the **App ID**. Client applications need this to use your app.
+
 5. On the **Azure Resources** page, under **Prediction resources**, if no prediction resource is listed, add the prediction resource in your Azure subscription.
+
 6. Note the **Primary Key**, **Secondary Key**, and **Location** (<u>not</u> endpoint!) for the prediction resource. Speech SDK client applications need the location and one of the keys to connect to the prediction resource and be authenticated.
 
 ## Configure a client application for Language Understanding
