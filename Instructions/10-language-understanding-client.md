@@ -19,6 +19,7 @@ The Language Understanding service enables you to define an app that encapsulate
 If you already have Language Understanding authoring and prediction resources in your Azure subscription, you can use them in this exercise. Otherwise, follow these instructions to create them.
 
 1. Open the Azure portal at `https://portal.azure.com`, and sign in using the Microsoft account associated with your Azure subscription.
+
 2. Select the **&#65291;Create a resource** button, search for *language understanding*, and create a **Language Understanding** resource with the following settings:
     - **Create option**: Both
     - **Subscription**: *Your Azure subscription*
@@ -29,22 +30,33 @@ If you already have Language Understanding authoring and prediction resources in
     - **Prediction location**: *Choose the <u>same location</u> as your authoring location*
     - **Prediction pricing tier**: F0 (*If F0 is not available, choose S0*)
 
-3. Wait for the resources to be created, and note that two Language Understanding resources are provisioned; one for authoring, and another for prediction. You can view both of these by navigating to the resource group where you created them.
+3. Select **Review + Create** to navigate to the **Review + Create** tab, and then select **Create**.
+
+4. Wait for the resources to be created, and note that two Language Understanding resources are provisioned; one for authoring, and another for prediction. You can view both of these by navigating to the resource group where you created them.
 
 ## Import, train, and publish a Language Understanding app
 
 If you already have a **Clock** app from a previous exercise, you can use it in this exercise. Otherwise, follow these instructions to create it.
 
 1. In a new browser tab, open the Language Understanding portal at `https://www.luis.ai`.
+
 2. Sign in using the Microsoft account associated with your Azure subscription. If this is the first time you have signed into the Language Understanding portal, you may need to grant the app some permissions to access your account details. Then complete the *Welcome* steps by selecting your Azure subscription and the authoring resource you just created.
+
 3. Open the **Conversation Apps** page, next to **&#65291;New app**, view the drop-down list and select **Import As LU**.
 Browse to the **10-luis-client** subfolder in the project folder containing the lab files for this exercise, and select **Clock.lu**. Then specify a unique name for the clock app.
+
 4. If a panel with tips for creating an effective Language Understanding app is displayed, close it.
+
 5. At the top of the Language Understanding portal, select **Train** to train the app.
+
 6. At the top right of the Language Understanding portal, select **Publish** and publish the app to the **Production slot**.
+
 7. After publishing is complete, at the top of the Language Understanding portal, select **Manage**.
+
 8. On the **Settings** page, note the **App ID**. Client applications need this to use your app.
+
 9. On the **Azure Resources** page, under **Prediction resources**, if no prediction resource is listed, add the prediction resource in your Azure subscription.
+
 10. Note the **Primary Key**, **Secondary Key**, and **Endpoint URL** for the prediction resource. Client applications need the endpoint and one of the keys to connect to the prediction resource and be authenticated.
 
 ## Prepare to use the Language Understanding SDK
@@ -54,6 +66,7 @@ In this exercise, you'll complete a partially implemented client application tha
 > **Note**: You can choose to use the SDK for either **C#** or **Python**. In the steps below, perform the actions appropriate for your preferred language.
 
 1. In Visual Studio Code, in the **Explorer** pane, browse to the **10-luis-client** folder and expand the **C-Sharp** or **Python** folder depending on your language preference.
+
 2. Right-click the **clock-client** folder and open an integrated terminal. Then install the Language Understanding SDK package by running the appropriate command for your language preference:
 
 **C#**
