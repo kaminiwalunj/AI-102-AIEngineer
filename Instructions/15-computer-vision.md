@@ -19,15 +19,21 @@ Computer vision is an artificial intelligence capability that enables software s
 If you don't already have one in your subscription, you'll need to provision a **Cognitive Services** resource.
 
 1. Open the Azure portal at `https://portal.azure.com`, and sign in using the Microsoft account associated with your Azure subscription.
+
 2. Select the **&#65291;Create a resource** button, search for *computer vision*, and create a **Computer Vision** resource with the following settings:
     - **Subscription**: *Your Azure subscription*
     - **Resource group**: *Choose or create a resource group (if you are using a restricted subscription, you may not have permission to create a new resource group - use the one provided)*
     - **Region**: *Choose any available region*
     - **Name**: *Enter a unique name*
     - **Pricing tier**: Standard S1
+
 3. Select the required checkboxes and create the resource.
-4. Wait for deployment to complete, and then view the deployment details.
-5. When the resource has been deployed, go to it and view its **Keys and Endpoint** page. You will need the endpoint and one of the keys from this page in the next procedure.
+
+4. Select **Review + Create** to navigate to the **Review + Create** tab, and then select **Create**.
+
+5. Wait for deployment to complete, and and then click **Go to resource**.
+
+6. On **Computer vision** blade, click on **Keys and Endpoint** under Resource Management. You will need the endpoint and one of the **keys** from this page in the next procedure.
 
 ## Prepare to use the Computer Vision SDK
 
@@ -36,6 +42,7 @@ In this exercise, you'll complete a partially implemented client application tha
 > **Note**: You can choose to use the SDK for either **C#** or **Python**. In the steps below, perform the actions appropriate for your preferred language.
 
 1. In Visual Studio Code, in the **Explorer** pane, browse to the **15-computer-vision** folder and expand the **C-Sharp** or **Python** folder depending on your language preference.
+
 2. Right-click the **image-analysis** folder and open an integrated terminal. Then install the Computer Vision SDK package by running the appropriate command for your language preference:
 
 **C#**
@@ -67,6 +74,7 @@ python -m pip install -U matplotlib --user
     - **Python**: .env
 
     Open the configuration file and update the configuration values it contains to reflect the **endpoint** and an authentication **key** for your cognitive services resource. Save your changes.
+
 4. Note that the **image-analysis** folder contains a code file for the client application:
 
     - **C#**: Program.cs
@@ -96,6 +104,7 @@ from msrest.authentication import CognitiveServicesCredentials
 In this exercise, you will use the Computer Vision service to analyze multiple images.
 
 1. In Visual Studio Code, expand the **image-analysis** folder and the **images** folder it contains.
+
 2. Select each of the image files in turn to view then in Visual Studio Code.
 
 ## Analyze an image to suggest a caption
@@ -230,7 +239,9 @@ python image-analysis.py images/street.jpg
 ```
     
 6. Observe the output, which should include a suggested caption for the **street.jpg** image.
+
 7. Run the program again, this time with the argument **images/building.jpg** to see the caption that gets generated for the **building.jpg** image.
+
 8. Repeat the previous step to generate a caption for the **images/person.jpg** file.
 
 ## Get suggested tags for an image
