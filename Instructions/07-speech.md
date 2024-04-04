@@ -43,14 +43,8 @@ If you don't already have on in your subscription, you'll need to provision a **
 
 In this exercise, you'll complete a partially implemented client application that uses the Azure AI Speech SDK to recognize and synthesize speech.
 
-> [!NOTE]
-> You can choose to use the SDK for either **C#** or **Python**. In the steps below, perform the actions appropriate for your preferred language.
-
-1. In Visual Studio Code, in the **Explorer** pane, browse to the **07-speech** folder and expand the **C-Sharp** or **Python** folder depending on your language preference.
+1. In Visual Studio Code, in the **Explorer** pane, browse to the **07-speech** folder and expand the **C-Sharp** folder.
 1. Right-click the **speaking-clock** folder and open an integrated terminal. Then install the Speech SDK package by running the appropriate command for your language preference:
-
-> [!NOTE]
->  Please open the **CMD run as administrator** > run the command **setx PATH1 "%PATH%;C:\Python313\Scripts;C:\Python313;"** > close the cmd and return to the visual studio.
 
 
     **C#**
@@ -59,21 +53,13 @@ In this exercise, you'll complete a partially implemented client application tha
     dotnet add package Microsoft.CognitiveServices.Speech --version 1.30.0
     ```
 
-    **Python**
-
-    ```bash
-    pip install azure-cognitiveservices-speech==1.30.0
-    ```
-
 1. View the contents of the **speaking-clock** folder, and note that it contains a file for configuration settings:
     - **C#**: appsettings.json
-    - **Python**: .env
 
     Open the configuration file and update the configuration values it contains to include an authentication **key** for Azure AI Speech resource, and the **location** where it is deployed. Save your changes.
 1. Note that the **speaking-clock** folder contains a code file for the client application:
 
     - **C#**: Program.cs
-    - **Python**: speaking-clock.py
 
     Open the code file and at the top, under the existing namespace references, find the comment **Import namespaces**. Then, under this comment, add the following language-specific code to import the namespaces you will need to use the Azure AI Speech SDK:
 
@@ -83,13 +69,6 @@ In this exercise, you'll complete a partially implemented client application tha
     // Import namespaces
     using Microsoft.CognitiveServices.Speech;
     using Microsoft.CognitiveServices.Speech.Audio;
-    ```
-
-    **Python**
-
-    ```python
-    # Import namespaces
-    import azure.cognitiveservices.speech as speech_sdk
     ```
 
 1. In the **Main** function, note that code to load the service key and region from the configuration file has already been provided. You must use these variables to create a **SpeechConfig** for your Azure AI Speech resource. Add the following code under the comment **Configure speech service**:
@@ -105,13 +84,6 @@ In this exercise, you'll complete a partially implemented client application tha
     speechConfig.SpeechSynthesisVoiceName = "en-US-AriaNeural";
     ```
 
-    **Python**
-
-    ```python
-    # Configure speech service
-    speech_config = speech_sdk.SpeechConfig(cog_key, cog_region)
-    print('Ready to use speech service in:', speech_config.region)
-    ```
 
 1. Save your changes and return to the integrated terminal for the **speaking-clock** folder, and enter the following command to run the program:
 
@@ -120,16 +92,6 @@ In this exercise, you'll complete a partially implemented client application tha
     ```bash
     dotnet run
     ```
-
-    **Python**
-
-    ```bash
-    python speaking-clock.py
-    ```
-
-> [!NOTE]
->  Please run the **pip install python-dotenv** on integrated terminal for python code to work.
-
 
 1. If you are using C#, you can ignore any warnings about using the **await** operator in asynchronous methods - we'll fix that later. The code should display the region of the speech service resource the application will use.
 
@@ -151,15 +113,6 @@ Now that you have a **SpeechConfig** for the speech service in your Azure AI Spe
     Console.WriteLine("Speak now...");
     ```
 
-    **Python**
-
-    ```python
-    # Configure speech recognition
-    audio_config = speech_sdk.AudioConfig(use_default_microphone=True)
-    speech_recognizer = speech_sdk.SpeechRecognizer(speech_config, audio_config)
-    print('Speak now...')
-    ```
-
 1. Now skip ahead to the **Add code to process the transcribed command** section below.
 
 ### Alternatively, use audio input from a file
@@ -172,25 +125,13 @@ Now that you have a **SpeechConfig** for the speech service in your Azure AI Spe
     dotnet add package System.Windows.Extensions --version 4.6.0 
     ```
 
-    **Python**
-
-    ```bash
-    pip install playsound==1.3.0
-    ```
-
 1. In the code file for your program, under the existing namespace imports, add the following code to import the library you just installed:
 
     **C#**
 
     ```csharp
     using System.Media;
-    ```
-
-    **Python**
-
-    ```python
-    from playsound import playsound
-    ```
+    ````
 
 1. In the **Main** function, note that the code uses the **TranscribeCommand** function to accept spoken input. Then in the **TranscribeCommand** function, under the comment **Configure speech recognition**, add the appropriate code below to create a **SpeechRecognizer** client that can be used to recognize and transcribe speech from an audio file:
 
@@ -203,17 +144,6 @@ Now that you have a **SpeechConfig** for the speech service in your Azure AI Spe
     wavPlayer.Play();
     using AudioConfig audioConfig = AudioConfig.FromWavFileInput(audioFile);
     using SpeechRecognizer speechRecognizer = new SpeechRecognizer(speechConfig, audioConfig);
-    ```
-
-    **Python**
-
-    ```python
-    # Configure speech recognition
-    current_dir = os.getcwd()
-    audioFile = current_dir + '\\time.wav'
-    playsound(audioFile)
-    audio_config = speech_sdk.AudioConfig(filename=audioFile)
-    speech_recognizer = speech_sdk.SpeechRecognizer(speech_config, audio_config)
     ```
 
 ### Add code to process the transcribed command
@@ -242,34 +172,12 @@ Now that you have a **SpeechConfig** for the speech service in your Azure AI Spe
     }
     ```
 
-    **Python**
-
-    ```python
-    # Process speech input
-    speech = speech_recognizer.recognize_once_async().get()
-    if speech.reason == speech_sdk.ResultReason.RecognizedSpeech:
-        command = speech.text
-        print(command)
-    else:
-        print(speech.reason)
-        if speech.reason == speech_sdk.ResultReason.Canceled:
-            cancellation = speech.cancellation_details
-            print(cancellation.reason)
-            print(cancellation.error_details)
-    ```
-
 1. Save your changes and return to the integrated terminal for the **speaking-clock** folder, and enter the following command to run the program:
 
     **C#**
 
     ```bash
     dotnet run
-    ```
-
-    **Python**
-
-    ```bash
-    python speaking-clock.py
     ```
 
 1. If using a microphone, speak clearly and say "what time is it?". The program should transcribe your spoken input and display the time (based on the local time of the computer where the code is running, which may not be the correct time where you are).
@@ -293,14 +201,6 @@ Your speaking clock application accepts spoken input, but it doesn't actually sp
     using SpeechSynthesizer speechSynthesizer = new SpeechSynthesizer(speechConfig);
     ```
 
-    **Python**
-
-    ```python
-    # Configure speech synthesis
-    speech_config.speech_synthesis_voice_name = "en-GB-RyanNeural"
-    speech_synthesizer = speech_sdk.SpeechSynthesizer(speech_config)
-    ```
-
 > [!NOTE]
 >  *The default audio configuration uses the default system audio device for output, so you don't need to explicitly provide an **AudioConfig**. If you need to     redirect     audio output to a file, you can use an **AudioConfig** with a filepath to do so.*
 
@@ -317,15 +217,6 @@ Your speaking clock application accepts spoken input, but it doesn't actually sp
     }
     ```
 
-    **Python**
-
-    ```python
-    # Synthesize spoken output
-    speak = speech_synthesizer.speak_text_async(response_text).get()
-    if speak.reason != speech_sdk.ResultReason.SynthesizingAudioCompleted:
-        print(speak.reason)
-    ```
-
 1. Save your changes and return to the integrated terminal for the **speaking-clock** folder, and enter the following command to run the program:
 
     **C#**
@@ -333,13 +224,7 @@ Your speaking clock application accepts spoken input, but it doesn't actually sp
     ```bash
     dotnet run
     ```
-
-    **Python**
-
-    ```bash
-    python speaking-clock.py
-    ```
-
+    
 1. When prompted, speak clearly into the microphone and say "what time is it?". The program should speak, telling you the time.
 
 ## Use a different voice
@@ -357,15 +242,7 @@ Your speaking clock application uses a default voice, which you can change. The 
     speechConfig.SpeechSynthesisVoiceName = "en-GB-LibbyNeural"; // change this
     using SpeechSynthesizer speechSynthesizer = new SpeechSynthesizer(speechConfig);
     ```
-
-    **Python**
-
-    ```python
-    # Configure speech synthesis
-    speech_config.speech_synthesis_voice_name = 'en-GB-LibbyNeural' # change this
-    speech_synthesizer = speech_sdk.SpeechSynthesizer(speech_config)
-    ```
-
+    
 1. Save your changes and return to the integrated terminal for the **speaking-clock** folder, and enter the following command to run the program:
 
     **C#**
@@ -373,12 +250,7 @@ Your speaking clock application uses a default voice, which you can change. The 
     ```bash
     dotnet run
     ```
-
-    **Python**
-
-    ```bash
-    python speaking-clock.py
-    ```
+`
 
 1. When prompted, speak clearly into the microphone and say "what time is it?". The program should speak in the specified voice, telling you the time.
 
@@ -407,35 +279,12 @@ Speech Synthesis Markup Language (SSML) enables you to customize the way your sp
     }
     ```
 
-    **Python**
-
-    ```python
-    # Synthesize spoken output
-    responseSsml = " \
-        <speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='en-US'> \
-            <voice name='en-GB-LibbyNeural'> \
-                {} \
-                <break strength='weak'/> \
-                Time to end this lab! \
-            </voice> \
-        </speak>".format(response_text)
-    speak = speech_synthesizer.speak_ssml_async(responseSsml).get()
-    if speak.reason != speech_sdk.ResultReason.SynthesizingAudioCompleted:
-        print(speak.reason)
-    ```
-
 1. Save your changes and return to the integrated terminal for the **speaking-clock** folder, and enter the following command to run the program:
 
     **C#**
 
     ```bash
     dotnet run
-    ```
-
-    **Python**
-
-    ```bash
-    python speaking-clock.py
     ```
 
 1. When prompted, speak clearly into the microphone and say "what time is it?". The program should speak in the voice that is specified in the SSML (overriding the voice specified in the SpeechConfig), telling you the time, and then after a pause telling you it's time to end this lab - which it is!
