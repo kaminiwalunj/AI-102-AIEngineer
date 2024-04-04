@@ -27,6 +27,12 @@ For example, suppose a travel agency wants to examine hotel reviews that have be
     cd azure-ai-eng/06-translate-text
     ```
 
+Open the built-in code editor, and observe the text files in the `text-analysis` folder. Use the following command to open the lab files in the code editor.
+
+```bash
+code .
+```
+
 ## Provision an Azure AI Translator resource
 
 If you don't already have one in your subscription, you'll need to provision an **Azure AI Translator** resource.
