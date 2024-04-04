@@ -44,8 +44,6 @@ In this exercise, you'll complete a partially implemented client application tha
 1. In Visual Studio Code, in the **Explorer** pane, browse to the **08-speech-translation** folder and expand the **C-Sharp** or **Python** folder depending on your language preference.
 1. Right-click the **translator** folder and open an integrated terminal. Then install the Speech SDK package by running the appropriate command for your language preference:
 
-> [!NOTE]
->  Please open the **CMD run as administrator** > run the command **setx PATH1 "%PATH%;C:\Python313\Scripts;C:\Python313;"** > close the cmd and return to the visual studio.
 
     **C#**
 
