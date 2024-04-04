@@ -63,7 +63,7 @@ In this exercise, you'll complete a partially implemented client application tha
 > [!NOTE]
 > > You can choose to use the SDK for either **C#** or **Python**. In the steps below, perform the actions appropriate for your preferred language.
 
-1. In Cloud Shell, ensure you are in the **05-analyze-text** folder and have navigated to the **C-Sharp** or **Python** folder depending on your language preference.
+1. In Cloud Shell, ensure you are in the **05-analyze-text** folder and have navigated to the **C-Sharp** > **text-analysis** or **Python** > **text-analysis** folder depending on your language preference.
 1. Install the Text Analytics SDK package by running the appropriate command for your language preference:
 
     **C#**
