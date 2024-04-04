@@ -56,7 +56,7 @@ In this exercise, you'll complete a partially implemented client application tha
 > [!NOTE]
 > You can choose to use the API from either **C#** or **Python**. In the steps below, perform the actions appropriate for your preferred language.
 
-1. In your Cloud Shell editor, expand the **06-translate-text** folder, and then the **C-Sharp** or **Python** folder depending on your language preference.
+1. In your Cloud Shell editor, expand the **06-translate-text** folder, and then the **C-Sharp** > **text-translation** or **Python**  > **text-translation** folder depending on your language preference.
 1. View the contents of the **text-translation** folder, and note that it contains a file for configuration settings:
     - **C#**: appsettings.json
     - **Python**: .env
