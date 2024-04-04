@@ -24,7 +24,7 @@ For example, suppose a travel agency wants to examine hotel reviews that have be
 1. The files have been downloaded into a folder called **azure-ai-eng**. Let's use the Cloud Shell Code editor to open the appropriate folder by running:
 
     ```bash
-        code azure-ai-eng/06-translate-text
+    cd azure-ai-eng/06-translate-text
     ```
 
 ## Provision an Azure AI Translator resource
