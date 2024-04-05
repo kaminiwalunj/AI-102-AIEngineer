@@ -500,7 +500,37 @@ with open(thumbnail_file_name, "wb") as thumbnail_file:
 print('Thumbnail saved in.', thumbnail_file_name)
 ```
     
-2. Save your changes and run the program once for each of the image files in the **images** folder, opening the **thumbnail.jpg** file that is generated in the same folder as your code file for each image.
+2. Save your changes and run the program once for each of the image files in the **images** folder, (**images/building.jpg**, **images/person.jpg**, **images/street.jpg**).
+  
+  **C#**
+
+```
+dotnet run images/street.jpg
+```
+
+**Python**
+
+```
+python image-analysis.py images/street.jpg
+```
+
+
+  
+3. opening the **thumbnail.jpg** file that is generated in the same folder as your code file.
+
+  **C#**
+
+```
+dotnet run thumbnail.jpg
+```
+
+**Python**
+
+```
+python image-analysis.py thumbnail.jpg
+```
+
+> **Note**: If you face any issues after running the command like process cannot access the file because it is being used by another process please ignore and proceed with next lab.
 
 ## More information
 
