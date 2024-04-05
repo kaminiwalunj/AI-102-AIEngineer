@@ -12,7 +12,7 @@ The ability to detect and analyze human faces is a core AI capability. In this e
 
     **Note:** You may be prompted to complete a 2-minute survey. Go ahead and select **No, thanks**. You may need to do this more than once.
 
-3. You will get a pop-up stating **Do you trust the authors of the files in this folder?** Select **Yes, I turst the authors**
+3. You will get a pop-up stating **Do you trust the authors of the files in this folder?** Select **Yes, I turst the authors**.
 
     ![Visual Studio Code Icon](./images/vscodewarning.png)
 
@@ -113,45 +113,45 @@ Now you're ready to use the SDK to call the Computer Vision service and detect f
 
 4. In the **AnalyzeFaces** function, under the comment **Get image analysis**, add the following code:
 
-**C#**
+     **C#**
 
-```C
-// Get image analysis
-using (var imageData = File.OpenRead(imageFile))
-{    
-    var analysis = await cvClient.AnalyzeImageInStreamAsync(imageData, features);
+    ```C
+     // Get image analysis
+     using (var imageData = File.OpenRead(imageFile))
+     {    
+         var analysis = await cvClient.AnalyzeImageInStreamAsync(imageData, features);
 
-    // Get faces
-    if (analysis.Faces.Count > 0)
-    {
-        Console.WriteLine($"{analysis.Faces.Count} faces detected.");
+         // Get faces
+         if (analysis.Faces.Count > 0)
+         {
+             Console.WriteLine($"{analysis.Faces.Count} faces detected.");
 
-        // Prepare image for drawing
-        Image image = Image.FromFile(imageFile);
-        Graphics graphics = Graphics.FromImage(image);
-        Pen pen = new Pen(Color.LightGreen, 3);
-        Font font = new Font("Arial", 3);
-        SolidBrush brush = new SolidBrush(Color.LightGreen);
+         // Prepare image for drawing
+         Image image = Image.FromFile(imageFile);
+         Graphics graphics = Graphics.FromImage(image);
+         Pen pen = new Pen(Color.LightGreen, 3);
+         Font font = new Font("Arial", 3);
+         SolidBrush brush = new SolidBrush(Color.LightGreen);
 
-        // Draw and annotate each face
-        foreach (var face in analysis.Faces)
-        {
+         // Draw and annotate each face
+         foreach (var face in analysis.Faces)
+         {
             var r = face.FaceRectangle;
             Rectangle rect = new Rectangle(r.Left, r.Top, r.Width, r.Height);
             graphics.DrawRectangle(pen, rect);
             string annotation = $"Person at approximately {r.Left}, {r.Top}";
             graphics.DrawString(annotation,font,brush,r.Left, r.Top);
-        }
+         }
 
-        // Save annotated image
-        String output_file = "detected_faces.jpg";
-        image.Save(output_file);
-        Console.WriteLine(" Results saved in " + output_file);   
-    }
-}        
-```
+         // Save annotated image
+         String output_file = "detected_faces.jpg";
+         image.Save(output_file);
+         Console.WriteLine(" Results saved in " + output_file);   
+       }
+   }        
+    ```
 
-5. Save your changes and return to the integrated terminal for the **computer-vision** folder, and enter the following command to run the program:
+6. Save your changes and return to the integrated terminal for the **computer-vision** folder, and enter the following command to run the program:
 
     **C#**
 
@@ -159,9 +159,9 @@ using (var imageData = File.OpenRead(imageFile))
     dotnet run
     ```
 
-6. Observe the output, which should indicate the number of faces detected.
+7. Observe the output, which should indicate the number of faces detected.
 
-7. View the **detected_faces.jpg** file that is generated in the same folder as your code file to see the annotated faces. In this case, your code has used the attributes of the face to label the location of the top left of the box, and the bounding box coordinates to draw a rectangle around each face.
+8. View the **detected_faces.jpg** file that is generated in the same folder as your code file to see the annotated faces. In this case, your code has used the attributes of the face to label the location of the top left of the box, and the bounding box coordinates to draw a rectangle around each face.
 
 ## Prepare to use the Face SDK
 
@@ -234,53 +234,53 @@ One of the most fundamental capabilities of the Face service is to detect faces 
 
 4. In the **DetectFaces** function, under the code you just added, find the comment **Get faces** and add the following code:
 
-**C#**
+     **C#**
 
-```C
-// Get faces
-using (var imageData = File.OpenRead(imageFile))
-{    
-    var detected_faces = await faceClient.Face.DetectWithStreamAsync(imageData, returnFaceAttributes: features, returnFaceId: false);
+     ```C
+     // Get faces
+     using (var imageData = File.OpenRead(imageFile))
+     {    
+         var detected_faces = await faceClient.Face.DetectWithStreamAsync(imageData, returnFaceAttributes: features, returnFaceId: false);
 
-    if (detected_faces.Count > 0)
-    {
-        Console.WriteLine($"{detected_faces.Count} faces detected.");
+         if (detected_faces.Count > 0)
+         {
+             Console.WriteLine($"{detected_faces.Count} faces detected.");
 
-        // Prepare image for drawing
-        Image image = Image.FromFile(imageFile);
-        Graphics graphics = Graphics.FromImage(image);
-        Pen pen = new Pen(Color.LightGreen, 3);
-        Font font = new Font("Arial", 4);
-        SolidBrush brush = new SolidBrush(Color.Black);
-        int faceCount=0;
+             // Prepare image for drawing
+             Image image = Image.FromFile(imageFile);
+             Graphics graphics = Graphics.FromImage(image);
+             Pen pen = new Pen(Color.LightGreen, 3);
+             Font font = new Font("Arial", 4);
+             SolidBrush brush = new SolidBrush(Color.Black);
+             int faceCount=0;
 
-        // Draw and annotate each face
-        foreach (var face in detected_faces)
-        {
-            faceCount++;
-            Console.WriteLine($"\nFace number {faceCount}");
+             // Draw and annotate each face
+             foreach (var face in detected_faces)
+             {
+                 faceCount++;
+                 Console.WriteLine($"\nFace number {faceCount}");
             
-            // Get face properties
-            Console.WriteLine($" - Mouth Occluded: {face.FaceAttributes.Occlusion.MouthOccluded}");
-            Console.WriteLine($" - Eye Occluded: {face.FaceAttributes.Occlusion.EyeOccluded}");
-            Console.WriteLine($" - Blur: {face.FaceAttributes.Blur.BlurLevel}");
-            Console.WriteLine($" - Glasses: {face.FaceAttributes.Glasses}");
+                 // Get face properties
+                 Console.WriteLine($" - Mouth Occluded: {face.FaceAttributes.Occlusion.MouthOccluded}");
+                 Console.WriteLine($" - Eye Occluded: {face.FaceAttributes.Occlusion.EyeOccluded}");
+                 Console.WriteLine($" - Blur: {face.FaceAttributes.Blur.BlurLevel}");
+                 Console.WriteLine($" - Glasses: {face.FaceAttributes.Glasses}");
 
-            // Draw and annotate face
-            var r = face.FaceRectangle;
-            Rectangle rect = new Rectangle(r.Left, r.Top, r.Width, r.Height);
-            graphics.DrawRectangle(pen, rect);
-            string annotation = $"Face ID: {face.FaceId}";
-            graphics.DrawString(annotation,font,brush,r.Left, r.Top);
-        }
+                 // Draw and annotate face
+                 var r = face.FaceRectangle;
+                 Rectangle rect = new Rectangle(r.Left, r.Top, r.Width, r.Height);
+                 graphics.DrawRectangle(pen, rect);
+                 string annotation = $"Face ID: {face.FaceId}";
+                 graphics.DrawString(annotation,font,brush,r.Left, r.Top);
+             }
 
-        // Save annotated image
-        String output_file = "detected_faces.jpg";
-        image.Save(output_file);
-        Console.WriteLine(" Results saved in " + output_file);   
-    }
-}
-```
+             // Save annotated image
+             String output_file = "detected_faces.jpg";
+             image.Save(output_file);
+             Console.WriteLine(" Results saved in " + output_file);   
+         }
+     }
+     ```
 
 4. Examine the code you added to the **DetectFaces** function. It analyzes an image file and detects any faces it contains, including attributes for age, emotions, and the presence of spectacles. The details of each face are displayed, including a unique face identifier that is assigned to each face; and the location of the faces is indicated on the image using a bounding box.
 
