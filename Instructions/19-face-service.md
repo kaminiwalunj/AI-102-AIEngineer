@@ -2,6 +2,8 @@
 
 The ability to detect and analyze human faces is a core AI capability. In this exercise, you'll explore two Azure Cognitive Services that you can use to work with faces in images: the **Computer Vision** service, and the **Face** service.
 
+> **Note**: From June 21st 2022, capabilities of Azure AI services that return personally identifiable information are restricted to customers who have been granted [limited access](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-limited-access). Additionally, capabilities that infer emotional state are no longer available. These restrictions may affect this lab exercise. We're working to address this, but in the meantime you may experience some errors when following the steps below; for which we apologize. For more details about the changes Microsoft has made, and why - see [Responsible AI investments and safeguards for facial recognition](https://azure.microsoft.com/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/).
+
 ## Open the cloned folder in Visual Studio Code.
 
 1.  Start Visual Studio Code (the program icon is pinned to the bottom taskbar).
@@ -16,11 +18,11 @@ The ability to detect and analyze human faces is a core AI capability. In this e
 
 ## Provision a Cognitive Services resource
 
-If you don't already have one in your subscription, you'll need to provision a **Cognitive Services** resource.
+If you don't already have one in your subscription, you'll need to provision a **Azure AI Services** resource.
 
 1. Open the Azure portal at `https://portal.azure.com`, and sign in using the Microsoft account associated with your Azure subscription.
 
-2. Select the **&#65291;Create a resource** button, search for *cognitive services*, and create a **Cognitive Services** resource with the following settings:
+2. Select the **&#65291;Create a resource** button, search for *cognitive services*, and create a **Azure AI Services** resource with the following settings:
     - **Subscription**: *Your Azure subscription*
     - **Resource group**: *Choose or create a resource group Ai-102-DeploymentID*
     - **Region**: *Choose any available region*
@@ -36,7 +38,7 @@ If you don't already have one in your subscription, you'll need to provision a *
 6. On **Cognitive Services** blade, click on **Keys and Endpoint** under Resource Management. You will need the **endpoint** and one of the **keys** from this page in the next procedure.
 
 
-## Prepare to use the Computer Vision SDK
+## Prepare to use the Azure AI Vision SDK
 
 In this exercise, you'll complete a partially implemented client application that uses the Computer Vision SDK to analyze faces in an image.
 
@@ -237,7 +239,7 @@ with open(image_file, mode="rb") as image_data:
 
 ## Prepare to use the Face SDK
 
-While the **Computer Vision** service offers basic face detection (along with many other image analysis capabilities), the **Face** service provides more comprehensive functionality for facial analysis and recognition.
+While the **Azure AI Vision** service offers basic face detection (along with many other image analysis capabilities), the **Face** service provides more comprehensive functionality for facial analysis and recognition.
 
 1. In Visual Studio Code, in the **Explorer** pane, browse to the **19-face** folder and expand the **C-Sharp** or **Python** folder depending on your language preference.
 
@@ -468,6 +470,6 @@ with open(image_file, mode="rb") as image_data:
 
 There are several additional features available within the **Face** service, but following the [Responsible AI Standard](https://aka.ms/aah91ff) those are restricted behind a Limited Access policy. These features include identifying, verifying, and creating facial recognition models. To learn more and apply for access, see the [Limited Access for Cognitive Services](https://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-limited-access).
 
-For more information about using the **Computer Vision** service for face detection, see the [Computer Vision documentation](https://docs.microsoft.com/azure/cognitive-services/computer-vision/concept-detecting-faces).
+For more information about using the **Azure AI Vision** service for face detection, see the [Computer Vision documentation](https://docs.microsoft.com/azure/cognitive-services/computer-vision/concept-detecting-faces).
 
 To learn more about the **Face** service, see the [Face documentation](https://docs.microsoft.com/azure/cognitive-services/face/).
