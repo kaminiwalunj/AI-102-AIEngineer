@@ -17,9 +17,15 @@ The Conversational Language Understanding feature of the Azure AI Service for La
 
 ## Create Language service resources
 
-If you already have Language Understanding authoring and prediction resources in your Azure subscription, you can use them in this exercise. Otherwise, follow these instructions to create them.
-
 1. Open the Azure portal at `https://portal.azure.com`, and sign in using the Microsoft account associated with your Azure subscription.
+
+2. Select the user icon from the top right corner, under **Current reosurce** choose **Select**.
+
+      ![](images/mod-5-60.png)
+
+3. In the Select an Azure resource tab, kepp the Active directory and Azure subscription as default. Under Resource type select **Language** and under resource name select **languageservice-<inject key="DeploymentID" enableCopy="false" /></inject>**.  Click **Done**.
+
+      ![](images/mod-5-61.png)
 
 2. Select the **&#65291;Create a resource** button, search and select *language service*, and select **Create** button and then select **Continue to create your resource** resource with the following settings:
 
