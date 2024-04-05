@@ -1,372 +1,416 @@
-# Create a Language Understanding App
+# Create a language understanding model with the Language service
 
-The Language Understanding service enables you to define an app that encapsulates a language model that applications can use to interpret natural language input from users,  predict the users *intent* (what they want to achieve), and identify any *entities* to which the intent should be applied.
+The conversational language understanding feature of the Azure AI Language service is currently in preview, and subject to change. In some cases, model training may fail - if this happens, try again.  
 
-For example, a language understanding app for a clock application might be expected to process input such as:
+The Azure AI Language service enables you to define a *conversational language understanding* model that applications can use to interpret natural language input from users,  predict the users *intent* (what they want to achieve), and identify any *entities* to which the intent should be applied.
+
+For example, a conversational language model for a clock application might be expected to process input such as:
 
 *What is the time in London?*
 
 This kind of input is an example of an *utterance* (something a user might say or type), for which the desired *intent* is to get the time in a specific location (an *entity*); in this case, London.
 
-> **Note**: The task of the language understanding app is to predict the user's intent, and identify any entities to which the intent applies. It is <u>not</u> its job to actually perform the actions required to satisfy the intent. For example, the clock application can use a language app to discern that the user wants to know the time in London; but the client application itself must then implement the logic to determine the correct time and present it to the user.
+> **Note**: The task of a conversational language model is to predict the user's intent and identify any entities to which the intent applies. It is <u>not</u> the job of a conversational language model to actually perform the actions required to satisfy the intent. For example, a clock application can use a conversational language model to discern that the user wants to know the time in London; but the client application itself must then implement the logic to determine the correct time and present it to the user.
 
+## Create an Azure AI Language resource
 
-## Open the cloned folder in Visual Studio Code.
+To create a conversational language model, you need a **Azure AI Language service** resource in a supported region.
 
-1.  Start Visual Studio Code (the program icon is pinned to the bottom taskbar).
+1. Open the Azure portal at `https://portal.azure.com`, and sign in using the Microsoft account associated with your Azure subscription. Here, enter your credentials:
 
-     ![Visual Studio Code Icon](./images/vscode.png)
+   - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
 
-2.  Open a file, From the top-left options, Click on **file->Open Folder** and navigate to **C:\AllFiles\AI-102-AIEngineer-prod**.
+   - **Password:** <inject key="AzureAdUserPassword"></inject>
 
-    **Note:** You may be prompted to complete a 2-minute survey. Go ahead and select **No, thanks**. You may need to do this more than once.
+1. On Azure Portal page, in **Search resources, services and docs (G+/)** box at the top of the portal, search **Azure AI services**, and then select **Azure AI services** under services.
 
-3.  Wait while additional files are installed to support the C# code projects in the repo.
+      ![](images/mod-5-1.png)
 
-## Create Language Understanding resources
+1. Then, in the Azure AI services tab, select **Language Service** and select **Create**.
 
-To use the Language Understanding service, you need two kinds of resource:
+1. Select **Continue to create your resource**.
+1. Provision the resource using the following settings:
+    - **Subscription**: *Your Azure subscription*.
+    - **Resource group**: *Ai-102-<inject key="DeploymentID" enableCopy="false" /></inject>*.
+    - **Region**: Choose same as resource group location.
+    - **Name**: *AIservice-<inject key="DeploymentID" enableCopy="false" /></inject>**.
+    - **Pricing tier**: Select either **Free (F0)** or **Standard (S)** tier if Free is not available.
+    - **Responsible AI Notice**: Agree.
+1. Select **Review + create**.
+1. Wait for deployment to complete, and then view the deployment details.
 
-- An *authoring* resource: used to define, train, and test the language understanding app. This must be a **Language Understanding - Authoring** resource in your Azure subscription.
-- A *prediction* resource: used to publish your language understanding app and handle requests from client applications that use it. This can be either a **Language Understanding** or **Cognitive Services** resource in your Azure subscription.
+## Create a conversational language understanding project
 
-     > **Important**: Authoring resources must be created in one of three *regions* (Europe, Australia, or US). Language Understanding apps created in European or Australian authoring resources can only be deployed to prediction resources in Europe or Australia respectively; models created in US authoring resources can be deployed to prediction resources in any Azure location other than Europe and Australia. See the [authoring and publishing regions documentation](https://docs.microsoft.com/azure/cognitive-services/luis/luis-reference-regions) for details about matching authoring and prediction locations.
+Now that you have created an authoring resource, you can use it to create a conversational language understanding project.
 
-If you don't already have Language Understanding authoring and prediction resources:
+1. In a new browser tab, open the Language Studio portal at `https://language.cognitive.azure.com/` and sign in using the Microsoft account associated with your Azure subscription if prompted to sign in.
 
-1. Open the Azure portal at `https://portal.azure.com`, and sign in using the Microsoft account associated with your Azure subscription.
+1. If prompted to choose a Language resource, select the following settings:
 
-2. Select the **&#65291;Create a resource** button, search for *language understanding*, and create a **Language Understanding** resource with the following settings.
+    - **Azure Directory**: The Azure directory containing your subscription.
+    - **Azure subscription**: Your Azure subscription.
+    - **Resource type**: Language.
+    - **Language resource**: AIservice-<inject key="DeploymentID" enableCopy="false" /></inject>.
 
-    *Ensure you select **Language Understanding**, <u>not</u> Language Understanding (Azure Cognitive Services)*
+1. If you are <u>not</u> prompted to choose a language resource, it may be because you have already assigned a different Azure AI Language resource; in which case:
 
-    - **Create option**: Both
-    - **Subscription**: *Your Azure subscription*
-    - **Resource group**: *Choose or create a resource group (if you are using a restricted subscription, you may not have permission to create a new resource group - use the one provided)*
-    - **Name**: *Enter a unique name*
-    - **Authoring location**: *Select your preferred location*
-    - **Authoring pricing tier**: F0
-    - **Prediction location**: *The same as your authoring location*
-    - **Prediction pricing tier**: F0
+    1. On the bar at the top if the page, select the **Settings (&#9881;)** button.
+    2. On the **Settings** page, view the **Resources** tab.
+    3. Select the language resource you just created, and select **Switch resource**.
+    4. At the top of the page, select **Language Studio** to return to the Language Studio home page.
 
-3. Select **Review + Create** to navigate to the **Review + Create** tab, and then select **Create**.
+1. At the top of the portal, select the **Create new** menu and from the dropdown select **Conversational language understanding**.
 
-4. Wait for the resources to be created, and note that two Language Understanding resources are provisioned; one for authoring, and another for prediction. You can view both of these by navigating to the resource group where you created them. If you select **Go to resource**, it will open the *authoring* resource.
+1. In the **Create a project** dialog box, on the **Enter basic information** page, enter the following details and then select **Next**:
+    - **Name**: `Clock`
+    - **Description**: `Natural language clock`
+    - **Utterances primary language**: English
+    - **Enable multiple languages in project?**: *Unselected*
 
-## Create a Language Understanding app
-
-Now that you have created an authoring resource, you can use it to create a Language Understanding app.
-
-1. In a new browser tab, open the Language Understanding portal at `https://www.luis.ai`.
-
-2. Sign in using the Microsoft account associated with your Azure subscription. If this is the first time you have signed into the Language Understanding portal, you may need to grant the app some permissions to access your account details. Then complete the *Welcome* steps by selecting your Azure subscription and the authoring resource you just created.
-
-    > **Note**: If your account is associated with multiple subscriptions in different directories, you may need to switch to the directory containing the subscription where you provisioned your Language Understanding resources.
-
-3. On the **Conversation Apps** page, ensure your subscription and Language Understanding authoring resource are selected. Then click on **+ New app** for conversation with the following settings:
-  
-    - **Name**: Clock
-    - **Culture**: English (*if this option is not available, leave it blank*)
-    - **Description**: Natural language clock
-    - **Prediction resource**: *Your Language Understanding prediction resource*
-
-    If your **Clock** app isn't opened automatically, open it.
-    
-    If a panel with tips for creating an effective Language Understanding app is displayed, close it.
+1. On the **Review and finish** page, select **Create**.
 
 ## Create intents
 
-The first thing we'll do in the new app is to define some intents.
+The first thing we'll do in the new project is to define some intents.
 
-1. On the **Intents** page, select **&#65291; Create** to create a new intent named **GetTime**.
+> **Tip**: When working on your project, if some tips are displayed, read them and select **Got it** to dismiss them, or select **Skip all**.
 
-2. In the **GetTime** intent, add the following utterances as example user input:
+1. On the **Schema definition** page, on the **Intents** tab, select **&#65291; Add** to add a new intent named **GetTime**.
 
-    *what is the time?*
+1. Select the new **GetTime** intent to edit it, add the following utterances as example user input and press **enter**:
 
-    *what time is it?*
+    `what is the time?`
 
-3. After you've added these utterances, go back to the **Intents** page and add another new intent named **GetDay** with the following utterances:
+    `what's the time?`
 
-    *what is the day today?*
+    `what time is it?`
 
-    *what day is it?*
+    `tell me the time`
 
-4. After you've added these utterances, go back to the **Intents** page and add another new intent named **GetDate** with the following utterances:
 
-    *what is the date today?*
+1. After you've added these utterances, select **Save changes** and go back to the **Schema definition** page.
 
-    *what date is it?*
+1. Add another new intent named **GetDay** with the following utterances:
 
-5. After you've added these utterances, go back to the **Intents** page and select the **None** intent. This is provided as a fallback for input that doesn't map to any of the intents you have defined in your language model.
+    `what day is it?`
 
-6. Add the following utterances to the **None** intent:
+    `what's the day?`
 
-    *hello*
+    `what is the day today?`
 
-    *goodbye*
+    `what day of the week is it?`
 
-## Train and test the app
+1. After you've added these utterances and saved them, go back to the **Schema definition** page and add another new intent named **GetDate** with the following utterances:
 
-Now that you've added some intents, let's train the app and see if it can correctly predict them from user input.
+    `what date is it?`
 
-1. At the top right of the portal, select **Train** to train the app.
+    `what's the date?`
 
-2. When the app is trained, select **Test** to display the Test panel, and then enter the following test utterance:
+    `what is the date today?`
 
-    *what's the time now?*
+    `what's today's date?`
 
-    Review the result that is returned, noting that it includes the predicted intent (which should be **GetTime**) and a confidence score that indicates the probability the model calculated for the predicted intent.
+1. After you've added these utterances, save them and clear the **GetDate** filter on the utterances page so you can see all of the utterances for all of the intents. To do this select the filter button on the top right of the Training set tab then unselect **GetDate**.
 
-3. Try the following test utterance:
+## Train and test the model
 
-    *tell me the time*
+Now that you've added some intents, let's train the language model and see if it can correctly predict them from user input.
+
+1. In the pane on the left, select **Training jobs**. Then select **+ Start a training job**.
+
+1. On the **Start a training job** dialog, select the option to train a new model, name it **Clock**.
+
+1. To begin the process of training your model, select **Train**.
+
+1. When training is complete (which may take several minutes) the job **Status** will change to **Training succeeded**.
+
+1. Select the **Model performance** page, and then select the **Clock** model. Review the overall and per-intent evaluation metrics (*precision*, *recall*, and *F1 score*) and the *confusion matrix* generated by the evaluation that was performed when training (note that due to the small number of sample utterances, not all intents may be included in the results).
+
+    > **Note**: To learn more about the evaluation metrics, refer to the [documentation](https://learn.microsoft.com/azure/ai-services/language-service/conversational-language-understanding/concepts/evaluation-metrics)
+
+1. Go to the **Deploying a model** page, then select **Add deployment**.
+
+1. On the **Add deployment** dialog, select **Create a new deployment name**, and then enter **production**.
+
+1. Select the **Clock** model in the **Model** field then select **Deploy**. The deployment may take some time.
+
+1. When the model has been deployed, select the **Testing deployments** page, then select the **production** deployment in the **Deployment name** field.
+
+1. Enter the following text in the empty textbox, and then select **Run the test**:
+
+    `what's the time now?`
+
+    Review the result that is returned, noting that it includes the predicted intent (which should be **GetTime**) and a confidence score that indicates the probability the model calculated for the predicted intent. The JSON tab shows the comparative confidence for each potential intent (the one with the highest confidence score is the predicted intent)
+
+1. Clear the text box, and then run another test with the following text:
+
+    `tell me the time`
 
     Again, review the predicted intent and confidence score.
 
-4. Try the following test utterance:
+1. Try the following text:
 
-    *what's today?*
+    `what's the day today?`
 
     Hopefully the model predicts the **GetDay** intent.
-
-5. Finally, try this test utterance:
-
-    *hi*
-
-    This should return the **None** intent.
-
-6. Close the Test panel.
 
 ## Add entities
 
 So far you've defined some simple utterances that map to intents. Most real applications include more complex utterances from which specific data entities must be extracted to get more context for the intent.
 
-### Add a *machine learned* entity
+### Add a learned entity
 
-The most common kind of entity is a *machine learned* entity, in which the app learns to identify entity values based on examples.
+The most common kind of entity is a *learned* entity, in which the model learns to identify entity values based on examples.
 
-1. On the **Entities** page, select **&#65291; Create** to create a new entity.
+1. In Language Studio, return to the **Schema definition** page and then on the **Entities** tab, select **&#65291; Add** to add a new entity.
 
-2. In the **Create an entity** dialog box, create a **Machine learned** entity named **Location**.
+1. In the **Add an entity** dialog box, enter the entity name **Location** and ensure that the **Learned** tab is selected. Then select **Add entity**.
 
-3. After the **Location** entity has been created, return to the **Intents** page and select the **GetTime** intent.
+1. After the **Location** entity has been created, return to the **Schema definition** page and then on the **Intents** tab, select the **GetTime** intent.
 
-4. Enter the following new example utterance:
+1. Enter the following new example utterance:
 
-    *what time is it in London?*
+    `what time is it in London?`
 
-5. When the utterance has been added, select the word ***london***, and in the drop-down list that appears, select **Location** to indicate that "london" is an example of a location.
+1. When the utterance has been added, select the word **London**, and in the drop-down list that appears, select **Location** to indicate that "London" is an example of a location.
 
-6. Add another example utterance:
+1. Add another example utterance:
 
-    *what is the current time in New York?*
+    `Tell me the time in Paris?`
 
-7. When the utterance has been added, select the words ***new york***, and map them to the **Location** entity.
+1. When the utterance has been added, select the word **Paris**, and map it to the **Location** entity.
+
+1. Add another example utterance:
+
+    `what's the time in New York?`
+
+1. When the utterance has been added, select the words **New York**, and map them to the **Location** entity.
+
+1. Select **Save changes** to save the new utterances.
 
 ### Add a *list* entity
 
 In some cases, valid values for an entity can be restricted to a list of specific terms and synonyms; which can help the app identify instances of the entity in utterances.
 
-1. On the **Entities** page, select **&#65291; Create** to create a new entity.
+1. In Language Studio, return to the **Schema definition** page and then on the **Entities** tab, select **&#65291; Add** to add a new entity.
 
-2. In the **Create an entity** dialog box, create a **List** entity named **Weekday**.
+1. In the **Add an entity** dialog box, enter the entity name **Weekday** and select the **List** entity tab. Then select **Add entity**.
 
-3. Add the following **Normalized values** and **synonyms**:
+1. On the page for the **Weekday** entity, in the **List** section, select **&#65291; Add new list**. Then enter the following value and synonym and select **Save**:
 
-    | Normalized values | synonyms|
+    | List key | synonyms|
     |-------------------|---------|
-    | sunday | sun |
-    | monday | mon |
-    | tuesday | tue |
-    | wednesday | wed |
-    | thursday | thu |
-    | friday | fri |
-    | saturday | sat |
+    | Sunday | Sun |
 
-4. After the **Weekday** entity has been created, return to the **Intents** page and select the **GetDate** intent.
+      ![](images/mod-5-43.png)
 
-5. Enter the following new example utterance:
+1. Repeat the previous step to add the following list components:
 
-    *what date was it on Saturday?*
+    | Value | synonyms|
+    |-------------------|---------|
+    | Monday | Mon |
+    | Tuesday | Tue, Tues |
+    | Wednesday | Wed, Weds |
+    | Thursday | Thur, Thurs |
+    | Friday | Fri |
+    | Saturday | Sat |
 
-6. When the utterance has been added, verify that **saturday** has been automatically mapped to the **Weekday** entity. If not, select the word ***saturday***, and in the drop-down list that appears, select **Weekday**.
+1. Return to the **Schema definition** page and then on the **Intents** tab, select the **GetDate** intent.
 
-7. Add another example utterance:
+1. Enter the following new example utterance:
 
-    *what date will it be on Friday?*
+    `what date was it on Saturday?`
 
-8. When the utterance has been added, ensure **friday** is mapped to the **Weekday** entity.
+1. When the utterance has been added, select the word ***Saturday***, and in the drop-down list that appears, select **Weekday**.
 
-### Add a *Regex* entity
+1. Add another example utterance:
 
-Sometimes, entities have a specific format, such as a serial number, form code, or date. You can define a regular expression (*regex*) that describes an expected format to help your app identify matching entity values.
+    `what date will it be on Friday?`
 
-1. On the **Entities** page, select **&#65291; Create** to create a new entity.
+1. When the utterance has been added, map **Friday** to the **Weekday** entity.
 
-2. In the **Create an entity** dialog box, create a **Regex** entity named **Date** with the following regex:
+1. Add another example utterance:
 
-    ```
-    [0-9]{2}/[0-9]{2}/[0-9]{4}
-    ```
+    `what will the date be on Thurs?`
 
-    > **Note**: This is a simple regex that checks for two digits followed by a "/", another two digits, another "/", and four digits - for example *01/11/2020*. It allows for invalid dates, such as *56/00/9999*; but it's important to remember that the entity regex is used to identify data entry that is *intended* as a date - not to validate date values.
+1. When the utterance has been added, map **Thurs** to the **Weekday** entity.
 
-3. After the **Date** entity has been created, return to the **Intents** page and select the **GetDay** intent.
+1. select **Save changes** to save the new utterances.
 
-4. Enter the following new example utterance:
+### Add a *prebuilt* entity
 
-    *what day was 01/01/1901?*
+The Azure AI Language service provides a set of *prebuilt* entities that are commonly used in conversational applications.
 
-5. When the utterance has been added, verify that **01/01/1901** has been automatically mapped to the **Date** entity. If not, select ***01/01/1901***, and in the drop-down list that appears, select **Date**.
+1. In Language Studio, return to the **Schema definition** page and then on the **Entities** tab, select **&#65291; Add** to add a new entity.
 
-6. Add another example utterance:
+1. In the **Add an entity** dialog box, enter the entity name **Date** and select the **Prebuilt** entity tab. Then select **Add entity**.
 
-    *what day will it be on 12/12/2099?*
+1. On the page for the **Date** entity, in the **Prebuilt** section, select **&#65291; Add new prebuilt**.
 
-7. When the utterance has been added, ensure **12/12/2099** is mapped to the **Date** entity.
+1. In the **Select prebuilt** list, select **DateTime** and then select **Save**.
 
-### Retrain the app
+1. Return to the **Schema definition** page and then on the **Intents** tab, select the **GetDay** intent.
 
-Now that you've modified ths language model, you need to retrain and retest the app.
+1. Enter the following new example utterance:
 
-1. At the top right of the portal, select **Train** to retrain the app.
+    `what day was 01/01/1901?`
 
-2. When the app is trained, select **Test** to display the Test panel, and then enter the following test utterance:
+1. When the utterance has been added, select ***01/01/1901***, and in the drop-down list that appears, select **Date**.
 
-    *what's the time in Edinburgh?*
+1. Add another example utterance:
 
-3. Review the result that is returned, which should hopefully predict the **GetTime** intent. Then select **Inspect** and in the additional inspection panel that is displayed, examine the **ML entities** section. The model should have predicted that "edinburgh" is an instance of a **Location** entity.
+    `what day will it be on Dec 31st 2099?`
 
-4. Try testing the following utterances:
+1. When the utterance has been added, map **Dec 31st 2099** to the **Date** entity.
 
-    *what date is it on Friday?*
+1. Select **Save changes** to save the new utterances.
 
-    *what's the date on Thu?*
+### Retrain the model
 
-    *what was the day on 01/01/2020?*
+Now that you've modified the schema, you need to retrain and retest the model.
 
-5. When you have finished testing, close the inspection panel, but leave the test panel open.
+1. On the **Training jobs** page, select **Start a training job**.
 
-## Perform batch testing
+1. On the **Start a training job** dialog,  select  **overwrite an existing model** and specify the **Clock** model. Select **Train** to train the model. If prompted, confirm you want to overwrite the existing model.
 
-You can use the test pane to test individual utterances interactively, but for more complex language models it is generally more efficient to perform *batch testing*.
+1. When training is complete the job **Status** will update to **Training succeeded**.
 
-1. In Visual Studio Code, open the **batch-test.json** file in the **09-luis-app** folder. This file consists of a JSON document that contains multiple test cases for the clock language model you created.
+1. Select the **Model performance** page and then select the **Clock** model. Review the evaluation metrics (*precision*, *recall*, and *F1 score*) and the *confusion matrix* generated by the evaluation that was performed when training (note that due to the small number of sample utterances, not all intents may be included in the results).
 
-2. In the Language Understanding portal, in the Test panel, select **Batch testing panel**. Then select **&#65291; Import** and import the **batch-test.json** file, assigning the name **clock-test**.
+1. On the **Deploying a model** page, select **Add deployment**.
 
-3. In the Batch testing panel, run the **clock-test** test.
+1. On the **Add deployment** dialog, select **Override an existing deployment name**, and then select **production**.
 
-4. When the test has completed, select **See results**.
+1. Select the **Clock** model in the **Model** field and then select **Deploy** to deploy it. This may take some time.
 
-5. On the results page, view the confusion matrix that represents the prediction results. It shows true positive, false positive, true negative, and false negative predictions for the intent or entity that is selected in the list on the right.
+1. When the model is deployed, on the **Testing deployments** page, select the **production** deployment under the **Deployment name** field, and then test it with the following text:
 
-    ![A confusion matrix for a language understanding batch test](./images/luis-confusion-matrix.jpg)
+    `what's the time in Edinburgh?`
 
-    > **Note**: Each utterance is scored as *positive* or *negative* for each intent - so for example "what time is it?" should be scored as *positive* for the **GetTime** intent, and *negative* for the **GetDate** intent. The points on the confusion matrix show which utterances were predicted correctly (*true*) and incorrectly (*false*) as *positive* and *negative* for the selected intent.
+1. Review the result that is returned, which should hopefully predict the **GetTime** intent and a **Location** entity with the text value "Edinburgh".
 
-6. With the **GetDate** intent selected, select any of the points on the confusion matrix to see the details of the prediction - including the utterance and the confidence score for the prediction. Then select the **GetDay**, **GetTime** and **None** intents and view their prediction results. The app should have done well at predicting the intents correctly.
+1. Try testing the following utterances:
 
-    > **Note**: The user interface may not clear previously selected points.
+    `what time is it in Tokyo?`
 
-7. Select the **Location** entity and view the prediction results in the confusion matrix. In particular, note the predictions that were *false negatives* - these were cases where the app failed to detect the specified location in the utterance, indicating that you may need to add more sample utterances to the intents and retrain the model.
+    `what date is it on Friday?`
 
-8. Close the Batch testing panel.
+    `what's the date on Weds?`
 
-## Publish the app
+    `what day was 01/01/2020?`
 
-In a real project, you'd iteratively refine intents and entities, retrain, and retest until you are satisfied with the predictive performance. Then, you can publish the app for client applications to use.
+    `what day will Mar 7th 2030 be?`
 
-1. At the top right of the Language Understanding portal, select **Publish**.
+## Use the model from a client app
 
-2. Select **Production slot**, and publish the app.
+In a real project, you'd iteratively refine intents and entities, retrain, and retest until you are satisfied with the predictive performance. Then, when you've tested it and are satisfied with its predictive performance, you can use it in a client app by calling its REST interface. In this exercise, you'll use the *curl* utility to call the REST endpoint for your model.
 
-3. After publishing is complete, at the top of the Language Understanding portal, select **Manage**.
+1. In Language Studio, on the **Deploying a model** page, select the **production** deployment. Then select **Get prediction URL**.
 
-4. On the **Settings** page, note the **App ID**. Client applications need this to use your app.
+1. In the **Get prediction URL** dialog box, note that the URL for the prediction endpoint is shown along with a sample request, which consists of a **curl** command that submits an HTTP POST request to the endpoint, specifying the key for your Azure AI Language resource in the header and including a query and language in the request data. Paste the sample request in a notepad, we will be needing it in next task of lab.
 
-5. On the **Azure Resources** page, note the **Primary Key**, **Secondary Key**, and **Endpoint URL** for the prediction resource through which the app can be consumed. Client applications need the endpoint and one of the keys to connect to the prediction resource and be authenticated.
+## Call the API from the Azure Cloud Shell
 
-6. In Visual Studio Code, in the **09-luis-app** folder, select the **GetIntent.cmd** batch file and view the code it contains. This command-line script uses cURL to call the Language Understanding REST API for the specified application and prediction endpoint.
+Open up a new internet browser tab to work with Cloud Shell.
 
-7. Replace the placeholder values in the script with the **App ID**, **Endpoint URL**, and either the **Primary Key** or **Secondary Key** for your Language Understanding app; and then save the updated file.
+1. In the [Azure portal](https://portal.azure.com?azure-portal=true), select the **[>_]** (*Cloud Shell*) button at the top of the page to the right of the search box. A Cloud Shell pane will open at the bottom of the portal.
 
-8. Right-click the **09-luis-app** folder and open an integrated terminal. Then enter the following command (be sure to include the quotation marks!):
+      ![](images/mod-5-59.png)
 
-    ```
-    .\GetIntent "What's the time?"
-    ```
+1. The first time you open the Cloud Shell, you may be prompted to choose the type of shell you want to use (*Bash* or *PowerShell*). Select **Bash**. If you don't see this option, skip the step.  
 
-9. Review the JSON response returned by your app, which should indicate the top scoring intent predicted for your input (which should be **GetTime**).
+1. If you're prompted to create storage for your Cloud Shell, ensure your subscription is specified and select **Create storage**. Then wait a minute or so for the storage to be created.
 
-10. Try the following command:
+1. Make sure the type of shell indicated on the top left of the Cloud Shell pane is switched to *Bash*. If it's *PowerShell*, switch to *Bash* by using the drop-down menu in the top left.
 
-    ```
-    .\GetIntent "What's today's date?"
-    ```
+1. Once the terminal starts, run the following commands to download a copy of the repo into your Cloud Shell:
 
-11. Examine the response and verify that it predicts the **GetDate** intent.
-
-12. Try the following command:
-
-    ```
-    .\GetIntent "What time is it in Sydney?"
+    ```bash
+    rm -r azure-ai-eng -f
+    git clone https://github.com/MicrosoftLearning/AI-102-AIEngineer azure-ai-eng
     ```
 
-13. Examine the response and verify that it includes a **Location** entity.
+1. The files have been downloaded into a folder called **azure-ai-eng**. Let's change into that folder by running:
 
-14. Try the following commands and examine the responses:
-
-    ```
-    .\GetIntent "What time is it in Glasgow?"
+    ```bash
+    cd azure-ai-eng/09-language-app
     ```
 
+1. Then run `code send-call.sh` to open the file in the Cloud Shell editor. This file contains a script that will call the service with the question: "What's the time in Sydney?".
+1. Replace the following values from the corresponding values in the sample request from Language Studio:
+
+    - **<ENDPOINT_URL>**: Your endpoint URL.Looks like: `https://my-service.cognitiveservices.azure.com/language/:analyze-conversations?api-version=2022-10-01-preview`
+    - **<Apim-Subscription-Key>**: Your key looks like: `b11bcsbd50a149dfb6626791d20f514b`
+    - **<Apim-Request-Id>**: Your request ID looks like: `4vfdad1c-b2fc-48ba-bd7d-b59d2242395b`
+
+1. Press **CTRL + Save** to save your changes.
+1. Make a call by running `sh send-call.sh`.
+1. View the resulting JSON, which should include the predicted intent and entities, like this:
+
+    ```json
+    {
+      "kind": "ConversationResult",
+      "result": {
+        "query": "What's the time in Sydney",
+        "prediction": {
+          "topIntent": "GetTime",
+          "projectKind": "Conversation",
+          "intents": [
+            {
+              "category": "GetTime",
+              "confidenceScore": 0.9135122
+            },
+            {
+              "category": "GetDay",
+              "confidenceScore": 0.61633164
+            },
+            {
+              "category": "GetDate",
+              "confidenceScore": 0.601757
+            },
+            {
+              "category": "None",
+              "confidenceScore": 0
+            }
+          ],
+          "entities": [
+            {
+              "category": "Location",
+              "text": "Sydney",
+              "offset": 19,
+              "length": 6,
+              "confidenceScore": 1
+            }
+          ]
+        }
+      }
+    }
     ```
-    .\GetIntent "What's the time in Nairobi?"
-    ```
 
-    ```
-    .\GetIntent "What's the UK time?"
-    ```
-15. Try a few more variations - the goal is to generate at least some responses that correctly predict the **GetTime** intent, but fail to detect a **Location** entity.
+1. Review the JSON response returned by your model to ensure that the top scoring intent predicted is **GetTime**.
 
-    Keep the terminal open. You will return to it later.
+1. Change the query in the curl command to `What's today's date?` and then run it and review the resulting JSON.
 
-## Apply *active learning*
+1. Try the following queries:
 
-You can improve a Language Understanding app based on historical utterances submitted to the endpoint. This practice is called *active learning*.
+    `What day will Jan 1st 2050 be?`
 
-In the previous procedure, you used cURL to submit requests to your app's endpoint. These requests included the option to log the queries, which enables the app to track them for use in active learning.
+    `What time is it in Glasgow?`
 
-1. In the Language Understanding portal, Select **Build** and view the **Review endpoint utterances** page. This page lists logged utterances that the service has flagged for review.
+    `What date will next Monday be?`
 
-2. For any utterances for which the intent and a new location entity (that wasn't included in the original training utterances) are correctly predicted, select **&#10003;** to confirm the entity, and then use the **&#10514;** icon to add the utterance to the intent as a training example.
+## Export the project
 
-3. Find an example of an utterance in which the **GetTime** intent was correctly identified, but a **Location** entity was <u>not</u> identified; and select the location name and map it to the **location** entity. Then use the **&#10514;** icon to add the utterance to the intent as a training example.
+You can use Language Studio to develop and test your language understanding model, but in a software development process for DevOps, you should maintain a source controlled definition of the project that can be included in continuous integration and delivery (CI/CD) pipelines. While you can use the Azure AI Language REST API in code scripts to create and train the model, a simpler way is to use the portal to create the model schema, and export it as a **.json** file that can be imported and retrained in another Azure AI Language  instance. This approach enables you to make use of the productivity benefits of the Language Studio visual interface while maintaining portability and reproducibility for the model.
 
-4. Go to the **Intents** page and open the **GetTime** intent to confirm that the suggested utterances have been added.
+1. Select the**Projects** tab, select the circle icon to select the **Clock** project.
 
-5. At the top of the Language Understanding portal, select **Train** to retrain the app.
+1. Select the **&#x2913; Export** button.
 
-6. At the top right of the Language Understanding portal, select **Publish** and republish the app to the **Production slot**.
+1. Save the **Clock.json** file that is generated (anywhere you like).
 
-7. Return to the terminal for the **09-luis-app** folder, and use the **GetIntent** command to submit the utterance you added and corrected during active learning.
-
-8. Verify that the result now includes the **Location** entity. Then try another utterance that uses the same phrasing but specifies a different location (for example, *Berlin*).
-
-## Export the app
-
-You can use the Language Understanding portal to develop and test your language app, but in a software development process for DevOps, you should maintain a source controlled definition of the app that can be included in continuous integration and delivery (CI/CD) pipelines. While you *can* use the Language Understanding SDK or REST API in code scripts to create and train the app, a simpler way is to use the portal to create the app, and export it as a *.lu* file that can be imported and retrained in another Language Understanding instance. This approach enables you to make use of the productivity benefits of the portal while maintaining portability and reproducibility for the app.
-
-1. In the Language Understanding portal, select **Manage**.
-
-2. On the **Versions** page, select the current version of the app (there should only be one).
-
-3. In the **Export** drop-down list, select **Export as LU**. Then, when prompted by your browser, save the file in the **09-luis-app** folder.
-
-4. In Visual Studio Code, open the **.lu** file you just exported and downloaded (if you are prompted to search the marketplace for an extension that can read it, dismiss the prompt). Note that the LU format is human-readable, making it an effective way to document the definition of your Language Understanding app in a team development environment.
+1. Open the downloaded file in your favorite code editor (for example, Visual Studio Code) to review the JSON definition of your project.
 
 ## More information
 
-For more information about using the **Language Understanding** service, see the [Language Understanding documentation](https://docs.microsoft.com/azure/cognitive-services/luis/).
+For more information about using the **Azure AI Language** service to create language understanding solutions, see the [Azure AI Language documentation](/azure/ai-services/language-service/conversational-language-understanding/overview).
