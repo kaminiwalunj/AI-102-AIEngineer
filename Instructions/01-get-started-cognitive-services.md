@@ -1,4 +1,4 @@
-# Lab 01: Get Started with Azure AI Services
+# Exercise 01: Get Started with Azure AI Services
 
 ## Lab scenario
 

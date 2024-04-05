@@ -1,4 +1,4 @@
-# Lab 03: Monitor Azure AI services
+# Exercise 03: Monitor Azure AI services
 
 ## Lab scenario
 

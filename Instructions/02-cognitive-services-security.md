@@ -1,4 +1,4 @@
-# Lab 02: Manage Azure AI Services Security
+# Exercise 02: Manage Azure AI Services Security
 
 ## Lab scenario
 

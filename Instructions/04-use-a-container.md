@@ -1,4 +1,4 @@
-# Lab 04: Use an Azure AI Services Container
+# Exercise 04: Use an Azure AI Services Container
 
 ## Lab scenario
 
