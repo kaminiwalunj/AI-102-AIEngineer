@@ -1,6 +1,9 @@
 # Analyze Video with Video Analyzer
 
-A large proportion of the data created and consumed today is in the format of video. **Video Analyzer for Media** is an AI-powered service that you can use to index videos and extract insights from them.
+A large proportion of the data created and consumed today is in the format of video. **Azure AI Video Indexer** is an AI-powered service that you can use to index videos and extract insights from them.
+
+> **Note**: From June 21st 2022, capabilities of Azure AI services that return personally identifiable information are restricted to customers who have been granted [limited access](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-limited-access). Without getting limited access approval, recognizing people and celebrities with Video Analyzer for this lab is not available. For more details about the changes Microsoft has made, and why - see [Responsible AI investments and safeguards for facial recognition](https://azure.microsoft.com/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/).
+
 
 ## Open the cloned folder in Visual Studio Code.
 
