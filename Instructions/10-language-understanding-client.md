@@ -19,21 +19,11 @@ The Conversational Language Understanding feature of the Azure AI Service for La
 
 1. Open the Azure portal at `https://portal.azure.com`, and sign in using the Microsoft account associated with your Azure subscription.
 
-2. Select the user icon from the top right corner, under **Current reosurce** choose **Select**.
-
-      ![](images/mod-5-60.png)
-
-3. In the Select an Azure resource tab, kepp the Active directory and Azure subscription as default. Under Resource type select **Language** and under resource name select **languageservice-<inject key="DeploymentID" enableCopy="false" /></inject>**.  Click **Done**.
-
-      ![](images/mod-5-61.png)
-
 2. Select the **&#65291;Create a resource** button, search and select *language service*, and select **Create** button and then select **Continue to create your resource** resource with the following settings:
 
-    - **Default features**: All
-    - **Custom features**: none
-    - **Subscription**: *Your Azure subscription*
-    - **Resource group**: *Choose same as resource group location.*
-    - **Region**: *westus2*
+    - **Subscription**: *Keep it as default*
+    - **Resource group**: *Ai-102-<inject key="DeploymentID" enableCopy="false" /></inject>*.
+    - **Region**: *Choose same as resource group location.*
     - **Name**: *languageservice-<inject key="DeploymentID" enableCopy="false" /></inject>*
     - **Pricing tier**: *S*
     - **Responsible AI Notice**: *Select check box to confirm*
@@ -44,43 +34,48 @@ The Conversational Language Understanding feature of the Azure AI Service for La
 
 ## Import, train, and publish a Conversational language understanding model
 
-If you already have a **Clock** project from a previous lab or exercise, you can use it in this exercise. Otherwise, follow these instructions to create it.
-
 1. In a new browser tab, open the Language Studio - Preview portal at `https://language.cognitive.azure.com`.
 
-2. Sign in using the Microsoft account associated with your Azure subscription. If this is the first time you have signed into the Language Service portal, you may need to grant the app some permissions to access your account details. Then complete the *Welcome* steps by selecting your Azure subscription and the authoring resource you just created.
+2. Select the user icon from the top right corner, under **Current resource** choose **Select**.
 
-3. Open the **Conversational Language Understanding** page.
+      ![](images/mod-5-60.png)
 
-4. Next to **&#65291;Create new project**, select **Import**. Click **Choose File** and then browse to the **10b-clu-client-(preview)** subfolder in the project folder containing the lab files for this exercise. Select **Clock.json**, click **Open**, Under Name provide **Clock** and then click **Done**.
+3. In the Select an Azure resource tab, keep the Active directory and Azure subscription as default. Under Resource type select **Language** and under resource name select **languageservice-<inject key="DeploymentID" enableCopy="false" /></inject>**.  Click **Done**.
 
-5. If a panel with tips for creating an effective Language service app is displayed, close it.
+      ![](images/mod-5-61.png)
+4. Sign in using the Microsoft account associated with your Azure subscription. If this is the first time you have signed into the Language Service portal, you may need to grant the app some permissions to access your account details. Then complete the *Welcome* steps by selecting your Azure subscription and the authoring resource you just created.
 
-6. At the left of the Language Studio portal, select **Training jobs** to train the app. Click **Start a training job**, name the model **Clock** and keep default training mode (Standard) and data splitting. Select **Train**. Training may take several minutes to complete.
+5. Open the **Conversational Language Understanding** page.
+
+6. Next to **&#65291;Create new project**, select **Import**. Click **Choose File** and then browse to the **10b-clu-client-(preview)** subfolder in the project folder containing the lab files for this exercise. Select **Clock.json**, click **Open**, Under Name provide **Clock** and then click **Done**.
+
+7. If a panel with tips for creating an effective Language service app is displayed, close it.
+
+8. At the left of the Language Studio portal, select **Training jobs** to train the app. Click **Start a training job**, name the model **Clock** and keep default training mode (Standard) and data splitting. Select **Train**. Training may take several minutes to complete.
 
     > **Note**: Select **>>** to open the left explorer if not opened. Because the model name **Clock** is hard-coded in the clock-client code (used later in the lab), capitalize and spell the name exactly as described.
 
-7. At the left of the Language Studio portal, select **Deploying a model** and use **Add deployment** to create deployment for the Clock model that's named **production**.
+9. At the left of the Language Studio portal, select **Deploying a model** and use **Add deployment** to create deployment for the Clock model that's named **production**.
 
     > **Note**: Because the deployment name **production** is hard-coded in the clock-client code (used later in the lab), capitalize and spell the name exactly as described. 
 
-8. The client applications needs the **Endpoint URL** and **Primary key** to use your deployed model. After the deployment is complete, to get those parameters, open the Azure portal at [https://portal.azure.com](https://portal.azure.com/?azure-portal=true), and sign in using the Microsoft account associated with your Azure subscription. On the Search bar, search for **Language** and select it to choose the *Azure AI Services|Language service*.
+10. The client applications needs the **Endpoint URL** and **Primary key** to use your deployed model. After the deployment is complete, to get those parameters, open the Azure portal at [https://portal.azure.com](https://portal.azure.com/?azure-portal=true), and sign in using the Microsoft account associated with your Azure subscription. On the Search bar, search for **Language** and select it to choose the *Azure AI Services|Language service*.
 
-9. Your Language service resource should be listed, select that resource.
+11. Your Language service resource should be listed, select that resource.
 
-10. On the left hand menu, under the *Resource Management* section, select **Keys and Endpoint**.
+12. On the left hand menu, under the *Resource Management* section, select **Keys and Endpoint**.
 
-11. Make a copy of your **KEY 1** and your **Endpoint**.
+13. Make a copy of your **KEY 1** and your **Endpoint**.
 
-12. Client applications need information from the prediction URL endpoint and the Language service key to connect to your deployed model and be authenticated.
+14. Client applications need information from the prediction URL endpoint and the Language service key to connect to your deployed model and be authenticated.
 
 ## Prepare to use the Language service SDK
 
 In this exercise, you'll complete a partially implemented client application that uses the Clock model (published Conversational Language Understanding model) to predict intents from user input and respond appropriately.
 
-> **Note**: You can choose to use the SDK for either **.NET** or **Python**. In the steps below, perform the actions appropriate for your preferred language.
+> **Note**: You can choose to use the SDK for **.NET**. In the steps below, perform the actions appropriate for your preferred language.
 
-1. In Visual Studio Code, in the **Explorer** pane, browse to the **10b-clu-client-(preview)** folder and expand the **C-Sharp** or **Python** folder depending on your language preference.
+1. In Visual Studio Code, in the **Explorer** pane, browse to the **10b-clu-client-(preview)** folder and expand the **C-Sharp** folder depending on your language preference.
 
 2. Right-click the **clock-client** folder and then select **Open in Integrated Terminal**. Then install the Conversational Language Service SDK package by running the appropriate command for your language preference:
 
@@ -91,18 +86,9 @@ In this exercise, you'll complete a partially implemented client application tha
     dotnet add package Azure.Core
     ```
 
-    **Python**
-
-    ```
-    pip install azure-ai-language-conversations --pre
-    python -m pip install python-dotenv
-    python -m pip install python-dateutil
-    ```
-
 3. View the contents of the **clock-client** folder, and note that it contains a file for configuration settings:
 
     - **C#**: appsettings.json
-    - **Python**: .env
 
     Open the configuration file and update the configuration values it contains to include the **Endpoint URL** and the **Primary key** for your Language resource and save the file. You can find the required values in the Azure portal or Language Studio as follows:
 
@@ -112,7 +98,6 @@ In this exercise, you'll complete a partially implemented client application tha
 4. Note that the **clock-client** folder contains a code file for the client application:
 
     - **C#**: Program.cs
-    - **Python**: clock-client.py
 
     Open the code file, and at the top, under the existing namespace references, find the comment **Import namespaces**. Then, under this comment, add the following language-specific code to import the namespaces you will need to use the Language service SDK:
 
@@ -122,14 +107,6 @@ In this exercise, you'll complete a partially implemented client application tha
     // Import namespaces
     using Azure;
     using Azure.AI.Language.Conversations;
-    ```
-
-    **Python**
-
-    ```Python
-    # Import namespaces
-    from azure.core.credentials import AzureKeyCredential
-    from azure.ai.language.conversations import ConversationAnalysisClient
     ```
 
 ## Get a prediction from the Language Understanding app
@@ -146,14 +123,6 @@ var credentials = new Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime.Ap
 var luClient = new LUISRuntimeClient(credentials) { Endpoint = predictionEndpoint };
 ```
 
-**Python**
-
-```Python
-# Create a client for the LU app
-credentials = CognitiveServicesCredentials(lu_prediction_key)
-lu_client = LUISRuntimeClient(lu_prediction_endpoint, credentials)
-```
-
 2. Note that the code in the **Main** function prompts for user input until the user enters "quit". Within this loop, find the comment **Call the LU app to get intent and entities** and add the following code:
 
 **C#**
@@ -168,20 +137,6 @@ Console.WriteLine("--------------------\n");
 Console.WriteLine(predictionResponse.Query);
 var topIntent = predictionResponse.Prediction.TopIntent;
 var entities = predictionResponse.Prediction.Entities;
-```
-
-**Python**
-
-```Python
-# Call the LU app to get intent and entities
-request = { "query" : userText }
-slot = 'Production'
-prediction_response = lu_client.prediction.get_slot_prediction(lu_app_id, slot, request)
-top_intent = prediction_response.prediction.top_intent
-entities = prediction_response.prediction.entities
-print('Top Intent: {}'.format(top_intent))
-print('Entities: {}'.format (entities))
-print('-----------------\n{}'.format(prediction_response.query))
 ```
 
 The call to the Language Understanding app returns a prediction, which includes the top (most likely) intent as well as any entities that were detected in the input utterance. Your client application must now use that prediction to determine and perform the appropriate action.
@@ -261,48 +216,6 @@ switch (topIntent)
         break;
 }
 ```
-
-**Python**
-
-```Python
-# Apply the appropriate action
-if top_intent == 'GetTime':
-    location = 'local'
-    # Check for entities
-    if len(entities) > 0:
-        # Check for a location entity
-        if 'Location' in entities:
-            # ML entities are strings, get the first one
-            location = entities['Location'][0]
-    # Get the time for the specified location
-    print(GetTime(location))
-
-elif top_intent == 'GetDay':
-    date_string = date.today().strftime("%m/%d/%Y")
-    # Check for entities
-    if len(entities) > 0:
-        # Check for a Date entity
-        if 'Date' in entities:
-            # Regex entities are strings, get the first one
-            date_string = entities['Date'][0]
-    # Get the day for the specified date
-    print(GetDay(date_string))
-
-elif top_intent == 'GetDate':
-    day = 'today'
-    # Check for entities
-    if len(entities) > 0:
-        # Check for a Weekday entity
-        if 'Weekday' in entities:
-            # List entities are lists
-            day = entities['Weekday'][0][0]
-    # Get the date for the specified day
-    print(GetDate(day))
-
-else:
-    # Some other intent (for example, "None") was predicted
-    print('Try asking me for the time, the day, or the date.')
-```
     
 4. Save your changes and return to the integrated terminal for the **clock-client** folder, and enter the following command to run the program:
 
@@ -310,17 +223,6 @@ else:
 
 ```
 dotnet run
-```
-
-**Python**
-
-```
-python -m pip install --user python-dotenv
-```
-
-
-```
-python clock-client.py
 ```
 
 5. When prompted, enter utterances to test the application. For example, try:
