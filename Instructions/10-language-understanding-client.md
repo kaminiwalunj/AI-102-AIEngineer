@@ -109,121 +109,135 @@ In this exercise, you'll complete a partially implemented client application tha
     using Azure.AI.Language.Conversations;
     ```
 
-## Get a prediction from the Language Understanding app
+## Get a prediction from the Conversational Language model
 
-Now you're ready to implement code that uses the SDK to get a prediction from your Language Understanding app.
+Now you're ready to implement code that uses the SDK to get a prediction from your Conversational Language model.
 
-1. In the **Main** function, note that code to load the App ID, prediction endpoint, and key from the configuration file has already been provided. Then find the comment **Create a client for the LU app** and add the following code to create a prediction client for your Language Understanding app:
+1. In the **Main** function, note that code to load the prediction endpoint and key from the configuration file has already been provided. Then find the comment **Create a client for the Language service model** and add the following code to create a prediction client for your Language Service app:
 
-**C#**
+    **C#**
 
-```C#
-// Create a client for the LU app
-var credentials = new Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime.ApiKeyServiceClientCredentials(predictionKey);
-var luClient = new LUISRuntimeClient(credentials) { Endpoint = predictionEndpoint };
-```
+    ```C#
+    // Create a client for the Language service model
+    Uri endpoint = new Uri(predictionEndpoint);
+    AzureKeyCredential credential = new AzureKeyCredential(predictionKey);
 
-2. Note that the code in the **Main** function prompts for user input until the user enters "quit". Within this loop, find the comment **Call the LU app to get intent and entities** and add the following code:
+    ConversationAnalysisClient client = new ConversationAnalysisClient(endpoint, credential);
+    ```
 
-**C#**
+2. Note that the code in the **Main** function prompts for user input until the user enters "quit". Within this loop, find the comment **Call the Language service model to get intent and entities** and add the following code:
 
-```C#
-// Call the LU app to get intent and entities
-var slot = "Production";
-var request = new PredictionRequest { Query = userText };
-PredictionResponse predictionResponse = await luClient.Prediction.GetSlotPredictionAsync(luAppId, slot, request);
-Console.WriteLine(JsonConvert.SerializeObject(predictionResponse, Formatting.Indented));
-Console.WriteLine("--------------------\n");
-Console.WriteLine(predictionResponse.Query);
-var topIntent = predictionResponse.Prediction.TopIntent;
-var entities = predictionResponse.Prediction.Entities;
-```
+    **C#**
 
-The call to the Language Understanding app returns a prediction, which includes the top (most likely) intent as well as any entities that were detected in the input utterance. Your client application must now use that prediction to determine and perform the appropriate action.
+    ```C#
+    // Call the Language service model to get intent and entities
+    var projectName = "Clock";
+    var deploymentName = "production";
+    var data = new
+    {
+        analysisInput = new
+        {
+            conversationItem = new
+            {
+                text = userText,
+                id = "1",
+                participantId = "1",
+            }
+        },
+        parameters = new
+        {
+            projectName,
+            deploymentName,
+            // Use Utf16CodeUnit for strings in .NET.
+            stringIndexType = "Utf16CodeUnit",
+        },
+        kind = "Conversation",
+    };
+    // Send request
+    Response response = await client.AnalyzeConversationAsync(RequestContent.Create(data));
+    dynamic conversationalTaskResult = response.Content.ToDynamicFromJson(JsonPropertyNames.CamelCase);
+    dynamic conversationPrediction = conversationalTaskResult.Result.Prediction;   
+    var options = new JsonSerializerOptions { WriteIndented = true };
+    Console.WriteLine(JsonSerializer.Serialize(conversationalTaskResult, options));
+    Console.WriteLine("--------------------\n");
+    Console.WriteLine(userText);
+    var topIntent = "";
+    if (conversationPrediction.Intents[0].ConfidenceScore > 0.5)
+    {
+        topIntent = conversationPrediction.TopIntent;
+    }
+    ```
+
+    The call to the Language service model returns a prediction/result, which includes the top (most likely) intent as well as any entities that were detected in the input utterance. Your client application must now use that prediction to determine and perform the appropriate action.
 
 3. Find the comment **Apply the appropriate action**, and add the following code, which checks for intents supported by the application (**GetTime**, **GetDate**, and **GetDay**) and determines if any relevant entities have been detected, before calling an existing function to produce an appropriate response.
 
-**C#**
+    **C#**
 
-```C#
-// Apply the appropriate action
-switch (topIntent)
-{
-    case "GetTime":
-        var location = "local";
-        // Check for entities
-        if (entities.Count > 0)
-        {
+    ```C#
+    // Apply the appropriate action
+    switch (topIntent)
+    {
+        case "GetTime":
+            var location = "local";           
             // Check for a location entity
-            if (entities.ContainsKey("Location"))
+            foreach (dynamic entity in conversationPrediction.Entities)
             {
-                //Get the JSON for the entity
-                var entityJson = JArray.Parse(entities["Location"].ToString());
-                // ML entities are strings, get the first one
-                location = entityJson[0].ToString();
+                if (entity.Category == "Location")
+                {
+                    //Console.WriteLine($"Location Confidence: {entity.ConfidenceScore}");
+                    location = entity.Text;
+                }
             }
-        }
-
-        // Get the time for the specified location
-        var getTimeTask = Task.Run(() => GetTime(location));
-        string timeResponse = await getTimeTask;
-        Console.WriteLine(timeResponse);
-        break;
-
-    case "GetDay":
-        var date = DateTime.Today.ToShortDateString();
-        // Check for entities
-        if (entities.Count > 0)
-        {
+            // Get the time for the specified location
+            string timeResponse = GetTime(location);
+            Console.WriteLine(timeResponse);
+            break;
+        case "GetDay":
+            var date = DateTime.Today.ToShortDateString();            
             // Check for a Date entity
-            if (entities.ContainsKey("Date"))
+            foreach (dynamic entity in conversationPrediction.Entities)
             {
-                //Get the JSON for the entity
-                var entityJson = JArray.Parse(entities["Date"].ToString());
-                // Regex entities are strings, get the first one
-                date = entityJson[0].ToString();
-            }
-        }
-        // Get the day for the specified date
-        var getDayTask = Task.Run(() => GetDay(date));
-        string dayResponse = await getDayTask;
-        Console.WriteLine(dayResponse);
-        break;
-
-    case "GetDate":
-        var day = DateTime.Today.DayOfWeek.ToString();
-        // Check for entities
-        if (entities.Count > 0)
-        {
+                if (entity.Category == "Date")
+                {
+                    //Console.WriteLine($"Location Confidence: {entity.ConfidenceScore}");
+                    date = entity.Text;
+                }
+            }            
+            // Get the day for the specified date
+            string dayResponse = GetDay(date);
+            Console.WriteLine(dayResponse);
+            break;
+        case "GetDate":
+            var day = DateTime.Today.DayOfWeek.ToString();
+            // Check for entities            
             // Check for a Weekday entity
-            if (entities.ContainsKey("Weekday"))
+            foreach (dynamic entity in conversationPrediction.Entities)
             {
-                //Get the JSON for the entity
-                var entityJson = JArray.Parse(entities["Weekday"].ToString());
-                // List entities are lists
-                day = entityJson[0][0].ToString();
-            }
-        }
-        // Get the date for the specified day
-        var getDateTask = Task.Run(() => GetDate(day));
-        string dateResponse = await getDateTask;
-        Console.WriteLine(dateResponse);
-        break;
+                if (entity.Category == "Weekday")
+                {
+                    //Console.WriteLine($"Location Confidence: {entity.ConfidenceScore}");
+                    day = entity.Text;
+                }
+            }          
+            // Get the date for the specified day
+            string dateResponse = GetDate(day);
+            Console.WriteLine(dateResponse);
+            break;
+        default:
+            // Some other intent (for example, "None") was predicted
+            Console.WriteLine("Try asking me for the time, the day, or the date.");
+            break;
+    }
+    ```
 
-    default:
-        // Some other intent (for example, "None") was predicted
-        Console.WriteLine("Try asking me for the time, the day, or the date.");
-        break;
-}
-```
-    
 4. Save your changes and return to the integrated terminal for the **clock-client** folder, and enter the following command to run the program:
 
-**C#**
+    **C#**
 
-```
-dotnet run
-```
+    ```
+    dotnet run
+    ```
 
 5. When prompted, enter utterances to test the application. For example, try:
 
@@ -241,7 +255,7 @@ dotnet run
 
     *What day is 01/01/2025?*
 
-> **Note**: The logic in the application is deliberately simple, and has a number of limitations. For example, when getting the time, only a restricted set of cities is supported and daylight savings time is ignored. The goal is to see an example of a typical pattern for using Language Understanding in which your application must:
+> **Note**: The logic in the application is deliberately simple, and has a number of limitations. For example, when getting the time, only a restricted set of cities is supported and daylight savings time is ignored. The goal is to see an example of a typical pattern for using Language Service in which your application must:
 >
 >   1. Connect to a prediction endpoint.
 >   2. Submit an utterance to get a prediction.
@@ -251,4 +265,4 @@ dotnet run
 
 ## More information
 
-To learn more about creating a Language Understanding client, see the [developer documentation](https://docs.microsoft.com/azure/cognitive-services/luis/developer-reference-resource)
+To learn more about creating a Language Service client, see the [developer documentation](https://docs.microsoft.com/azure/cognitive-services/luis/developer-reference-resource)
