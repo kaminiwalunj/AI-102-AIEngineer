@@ -36,7 +36,7 @@ To create a conversational language model, you need a **Azure AI Language servic
     - **Name**: *AIservice-<inject key="DeploymentID" enableCopy="false" /></inject>**.
     - **Pricing tier**: Select either **Free (F0)** or **Standard (S)** tier if Free is not available.
     - **Responsible AI Notice**: Agree.
-1. Select **Review + create**.
+1. Select **Review + create** and **Create**.
 1. Wait for deployment to complete, and then view the deployment details.
 
 ## Create a conversational language understanding project
