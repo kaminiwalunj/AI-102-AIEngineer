@@ -73,7 +73,7 @@ For example, suppose a travel agency wants to examine hotel reviews that have be
     - **Subscription (1)**: Use default Subscription
     - **Resource group (2)**: Ai-102<inject key="DeploymentID" enableCopy="false"/> 
     - **Region (3)**: **<inject key="location" enableCopy="false"/>**
-    - **Name (4)**: aiservice<inject key="DeploymentID" enableCopy="false"/> 
+    - **Name (4)**: aiservices-<inject key="DeploymentID" enableCopy="false"/> 
     - **Pricing tier (5)**: Standard S0
 1. Select **Create + review (6)**.
 
