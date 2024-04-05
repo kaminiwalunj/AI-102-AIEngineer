@@ -500,7 +500,7 @@ with open(thumbnail_file_name, "wb") as thumbnail_file:
 print('Thumbnail saved in.', thumbnail_file_name)
 ```
     
-2. Save your changes and run the program once for each of the image files in the **images** folder, opening the **thumbnail.jpg** file that is generated in the same folder as your code file for each image.
+2. Save your changes and run the program once for each of the image files in the **images** folder, opening the **thumbnail.jpg** file that is generated in the same folder as your code file.
 
 ## More information
 
