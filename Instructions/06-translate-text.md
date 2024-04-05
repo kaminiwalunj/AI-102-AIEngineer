@@ -1,18 +1,35 @@
-# Translate Text
+# Lab 6 : Translate Text
 
+## Lab overview
 **Azure AI Translator** is a service that enables you to translate text between languages.
 
 For example, suppose a travel agency wants to examine hotel reviews that have been submitted to the company's web site, standardizing on English as the language that is used for analysis. By using Azure AI Translator, they can determine the language each review is written in, and if it is not already English, translate it from whatever source language it was written in into English.
 
-## Clone the repo into your Azure Cloud Shell
+### Task 1: Clone the repo into your Azure Cloud Shell
 
-1. In the [Azure portal](https://portal.azure.com?azure-portal=true), select the **[>_]** (*Cloud Shell*) button at the top of the page to the right of the search box. A Cloud Shell pane will open at the bottom of the portal.
+1. In the [Azure portal](https://portal.azure.com?azure-portal=true), select the **[>_]** (*Cloud Shell*) button at the top of the page to the right of the search box. This opens a Cloud Shell pane at the bottom of the portal. 
 
-    ![Screenshot of starting Cloud Shell by clicking on the icon to the right of the top search box.](images/cloudshell-launch-portal.png#lightbox)
+    ![Screenshot of starting Cloud Shell by clicking on the icon to the right of the top search box.](images/powershell-portal-guide-1.png)
 
 1. The first time you open the Cloud Shell, you may be prompted to choose the type of shell you want to use (*Bash* or *PowerShell*). Select **PowerShell**. If you don't see this option, skip the step.
 
-1. If you're prompted to create storage for your Cloud Shell, ensure your subscription is specified and select **Create storage**. Then wait a minute or so for the storage to be created.
+    ![](./images/15.png)
+
+1. If you are prompted to create storage for your Cloud Shell, ensure your subscription is selected and click on **show advanced settings**.
+  
+   ![](./images/16.png)
+   
+1.  Please make sure you have selected your resource group **Ai-102-<inject key="DeploymentID" enableCopy="false"/> (1)** and enter **blob<inject key="DeploymentID" enableCopy="false"/> (2)** for the **Storage account name** and enter **blobfileshare<inject key="DeploymentID" enableCopy="false"/> (3)** For the **File share name**, then click on **Create Storage (4)**.
+
+    ![](./images/17.png)
+
+1. Make sure the type of shell indicated on the top left of the Cloud Shell pane is switched to *PowerShell*. If it is *Bash*, switch to *PowerShell* by using the drop-down menu.
+
+    ![](./images/18.png)
+
+1. Wait for PowerShell to start. You should see the following screen in the Azure portal:  
+
+    ![](./images/19.png)
 
 1. Once the terminal starts, run the following commands to download a copy of the repo into your Cloud Shell:
 
@@ -21,35 +38,60 @@ For example, suppose a travel agency wants to examine hotel reviews that have be
     git clone https://github.com/MicrosoftLearning/AI-102-AIEngineer azure-ai-eng
     ```
 
+     ![](./images/20.png)
+
 1. The files have been downloaded into a folder called **azure-ai-eng**. Let's use the Cloud Shell Code editor to open the appropriate folder by running:
 
     ```bash
     cd azure-ai-eng/06-translate-text
     ```
+1. Open the built-in code editor, and observe the text files in the `text-analysis` folder. Use the following command to open the lab files in the code editor.
 
-Open the built-in code editor, and observe the text files in the `text-analysis` folder. Use the following command to open the lab files in the code editor.
+    ```bash
+    code .
+    ```
+     ![](./images/21.png)
 
-```bash
-code .
-```
-
-## Provision an Azure AI Translator resource
-
-If you don't already have one in your subscription, you'll need to provision an **Azure AI Translator** resource.
+### Task 2: Provision an Azure AI Translator resource
 
 1. Open the Azure portal at `https://portal.azure.com`, and sign in using the Microsoft account associated with your Azure subscription.
-1. In the search field at the top, search for **Azure AI services** and press **Enter**, then select **Create** under Translator in the results.
-1. Create a resource with the following settings:
-    - **Subscription**: *Your Azure subscription*
-    - **Resource group**: *Choose or create a resource group (if you are using a restricted subscription, you may not have permission to create a new resource group - use the one provided)*
-    - **Region**: *East US*
-    - **Name**: *Enter a unique name*
-    - **Pricing tier**: *Standard S1*
-1. Select **Create + review**, then select **Create**.
-1. Wait for deployment to complete, and then view the deployment details.
-1. When the resource has been deployed, go to it and view its **Keys and Endpoint** page. You will need one of the keys and the location in which the service is provisioned from this page in the next procedure.
 
-## Prepare to use Azure AI Translator
+1. In the Azure Portal click the **&#65291;Create a resource** button.
+
+     ![](images/ai900mod1img1.png)
+   
+1. In the Marketplace page search for **azure ai Services** and Select **azure ai Services** 
+   
+   ![](images/23.png)
+     
+1. On Cognitive Services Page Click on **Create**. 
+     
+     ![](images/24.png)
+
+1. Create a resource with the following settings:
+
+    - **Subscription (1)**: Use default Subscription
+    - **Resource group (2)**: Ai-102<inject key="DeploymentID" enableCopy="false"/> 
+    - **Region (3)**: **<inject key="location" enableCopy="false"/>**
+    - **Name (4)**: aiservices-<inject key="DeploymentID" enableCopy="false"/> 
+    - **Pricing tier (5)**: Standard S0
+1. Select **Create + review (6)**.
+
+   ![](images/25.png)
+
+1. Select **Create**.
+
+   ![](images/26.png)
+
+1. Wait for deployment to complete, and once deployment completed click on **Go to resource**.
+
+   ![](images/27.png)
+
+1. When the resource has been deployed, go to it and view its **Keys and Endpoint** page. You will need one of the **keys and the location** in which the service is provisioned from this page in the next procedure.
+
+   ![](images/28.png)
+
+### Task 3: Prepare to use Azure AI Translator
 
 In this exercise, you'll complete a partially implemented client application that uses the Azure AI Translator REST API to translate hotel reviews.
 
@@ -85,6 +127,8 @@ In this exercise, you'll complete a partially implemented client application tha
     dotnet run
     ```
 
+     ![](./images/14.png)
+
     **Python**
 
     ```bash
@@ -96,12 +140,14 @@ In this exercise, you'll complete a partially implemented client application tha
     ```bash
     pip install python-dotenv
     ```
+    ![](./images/13.png)
 
     **Python**
 
     ```bash
     python text-translation.py
     ```
+    ![](./images/12.png)
 
 1. Observe the output as the code should run without error, displaying the contents of each review text file in the **reviews** folder. The application currently doesn't make use of Azure AI Translator. We'll fix that in the next procedure.
 
@@ -110,6 +156,11 @@ In this exercise, you'll complete a partially implemented client application tha
 Azure AI Translator can automatically detect the source language of text to be translated, but it also enables you to explicitly detect the language in which text is written.
 
 1. In your code file, find the **GetLanguage** function, which currently returns "en" for all text values.
+ 
+    ![](./images/10.png)
+
+    ![](./images/11.png)
+
 1. In the **GetLanguage** function, under the comment **Use the Azure AI Translator detect function**, add the following code to use the Azure AI Translator's REST API to detect the language of the specified text, being careful not to replace the code at the end of the function that returns the language:
 
     **C#**
@@ -141,6 +192,7 @@ Azure AI Translator can automatically detect the source language of text to be t
         }
     }
     ```
+   ![](./images/8.png)
 
     **Python**
 
@@ -171,7 +223,9 @@ Azure AI Translator can automatically detect the source language of text to be t
     # Parse JSON array and get language
     language = response[0]["language"]
     ```
-
+    
+   ![](./images/9.png)
+    
 1. Save your changes by pressing **CTRL+S** and  and enter the following command in the terminal to run the program:
 
     **C#**
@@ -179,6 +233,7 @@ Azure AI Translator can automatically detect the source language of text to be t
     ```bash
     dotnet run
     ```
+   ![](./images/7.png)
 
     **Python**
 
@@ -186,9 +241,11 @@ Azure AI Translator can automatically detect the source language of text to be t
     python text-translation.py
     ```
 
+   ![](./images/6.png)
+
 1. Observe the output, noting that this time the language for each review is identified.
 
-## Translate text
+### Task 4: Translate text
 
 Now that your application can determine the language in which reviews are written, you can use Azure AI Translator to translate any non-English reviews into English.
 
@@ -224,6 +281,7 @@ Now that your application can determine the language in which reviews are writte
             }
         }
      ```
+     ![](./images/5.png)
 
    **Python**
  
@@ -257,6 +315,8 @@ Now that your application can determine the language in which reviews are writte
     translation = response[0]["translations"][0]["text"]
    ```
 
+   ![](./images/4.png)
+
 1. Save your changes and enter the following command to run the program:
 
    **C#**
@@ -264,15 +324,17 @@ Now that your application can determine the language in which reviews are writte
     ```bash
     dotnet run
     ```
+    ![](./images/1.png)
 
     **Python**
 
     ```bash
     python text-translation.py
     ```
+   ![](./images/1.1.png)
 
 1. Observe the output, noting that non-English reviews are translated into English.
 
-## More information
+### Learn more
 
 For more information about using **Azure AI Translator**, see the [Azure AI Translator documentation](/azure/ai-services/translator/).
