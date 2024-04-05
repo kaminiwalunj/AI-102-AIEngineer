@@ -17,7 +17,7 @@ Suppose a company needs to automate a data entry process. Currently an employee 
 3.  Wait while additional files are installed to support the C# code projects in the repo.
 
 
-## Create a Form Recognizer resource
+## Create a Azure AI Document Intelligence resource
 
 To use the Form Recognizer service, you need a Form Recognizer resource in your Azure subscription. You'll use the Azure portal to create a resource.
 
