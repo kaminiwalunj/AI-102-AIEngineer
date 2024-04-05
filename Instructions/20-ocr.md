@@ -17,10 +17,10 @@ Optical character recognition (OCR) is a subset of computer vision that deals wi
 
 ## Provision a Cognitive Services resource
 
-If you don't already have one in your subscription, you'll need to provision a **Cognitive Services** resource.
+If you don't already have one in your subscription, you'll need to provision a **Azure AI Services** resource.
 
 1. Open the Azure portal at `https://portal.azure.com`, and sign in using the Microsoft account associated with your Azure subscription.
-2. Select the **&#65291;Create a resource** button, search for *cognitive services*, and create a **Cognitive Services** resource with the following settings:
+2. Select the **&#65291;Create a resource** button, search for *Azure AI services*, select **Azure AI Services**, and create an Azure AI services multi-service account resource with the following setting
     - **Subscription**: *Your Azure subscription*
     - **Resource group**: *Ai-102-<inject key="DeploymentID" enableCopy="false" /></inject>*.
     - **Region**: Choose same as resource group location.
