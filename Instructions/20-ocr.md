@@ -35,9 +35,9 @@ If you don't already have one in your subscription, you'll need to provision a *
 
 In this exercise, you'll complete a partially implemented client application that uses the Azure AI Vision SDK to read text.
 
-> **Note**: You can choose to use the SDK for either **C#** or **Python**. In the steps below, perform the actions appropriate for your preferred language.
+> **Note**: You can choose to use the SDK for **C#**. In the steps below, perform the actions appropriate for your preferred language.
 
-1. In Visual Studio Code, in the **Explorer** pane, browse to the **20-ocr** folder and expand the **C-Sharp** or **Python** folder depending on your language preference.
+1. In Visual Studio Code, in the **Explorer** pane, browse to the **20-ocr** folder and expand the **C-Sharp** folder depending on your language preference.
 2. Right-click the **read-text** folder and open an integrated terminal. Then install the Azure AI Vision SDK package by running the appropriate command for your language preference:
 
 **C#**
@@ -46,21 +46,14 @@ In this exercise, you'll complete a partially implemented client application tha
 dotnet add package Microsoft.Azure.CognitiveServices.Vision.ComputerVision --version 6.0.0
 ```
 
-**Python**
-
-```
-pip install azure-cognitiveservices-vision-computervision==0.7.0
-```
 
 3. View the contents of the **read-text** folder, and note that it contains a file for configuration settings:
     - **C#**: appsettings.json
-    - **Python**: .env
 
     Open the configuration file and update the configuration values it contains to reflect the **endpoint** and an authentication **key** for your Azure AI services resource. Save your changes.
 4. Note that the **read-text** folder contains a code file for the client application:
 
     - **C#**: Program.cs
-    - **Python**: read-text.py
 
     Open the code file and at the top, under the existing namespace references, find the comment **Import namespaces**. Then, under this comment, add the following language-specific code to import the namespaces you will need to use the Azure AI Vision SDK:
 
@@ -72,14 +65,6 @@ using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
 ```
 
-**Python**
-
-```Python
-# import namespaces
-from azure.cognitiveservices.vision.computervision import ComputerVisionClient
-from azure.cognitiveservices.vision.computervision.models import OperationStatusCodes
-from msrest.authentication import CognitiveServicesCredentials
-```
 
 5. In the code file for your client application, in the **Main** function, note that the code to load the configuration settings has been provided. Then find the comment **Authenticate Azure AI Vision client**. Then, under this comment, add the following language-specific code to create and authenticate a Azure AI Vision client object:
 
@@ -92,14 +77,6 @@ cvClient = new ComputerVisionClient(credentials)
 {
     Endpoint = cogSvcEndpoint
 };
-```
-
-**Python**
-
-```Python
-# Authenticate Azure AI Vision client
-credential = CognitiveServicesCredentials(cog_key) 
-cv_client = ComputerVisionClient(cog_endpoint, credential)
 ```
 
 ## Use the Read API to read text from an image
@@ -152,33 +129,6 @@ using (var imageData = File.OpenRead(imageFile))
 }  
 ```
 
-**Python**
-
-```Python
-# Use Read API to read text in image
-with open(image_file, mode="rb") as image_data:
-    read_op = cv_client.read_in_stream(image_data, raw=True)
-
-    # Get the async operation ID so we can check for the results
-    operation_location = read_op.headers["Operation-Location"]
-    operation_id = operation_location.split("/")[-1]
-
-    # Wait for the asynchronous operation to complete
-    while True:
-        read_results = cv_client.get_read_result(operation_id)
-        if read_results.status not in [OperationStatusCodes.running, OperationStatusCodes.not_started]:
-            break
-        time.sleep(1)
-
-    # If the operation was successfully, process the text line by line
-    if read_results.status == OperationStatusCodes.succeeded:
-        for page in read_results.analyze_result.read_results:
-            for line in page.lines:
-                print(line.text)
-                # Uncomment the following line if you'd like to see the bounding box 
-                #print(line.bounding_box)
-```
-
 4. Examine the code you added to the **GetTextRead** function. It submits a request for a read operation, and then repeatedly checks status until the operation has completed. If it was successful, the code processes the results by iterating through each page, and then through each line.
 5. Save your changes and return to the integrated terminal for the **read-text** folder, and enter the following command to run the program:
 
@@ -186,12 +136,6 @@ with open(image_file, mode="rb") as image_data:
 
 ```
 dotnet run
-```
-
-**Python**
-
-```
-python read-text.py
 ```
 
 6. When prompted, enter **1** and observe the output, which is the text extracted from the image.
@@ -207,12 +151,6 @@ python read-text.py
 
 ```
 dotnet run
-```
-
-**Python**
-
-```
-python read-text.py
 ```
 
 6. When prompted, enter **2** and observe the output, which is the text extracted from the document.
@@ -231,11 +169,6 @@ In addition to printed text, the **Read** API can extract handwritten text in En
 dotnet run
 ```
 
-**Python**
-
-```
-python read-text.py
-```
 
 4. When prompted, enter **3** and observe the output, which is the text extracted from the document.
 
