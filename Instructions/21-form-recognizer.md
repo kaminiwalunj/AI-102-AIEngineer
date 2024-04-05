@@ -23,7 +23,7 @@ To use the Form Recognizer service, you need a Form Recognizer resource in your 
 
 1.  Open the Azure portal at `https://portal.azure.com`, and sign in using the Microsoft account associated with your Azure subscription.
 
-2. Select the **&#65291;Create a resource** button, search for *Document intelligence*, and create a **Document intelligence** resource with the following settings:
+2. Select the **&#65291;Create a resource** button, search for *Document intelligence*, select **Document intelligence(form recogniser)** and then select **Create**. Provide the following settings:
     - **Subscription**: *Your Azure subscription*
     - **Resource group**: *Ai-102-<inject key="DeploymentID" enableCopy="false" /></inject>*.
     - **Region**: Choose same as resource group location.
