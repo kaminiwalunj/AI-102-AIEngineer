@@ -15,7 +15,10 @@ In this exercise, you'll use both of these APIs to implement a speaking clock ap
 If you have not already cloned **AI-102-AIEngineer** code repository to the environment where you're working on this lab, follow these steps to do so. Otherwise, open the cloned folder in Visual Studio Code.
 
 1. Start Visual Studio Code.
-1. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/AI-102-AIEngineer` repository to a local folder (it doesn't matter which folder).
+1. Open the New Terminal  and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/AI-102-AIEngineer` repository to a local folder (it doesn't matter which folder).
+
+   ![](./images/Terminal_new_vs_1.png)
+   
 1. When the repository has been cloned, open the folder in Visual Studio Code.
 1. Wait while additional files are installed to support the C# code projects in the repo.
 
