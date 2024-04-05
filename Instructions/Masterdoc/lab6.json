@@ -1,0 +1,13 @@
+[
+    {
+      "Name": "AI-102-AI-Engineer",
+      "Language": "English",
+      "BaseURL": "https://github.com/CloudLabs-MOC/AI-102-AIEngineer/tree/master/Instructions",
+      "Files": [
+        {
+          "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/AI-102-AIEngineer/stage/Instructions/06-translate-text.md",
+          "Order": 1
+        }
+      ]
+    }
+  ]
